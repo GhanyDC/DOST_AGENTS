@@ -29,7 +29,7 @@ const itemVariants = {
     y: 0,
     transition: {
       duration: 0.6,
-      ease: [0.25, 0.46, 0.45, 0.94],
+      ease: [0.25, 0.46, 0.45, 0.94] as const,
     },
   },
 };
@@ -39,7 +39,7 @@ export function HeroSection() {
     <section className="relative min-h-screen flex items-center justify-center bg-hero-gradient overflow-hidden">
       {/* Background gradient overlay */}
       <motion.div 
-        className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[var(--background)]/50"
+        className="absolute inset-0 bg-linear-to-b from-transparent via-transparent to-(--background)/50"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1 }}
@@ -57,17 +57,17 @@ export function HeroSection() {
             className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight mb-4 sm:mb-6"
             variants={itemVariants}
           >
-            <span className="text-[var(--color-primary)] italic">
+            <span className="text-(--color-primary) italic">
               {HERO_CONTENT.titleHighlight}
             </span>{' '}
-            <span className="text-[var(--foreground)]">
+            <span className="text-(--foreground)">
               {HERO_CONTENT.titleRest}
             </span>
           </motion.h1>
           
           {/* Description */}
           <motion.p 
-            className="text-xs sm:text-sm md:text-base text-[var(--foreground-muted)] max-w-2xl mx-auto leading-relaxed mb-6 sm:mb-8 md:mb-10 px-2"
+            className="text-xs sm:text-sm md:text-base text-(--foreground-muted) max-w-2xl mx-auto leading-relaxed mb-6 sm:mb-8 md:mb-10 px-2"
             variants={itemVariants}
           >
             {HERO_CONTENT.description}

@@ -30,17 +30,17 @@ const itemVariants = {
     y: 0,
     transition: {
       duration: 0.5,
-      ease: [0.25, 0.46, 0.45, 0.94],
+      ease: [0.25, 0.46, 0.45, 0.94] as const,
     },
   },
 };
 
 export function IskoOpsSection() {
   return (
-    <section className="min-h-screen py-12 sm:py-16 md:py-20 bg-[var(--background)] flex items-center">
+    <section className="min-h-screen py-12 sm:py-16 md:py-20 bg-(--background) flex items-center">
       <Container>
         <motion.div 
-          className="bg-[var(--card)] border border-[var(--card-border)] rounded-xl sm:rounded-2xl overflow-hidden"
+          className="bg-(--card) border border-(--card-border) rounded-xl sm:rounded-2xl overflow-hidden"
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -49,7 +49,7 @@ export function IskoOpsSection() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-0 lg:gap-8">
             {/* Image Side */}
             <motion.div 
-              className="relative min-h-[250px] sm:min-h-[300px] lg:min-h-[500px] bg-[var(--muted)]"
+              className="relative min-h-62.5 sm:min-h-75 lg:min-h-125 bg-(--muted)"
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
@@ -75,36 +75,36 @@ export function IskoOpsSection() {
             >
               {/* Title */}
               <motion.h2 className="text-xl sm:text-2xl md:text-3xl font-bold mb-2" variants={itemVariants}>
-                <span className="text-[var(--color-secondary)]">
+                <span className="text-(--color-secondary)">
                   {ISKO_OPS_CONTENT.title}
                 </span>
               </motion.h2>
               <motion.h3 
-                className="text-lg sm:text-xl md:text-2xl font-semibold text-[var(--foreground)] mb-4 sm:mb-6"
+                className="text-lg sm:text-xl md:text-2xl font-semibold text-(--foreground) mb-4 sm:mb-6"
                 variants={itemVariants}
               >
                 {ISKO_OPS_CONTENT.subtitle}
               </motion.h3>
 
               {/* Description */}
-              <motion.p className="text-xs sm:text-sm text-[var(--foreground-muted)] mb-3 sm:mb-4" variants={itemVariants}>
-                A <span className="font-semibold text-[var(--foreground)]">FREE Online Review Program</span> designed to help aspiring scholars in Cagayan Valley confidently prepare for the <span className="font-semibold text-[var(--foreground)]">2026 DOST-SEI Undergraduate Scholarship Qualifying Examination</span>.
+              <motion.p className="text-xs sm:text-sm text-(--foreground-muted) mb-3 sm:mb-4" variants={itemVariants}>
+                A <span className="font-semibold text-(--foreground)">FREE Online Review Program</span> designed to help aspiring scholars in Cagayan Valley confidently prepare for the <span className="font-semibold text-(--foreground)">2026 DOST-SEI Undergraduate Scholarship Qualifying Examination</span>.
               </motion.p>
 
               {/* Details */}
-              <motion.p className="text-xs sm:text-sm text-[var(--foreground-muted)] mb-3 sm:mb-4" variants={itemVariants}>
-                Anchored on <span className="font-semibold text-[var(--foreground)]">Agham na Ramdam</span>, ISKO-OPS brings science closer through guided tutoring, review sessions, and meaningful mentorship, <span className="text-[var(--color-primary)]">transforming learning into opportunities and solutions for the youth</span>.
+              <motion.p className="text-xs sm:text-sm text-(--foreground-muted) mb-3 sm:mb-4" variants={itemVariants}>
+                Anchored on <span className="font-semibold text-(--foreground)">Agham na Ramdam</span>, ISKO-OPS brings science closer through guided tutoring, review sessions, and meaningful mentorship, <span className="text-(--color-primary)">transforming learning into opportunities and solutions for the youth</span>.
               </motion.p>
 
-              <motion.p className="text-xs sm:text-sm text-[var(--foreground-muted)] mb-3 sm:mb-4 hidden sm:block" variants={itemVariants}>
-                Powered by <span className="font-semibold text-[var(--foreground)]">DOST Cagayan Valley, DOST ACCESS, and DOST-SEI Scholars Organizations in Cagayan Valley</span>, this initiative brings together top-performing scholars, outstanding alumni, and expert mentors ready to guide you every step of the way. Expect high-yield lessons, proven exam strategies, mock exams, and real insights from those who've been in your shoes—and succeeded. Whether you're strengthening your fundamentals or sharpening your test-taking skills, <span className="font-semibold text-[var(--foreground)]">ISKO-OPS levels the playing field and helps you reach your academic goals</span>.
+              <motion.p className="text-xs sm:text-sm text-(--foreground-muted) mb-3 sm:mb-4 hidden sm:block" variants={itemVariants}>
+                Powered by <span className="font-semibold text-(--foreground)">DOST Cagayan Valley, DOST ACCESS, and DOST-SEI Scholars Organizations in Cagayan Valley</span>, this initiative brings together top-performing scholars, outstanding alumni, and expert mentors ready to guide you every step of the way. Expect high-yield lessons, proven exam strategies, mock exams, and real insights from those who&apos;ve been in your shoes—and succeeded. Whether you&apos;re strengthening your fundamentals or sharpening your test-taking skills, <span className="font-semibold text-(--foreground)">ISKO-OPS levels the playing field and helps you reach your academic goals</span>.
               </motion.p>
 
               {/* Tagline */}
-              <motion.p className="text-xs sm:text-sm text-[var(--foreground)] mb-1 sm:mb-2" variants={itemVariants}>
-                <span className="font-bold text-[var(--color-primary)]">TARA:</span> Sama-sama nating buuin ang kinabukasang hinuhubog ng kaalaman at malasakit.
+              <motion.p className="text-xs sm:text-sm text-(--foreground) mb-1 sm:mb-2" variants={itemVariants}>
+                <span className="font-bold text-(--color-primary)">TARA:</span> Sama-sama nating buuin ang kinabukasang hinuhubog ng kaalaman at malasakit.
               </motion.p>
-              <motion.p className="text-xs sm:text-sm text-[var(--foreground)] mb-4 sm:mb-6" variants={itemVariants}>
+              <motion.p className="text-xs sm:text-sm text-(--foreground) mb-4 sm:mb-6" variants={itemVariants}>
                 Your journey to becoming a <span className="font-semibold">DOST-SEI Scholar</span> starts here.
               </motion.p>
 

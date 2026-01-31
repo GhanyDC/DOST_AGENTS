@@ -34,7 +34,7 @@ const cardVariants = {
     y: 0,
     transition: {
       duration: 0.5,
-      ease: [0.25, 0.46, 0.45, 0.94],
+      ease: [0.25, 0.46, 0.45, 0.94] as const,
     },
   },
 };
@@ -45,7 +45,7 @@ export function PerspectivesSection({ projects = SAMPLE_PROJECTS }: Perspectives
   const secondRow = projects.slice(4, 8);
 
   return (
-    <section className="min-h-screen py-12 sm:py-16 md:py-20 bg-[var(--background)] overflow-hidden flex flex-col justify-center">
+    <section className="min-h-screen py-12 sm:py-16 md:py-20 bg-(--background) overflow-hidden flex flex-col justify-center">
       <Container>
         {/* Section Heading */}
         <motion.div
@@ -74,7 +74,7 @@ export function PerspectivesSection({ projects = SAMPLE_PROJECTS }: Perspectives
             viewport={{ once: true, amount: 0.2 }}
           >
             {firstRow.map((project) => (
-              <motion.div key={project.id} className="flex-shrink-0 w-[260px] sm:w-auto" variants={cardVariants}>
+              <motion.div key={project.id} className="shrink-0 w-65 sm:w-auto" variants={cardVariants}>
                 <ProjectCard
                   title={project.title}
                   date={project.date}
@@ -99,7 +99,7 @@ export function PerspectivesSection({ projects = SAMPLE_PROJECTS }: Perspectives
               viewport={{ once: true, amount: 0.2 }}
             >
               {secondRow.map((project) => (
-                <motion.div key={project.id} className="flex-shrink-0 w-[260px] sm:w-auto" variants={cardVariants}>
+                <motion.div key={project.id} className="shrink-0 w-65 sm:w-auto" variants={cardVariants}>
                   <ProjectCard
                     title={project.title}
                     date={project.date}

@@ -27,35 +27,41 @@ function getSystemTheme(): 'light' | 'dark' {
 }
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setThemeState] = useState<Theme>('system');
-  const [resolvedTheme, setResolvedTheme] = useState<'light' | 'dark'>('dark');
+  const [theme, setThemeState] = useState<Theme>(() => {
+    if (typeof window === 'undefined') return 'system';
+    const stored = localStorage.getItem(THEME_STORAGE_KEY) as Theme | null;
+    return stored || 'system';
+  });
+  const [resolvedTheme, setResolvedTheme] = useState<'light' | 'dark'>(() => {
+    if (typeof window === 'undefined') return 'dark';
+    const stored = localStorage.getItem(THEME_STORAGE_KEY) as Theme | null;
+    const currentTheme = stored || 'system';
+    return currentTheme === 'system' ? getSystemTheme() : currentTheme;
+  });
   const [mounted, setMounted] = useState(false);
 
-  // Apply theme to document
-  const applyTheme = useCallback((newTheme: Theme) => {
+  // Apply theme to document - only updates DOM, doesn't setState
+  const applyThemeToDOM = useCallback((resolved: 'light' | 'dark') => {
     const root = document.documentElement;
-    const resolved = newTheme === 'system' ? getSystemTheme() : newTheme;
-
     root.classList.remove('light', 'dark');
     root.classList.add(resolved);
-    setResolvedTheme(resolved);
   }, []);
 
   // Set theme and persist to localStorage
   const setTheme = useCallback((newTheme: Theme) => {
+    const resolved = newTheme === 'system' ? getSystemTheme() : newTheme;
     setThemeState(newTheme);
+    setResolvedTheme(resolved);
     localStorage.setItem(THEME_STORAGE_KEY, newTheme);
-    applyTheme(newTheme);
-  }, [applyTheme]);
+    applyThemeToDOM(resolved);
+  }, [applyThemeToDOM]);
 
-  // Initialize theme on mount
+  // Initialize theme on mount - only applies to DOM
   useEffect(() => {
-    const stored = localStorage.getItem(THEME_STORAGE_KEY) as Theme | null;
-    const initialTheme = stored || 'system';
-    setThemeState(initialTheme);
-    applyTheme(initialTheme);
+    applyThemeToDOM(resolvedTheme);
     setMounted(true);
-  }, [applyTheme]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   // Listen for system preference changes
   useEffect(() => {
@@ -64,13 +70,15 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
     const handleChange = () => {
       if (theme === 'system') {
-        applyTheme('system');
+        const newResolved = getSystemTheme();
+        setResolvedTheme(newResolved);
+        applyThemeToDOM(newResolved);
       }
     };
 
     mediaQuery.addEventListener('change', handleChange);
     return () => mediaQuery.removeEventListener('change', handleChange);
-  }, [theme, mounted, applyTheme]);
+  }, [theme, mounted, applyThemeToDOM]);
 
   // Always render children, but hide until mounted to prevent flash
   return (

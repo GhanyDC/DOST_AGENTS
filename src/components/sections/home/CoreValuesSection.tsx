@@ -15,7 +15,7 @@ function HighlightedWord({ word, highlight }: { word: string; highlight: string 
   const highlightIndex = word.indexOf(highlight);
   
   if (highlightIndex === -1) {
-    return <span className="text-[var(--foreground)]">{word}</span>;
+    return <span className="text-(--foreground)">{word}</span>;
   }
 
   const before = word.slice(0, highlightIndex);
@@ -24,9 +24,9 @@ function HighlightedWord({ word, highlight }: { word: string; highlight: string 
 
   return (
     <span>
-      {before && <span className="text-[var(--foreground)]">{before}</span>}
-      <span className="text-[var(--color-accent-yellow)]">{highlighted}</span>
-      {after && <span className="text-[var(--foreground)]">{after}</span>}
+      {before && <span className="text-(--foreground)">{before}</span>}
+      <span className="text-(--color-accent-yellow)">{highlighted}</span>
+      {after && <span className="text-(--foreground)">{after}</span>}
     </span>
   );
 }
@@ -49,22 +49,16 @@ const itemVariants = {
     y: 0,
     transition: {
       duration: 0.6,
-      ease: [0.25, 0.46, 0.45, 0.94],
+      ease: [0.25, 0.46, 0.45, 0.94] as const,
     },
   },
 };
 
 export function CoreValuesSection() {
-  const { title, description, values } = CORE_VALUES_CONTENT;
-
-  // Group values into lines for display
-  // Line 1: PROFESSIONAL EXCELLENCE | SOCIAL RESPONSIBILITY
-  // Line 2: SERVANT LEADERSHIP
-  const line1Values = values.slice(0, 4); // P, E, SO, R
-  const line2Values = values.slice(4); // SER, L
+  const { title, description } = CORE_VALUES_CONTENT;
 
   return (
-    <section className="py-8 sm:py-10 md:py-12 pb-16 sm:pb-20 md:pb-24 bg-[var(--background)] flex items-center">
+    <section className="py-8 sm:py-10 md:py-12 pb-16 sm:pb-20 md:pb-24 bg-(--background) flex items-center">
       <Container className="text-center px-4 sm:px-6">
         <motion.div
           variants={containerVariants}
@@ -74,7 +68,7 @@ export function CoreValuesSection() {
         >
           {/* Title */}
           <motion.h2 
-            className="font-script text-2xl sm:text-3xl md:text-4xl text-[var(--color-accent-yellow)] italic mb-6 sm:mb-8"
+            className="font-script text-2xl sm:text-3xl md:text-4xl text-(--color-accent-yellow) italic mb-6 sm:mb-8"
             variants={itemVariants}
           >
             {title}
@@ -88,7 +82,7 @@ export function CoreValuesSection() {
                 <HighlightedWord word="PROFESSIONAL" highlight="P" />
                 <HighlightedWord word="EXCELLENCE" highlight="E" />
               </div>
-              <span className="hidden sm:inline text-[var(--foreground-muted)] mx-2">|</span>
+              <span className="hidden sm:inline text-(--foreground-muted) mx-2">|</span>
               <div className="flex flex-wrap items-center justify-center gap-x-2">
                 <HighlightedWord word="SOCIAL" highlight="SO" />
                 <HighlightedWord word="RESPONSIBILITY" highlight="R" />
@@ -104,7 +98,7 @@ export function CoreValuesSection() {
 
           {/* Description */}
           <motion.p 
-            className="max-w-3xl mx-auto text-xs sm:text-sm md:text-base text-[var(--foreground-muted)] leading-relaxed"
+            className="max-w-3xl mx-auto text-xs sm:text-sm md:text-base text-(--foreground-muted) leading-relaxed"
             variants={itemVariants}
           >
             {description}

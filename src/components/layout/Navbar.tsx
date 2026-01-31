@@ -13,7 +13,6 @@ import { useTheme } from '@/app/providers/theme-provider';
 import { Container } from '@/components/ui/Container';
 import { Button } from '@/components/ui/Button';
 import { NAV_ITEMS } from '@/lib/constants';
-import { cn } from '@/lib/utils';
 
 const navItemVariants = {
   hidden: { opacity: 0, y: -10 },
@@ -49,7 +48,7 @@ const mobileMenuVariants = {
 
 export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const { theme, setTheme, resolvedTheme } = useTheme();
+  const { setTheme, resolvedTheme } = useTheme();
   const navRef = useRef<HTMLElement | null>(null);
 
   // Close mobile menu on escape key
@@ -81,13 +80,13 @@ export function Navbar() {
   return (
     <motion.nav
       ref={navRef}
-      className="sticky top-0 z-50 bg-[var(--background)]/95 backdrop-blur-md border-b border-[var(--border)] safe-area-inset"
+      className="sticky top-0 z-50 bg-(--background)/95 backdrop-blur-md border-b border-(--border) safe-area-inset"
       initial={{ y: -100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.5, ease: 'easeOut' }}
     >
       <Container>
-        <div className="flex items-center justify-between h-14 sm:h-16 md:h-[var(--nav-height)]">
+        <div className="flex items-center justify-between h-14 sm:h-16 md:h-(--nav-height)">
           {/* Logo */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
@@ -105,7 +104,7 @@ export function Navbar() {
                 height={32}
                 className="object-contain sm:w-10 sm:h-10"
               />
-              <span className="font-bold text-lg sm:text-xl tracking-tight text-[var(--foreground)]">
+              <span className="font-bold text-lg sm:text-xl tracking-tight text-(--foreground)">
                 AGENTS
               </span>
             </Link>
@@ -123,7 +122,7 @@ export function Navbar() {
               >
                 <Link
                   href={item.href!}
-                  className="px-3 xl:px-4 py-2 text-sm font-medium text-[var(--foreground-muted)] hover:text-[var(--foreground)] rounded-lg hover:bg-[var(--muted)] transition-all duration-150"
+                  className="px-3 xl:px-4 py-2 text-sm font-medium text-(--foreground-muted) hover:text-(--foreground) rounded-lg hover:bg-(--muted) transition-all duration-150"
                 >
                   {item.label}
                 </Link>
@@ -141,7 +140,7 @@ export function Navbar() {
             {/* Theme Toggle */}
             <motion.button
               onClick={toggleTheme}
-              className="hidden lg:flex items-center justify-center w-9 h-9 sm:w-10 sm:h-10 rounded-lg text-[var(--foreground-muted)] hover:text-[var(--foreground)] hover:bg-[var(--muted)] transition-colors"
+              className="hidden lg:flex items-center justify-center w-9 h-9 sm:w-10 sm:h-10 rounded-lg text-(--foreground-muted) hover:text-(--foreground) hover:bg-(--muted) transition-colors"
               aria-label="Toggle theme"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
@@ -180,7 +179,7 @@ export function Navbar() {
             {/* Contact Link */}
             <Link
               href="/contact"
-              className="hidden lg:block text-sm font-medium text-[var(--foreground-muted)] hover:text-[var(--foreground)] transition-colors"
+              className="hidden lg:block text-sm font-medium text-(--foreground-muted) hover:text-(--foreground) transition-colors"
             >
               Contact
             </Link>
@@ -198,7 +197,7 @@ export function Navbar() {
             <motion.button
               aria-label="Toggle mobile menu"
               onClick={() => setMobileOpen(!mobileOpen)}
-              className="lg:hidden inline-flex items-center justify-center p-2 rounded-lg text-[var(--foreground)] hover:bg-[var(--muted)] transition-colors touch-target"
+              className="lg:hidden inline-flex items-center justify-center p-2 rounded-lg text-(--foreground) hover:bg-(--muted) transition-colors touch-target"
               whileTap={{ scale: 0.95 }}
             >
               <svg
@@ -233,7 +232,7 @@ export function Navbar() {
             animate="visible"
             exit="exit"
           >
-            <div className="bg-[var(--background)] border-t border-[var(--border)]">
+            <div className="bg-(--background) border-t border-(--border)">
               <Container>
                 <div className="py-4 space-y-1">
                   {NAV_ITEMS.map((item, index) => (
@@ -245,7 +244,7 @@ export function Navbar() {
                     >
                       <Link
                         href={item.href!}
-                        className="block px-4 py-3 text-base font-medium text-[var(--foreground)] hover:bg-[var(--muted)] rounded-lg transition-colors"
+                        className="block px-4 py-3 text-base font-medium text-(--foreground) hover:bg-(--muted) rounded-lg transition-colors"
                         onClick={() => setMobileOpen(false)}
                       >
                         {item.label}
@@ -260,7 +259,7 @@ export function Navbar() {
                   >
                     <Link
                       href="/contact"
-                      className="block px-4 py-3 text-base font-medium text-[var(--foreground)] hover:bg-[var(--muted)] rounded-lg transition-colors"
+                      className="block px-4 py-3 text-base font-medium text-(--foreground) hover:bg-(--muted) rounded-lg transition-colors"
                       onClick={() => setMobileOpen(false)}
                     >
                       Contact
@@ -279,7 +278,7 @@ export function Navbar() {
                     </div>
                     <button
                       onClick={toggleTheme}
-                      className="flex items-center gap-3 px-4 py-3 text-base font-medium text-[var(--foreground)] hover:bg-[var(--muted)] rounded-lg transition-colors"
+                      className="flex items-center gap-3 px-4 py-3 text-base font-medium text-(--foreground) hover:bg-(--muted) rounded-lg transition-colors"
                     >
                       {resolvedTheme === 'dark' ? (
                         <>

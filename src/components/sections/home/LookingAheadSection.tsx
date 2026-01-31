@@ -35,14 +35,14 @@ const cardVariants = {
     scale: 1,
     transition: {
       duration: 0.5,
-      ease: [0.25, 0.46, 0.45, 0.94],
+      ease: [0.25, 0.46, 0.45, 0.94] as const,
     },
   },
 };
 
 export function LookingAheadSection({ features = SAMPLE_FEATURES }: LookingAheadSectionProps) {
   return (
-    <section className="min-h-screen py-12 sm:py-16 md:py-20 bg-[var(--background)] flex items-center">
+    <section className="min-h-screen py-12 sm:py-16 md:py-20 bg-(--background) flex items-center">
       <Container>
         {/* Section Heading */}
         <motion.div

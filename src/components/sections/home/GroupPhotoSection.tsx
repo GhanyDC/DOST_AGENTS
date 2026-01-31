@@ -7,7 +7,6 @@
 
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-import { Container } from '@/components/ui/Container';
 import { GROUP_PHOTO_CONTENT } from '@/lib/constants';
 
 const fadeInUp = {
@@ -37,7 +36,7 @@ export function GroupPhotoSection() {
   const { tagline } = GROUP_PHOTO_CONTENT;
 
   return (
-    <section className="relative py-0 bg-[var(--background)]">
+    <section className="relative py-0 bg-(--background)">
       {/* Group Photo Container */}
       <div className="relative w-full min-h-screen">
         {/* Group Photo */}
@@ -80,18 +79,18 @@ export function GroupPhotoSection() {
           <motion.div className="text-center max-w-5xl" variants={fadeInUp}>
             <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-semibold text-white leading-tight">
               {tagline.prefix}{' '}
-              <span className="font-script text-[var(--color-accent-yellow)] italic">
+              <span className="font-script text-(--color-accent-yellow) italic">
                 {tagline.science}
               </span>
               {' '}{tagline.middle}{' '}
-              <span className="font-script text-[var(--color-accent-yellow)] italic">
+              <span className="font-script text-(--color-accent-yellow) italic">
                 {tagline.service}
               </span>
               {','}
             </h2>
             <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-semibold text-white mt-2 sm:mt-3 leading-tight">
               {tagline.suffix}{' '}
-              <span className="font-script text-[var(--color-accent-yellow)] italic">
+              <span className="font-script text-(--color-accent-yellow) italic">
                 {tagline.progress}
               </span>
             </h2>
