@@ -6,7 +6,7 @@
 import { Navbar, Footer } from '@/components/layout';
 import HomePage from '@/pages/HomePage';
 
-export default function RootPage() {
+export default function Page() {
   return (
     <>
       {/* Navigation */}
