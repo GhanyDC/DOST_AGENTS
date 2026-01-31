@@ -19,7 +19,7 @@ export function PerspectivesSection({ projects = SAMPLE_PROJECTS }: Perspectives
   const secondRow = projects.slice(4, 8);
 
   return (
-    <section className="py-20 bg-[var(--background)]">
+    <section className="py-12 sm:py-16 md:py-20 bg-[var(--background)] overflow-hidden">
       <Container>
         {/* Section Heading */}
         <SectionHeading
@@ -28,35 +28,45 @@ export function PerspectivesSection({ projects = SAMPLE_PROJECTS }: Perspectives
           description={PERSPECTIVES_CONTENT.description}
           align="center"
         />
+      </Container>
 
-        {/* Projects Grid - First Row */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
-          {firstRow.map((project) => (
-            <ProjectCard
-              key={project.id}
-              title={project.title}
-              date={project.date}
-              imageUrl={project.imageUrl}
-              href={project.slug ? `/projects/${project.slug}` : undefined}
-            />
-          ))}
-        </div>
-
-        {/* Projects Grid - Second Row */}
-        {secondRow.length > 0 && (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {secondRow.map((project) => (
-              <ProjectCard
-                key={project.id}
-                title={project.title}
-                date={project.date}
-                imageUrl={project.imageUrl}
-                href={project.slug ? `/projects/${project.slug}` : undefined}
-              />
+      {/* Projects Grid - First Row - Horizontal scroll on mobile */}
+      <div className="px-4 sm:px-0">
+        <Container className="overflow-visible">
+          <div className="flex gap-4 sm:gap-6 overflow-x-auto pb-4 scrollbar-hide sm:grid sm:grid-cols-2 lg:grid-cols-4 sm:overflow-visible sm:pb-0 -mx-4 px-4 sm:mx-0 sm:px-0">
+            {firstRow.map((project) => (
+              <div key={project.id} className="flex-shrink-0 w-[260px] sm:w-auto">
+                <ProjectCard
+                  title={project.title}
+                  date={project.date}
+                  imageUrl={project.imageUrl}
+                  href={project.slug ? `/projects/${project.slug}` : undefined}
+                />
+              </div>
             ))}
           </div>
-        )}
-      </Container>
+        </Container>
+      </div>
+
+      {/* Projects Grid - Second Row */}
+      {secondRow.length > 0 && (
+        <div className="px-4 sm:px-0 mt-4 sm:mt-6">
+          <Container className="overflow-visible">
+            <div className="flex gap-4 sm:gap-6 overflow-x-auto pb-4 scrollbar-hide sm:grid sm:grid-cols-2 lg:grid-cols-4 sm:overflow-visible sm:pb-0 -mx-4 px-4 sm:mx-0 sm:px-0">
+              {secondRow.map((project) => (
+                <div key={project.id} className="flex-shrink-0 w-[260px] sm:w-auto">
+                  <ProjectCard
+                    title={project.title}
+                    date={project.date}
+                    imageUrl={project.imageUrl}
+                    href={project.slug ? `/projects/${project.slug}` : undefined}
+                  />
+                </div>
+              ))}
+            </div>
+          </Container>
+        </div>
+      )}
     </section>
   );
 }

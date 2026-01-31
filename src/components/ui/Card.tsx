@@ -126,11 +126,11 @@ export function ProjectCard({
     >
       <Card>
         <CardImage src={imageUrl} alt={title} />
-        <CardContent>
-          <CardTitle className="text-primary text-sm">
+        <CardContent className="p-3 sm:p-4">
+          <CardTitle className="text-primary text-xs sm:text-sm line-clamp-2">
             {title}
           </CardTitle>
-          <CardDescription className="text-xs mt-1">
+          <CardDescription className="text-[10px] sm:text-xs mt-1">
             {date}
           </CardDescription>
         </CardContent>
@@ -156,22 +156,22 @@ export function FeatureCard({
   return (
     <div
       className={cn(
-        'feature-card p-6 rounded-xl',
+        'feature-card p-4 sm:p-5 md:p-6 rounded-lg sm:rounded-xl',
         className
       )}
     >
       {/* Number Badge */}
-      <div className="inline-flex items-center justify-center w-10 h-10 mb-4 rounded-lg bg-muted text-foreground font-bold text-sm">
+      <div className="inline-flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 mb-3 sm:mb-4 rounded-lg bg-muted text-foreground font-bold text-xs sm:text-sm">
         {number}
       </div>
       
       {/* Title */}
-      <h3 className="text-lg font-semibold text-foreground mb-3">
+      <h3 className="text-base sm:text-lg font-semibold text-foreground mb-2 sm:mb-3">
         {title}
       </h3>
       
       {/* Description */}
-      <p className="text-sm text-foreground-muted leading-relaxed">
+      <p className="text-xs sm:text-sm text-foreground-muted leading-relaxed">
         {description}
       </p>
     </div>

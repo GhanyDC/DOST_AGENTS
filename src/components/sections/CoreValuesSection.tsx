@@ -38,33 +38,37 @@ export function CoreValuesSection() {
   const line2Values = values.slice(4); // SER, L
 
   return (
-    <section className="py-20 bg-[var(--background)]">
-      <Container className="text-center">
+    <section className="py-12 sm:py-16 md:py-20 bg-[var(--background)]">
+      <Container className="text-center px-4 sm:px-6">
         {/* Title */}
-        <h2 className="font-script text-3xl md:text-4xl text-[var(--color-accent-yellow)] italic mb-8">
+        <h2 className="font-script text-2xl sm:text-3xl md:text-4xl text-[var(--color-accent-yellow)] italic mb-6 sm:mb-8">
           {title}
         </h2>
 
         {/* Core Values Display */}
-        <div className="mb-8 space-y-2">
+        <div className="mb-6 sm:mb-8 space-y-2 sm:space-y-3">
           {/* Line 1: PROFESSIONAL EXCELLENCE | SOCIAL RESPONSIBILITY */}
-          <div className="flex flex-wrap items-center justify-center gap-x-2 text-xl md:text-2xl lg:text-3xl font-bold tracking-wider">
-            <HighlightedWord word="PROFESSIONAL" highlight="P" />
-            <HighlightedWord word="EXCELLENCE" highlight="E" />
-            <span className="text-[var(--foreground-muted)] mx-2">|</span>
-            <HighlightedWord word="SOCIAL" highlight="SO" />
-            <HighlightedWord word="RESPONSIBILITY" highlight="R" />
+          <div className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-x-2 gap-y-1 text-base sm:text-xl md:text-2xl lg:text-3xl font-bold tracking-wider">
+            <div className="flex flex-wrap items-center justify-center gap-x-2">
+              <HighlightedWord word="PROFESSIONAL" highlight="P" />
+              <HighlightedWord word="EXCELLENCE" highlight="E" />
+            </div>
+            <span className="hidden sm:inline text-[var(--foreground-muted)] mx-2">|</span>
+            <div className="flex flex-wrap items-center justify-center gap-x-2">
+              <HighlightedWord word="SOCIAL" highlight="SO" />
+              <HighlightedWord word="RESPONSIBILITY" highlight="R" />
+            </div>
           </div>
 
           {/* Line 2: SERVANT LEADERSHIP */}
-          <div className="flex flex-wrap items-center justify-center gap-x-2 text-xl md:text-2xl lg:text-3xl font-bold tracking-wider">
+          <div className="flex flex-wrap items-center justify-center gap-x-2 text-base sm:text-xl md:text-2xl lg:text-3xl font-bold tracking-wider">
             <HighlightedWord word="SERVANT" highlight="SER" />
             <HighlightedWord word="LEADERSHIP" highlight="L" />
           </div>
         </div>
 
         {/* Description */}
-        <p className="max-w-3xl mx-auto text-sm md:text-base text-[var(--foreground-muted)] leading-relaxed">
+        <p className="max-w-3xl mx-auto text-xs sm:text-sm md:text-base text-[var(--foreground-muted)] leading-relaxed">
           {description}
         </p>
       </Container>

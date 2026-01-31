@@ -48,23 +48,23 @@ export function Navbar() {
   return (
     <nav
       ref={navRef}
-      className="sticky top-0 z-50 bg-[var(--background)]/95 backdrop-blur-md border-b border-[var(--border)]"
+      className="sticky top-0 z-50 bg-[var(--background)]/95 backdrop-blur-md border-b border-[var(--border)] safe-area-inset"
     >
       <Container>
-        <div className="flex items-center justify-between h-[var(--nav-height)]">
+        <div className="flex items-center justify-between h-14 sm:h-16 md:h-[var(--nav-height)]">
           {/* Logo */}
           <Link
             href="/"
-            className="flex items-center gap-3 hover:opacity-90 transition-opacity"
+            className="flex items-center gap-2 sm:gap-3 hover:opacity-90 transition-opacity"
           >
             <Image
               src="/agents_logo.png"
               alt="AGENTS Logo"
-              width={40}
-              height={40}
-              className="object-contain"
+              width={32}
+              height={32}
+              className="object-contain sm:w-10 sm:h-10"
             />
-            <span className="font-bold text-xl tracking-tight text-[var(--foreground)]">
+            <span className="font-bold text-lg sm:text-xl tracking-tight text-[var(--foreground)]">
               AGENTS
             </span>
           </Link>
@@ -75,7 +75,7 @@ export function Navbar() {
               <Link
                 key={item.label}
                 href={item.href!}
-                className="px-4 py-2 text-sm font-medium text-[var(--foreground-muted)] hover:text-[var(--foreground)] rounded-lg hover:bg-[var(--muted)] transition-all duration-150"
+                className="px-3 xl:px-4 py-2 text-sm font-medium text-[var(--foreground-muted)] hover:text-[var(--foreground)] rounded-lg hover:bg-[var(--muted)] transition-all duration-150"
               >
                 {item.label}
               </Link>
@@ -83,11 +83,11 @@ export function Navbar() {
           </div>
 
           {/* Right Side Actions */}
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 sm:gap-3">
             {/* Theme Toggle */}
             <button
               onClick={toggleTheme}
-              className="hidden lg:flex items-center justify-center w-10 h-10 rounded-lg text-[var(--foreground-muted)] hover:text-[var(--foreground)] hover:bg-[var(--muted)] transition-colors"
+              className="hidden lg:flex items-center justify-center w-9 h-9 sm:w-10 sm:h-10 rounded-lg text-[var(--foreground-muted)] hover:text-[var(--foreground)] hover:bg-[var(--muted)] transition-colors"
               aria-label="Toggle theme"
             >
               {resolvedTheme === 'dark' ? (
@@ -140,7 +140,7 @@ export function Navbar() {
             <button
               aria-label="Toggle mobile menu"
               onClick={() => setMobileOpen(!mobileOpen)}
-              className="lg:hidden inline-flex items-center justify-center p-2 rounded-lg text-[var(--foreground)] hover:bg-[var(--muted)] transition-colors"
+              className="lg:hidden inline-flex items-center justify-center p-2 rounded-lg text-[var(--foreground)] hover:bg-[var(--muted)] transition-colors touch-target"
             >
               <svg
                 className="w-6 h-6"

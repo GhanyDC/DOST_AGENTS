@@ -28,13 +28,13 @@ function TestimonialCard({
   return (
     <div
       className={cn(
-        'flex-shrink-0 w-[300px] md:w-[400px] p-6 rounded-xl transition-all duration-300',
+        'flex-shrink-0 w-[260px] sm:w-[300px] md:w-[350px] lg:w-[400px] p-4 sm:p-6 rounded-xl transition-all duration-300',
         isActive ? 'opacity-100 scale-100' : 'opacity-50 scale-95'
       )}
     >
       {/* Avatar */}
-      <div className="flex justify-center mb-6">
-        <div className="relative w-20 h-20 rounded-full overflow-hidden bg-[var(--muted)] border-2 border-[var(--border)]">
+      <div className="flex justify-center mb-4 sm:mb-6">
+        <div className="relative w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 rounded-full overflow-hidden bg-[var(--muted)] border-2 border-[var(--border)]">
           {testimonial.imageUrl ? (
             <Image
               src={testimonial.imageUrl}
@@ -43,7 +43,7 @@ function TestimonialCard({
               className="object-cover"
             />
           ) : (
-            <div className="w-full h-full flex items-center justify-center text-[var(--foreground-muted)] text-xl font-semibold">
+            <div className="w-full h-full flex items-center justify-center text-[var(--foreground-muted)] text-lg sm:text-xl font-semibold">
               {getInitials(testimonial.author)}
             </div>
           )}
@@ -51,26 +51,26 @@ function TestimonialCard({
       </div>
 
       {/* Quote Mark */}
-      <div className="text-center mb-4">
+      <div className="text-center mb-2 sm:mb-4">
         <span className="quote-mark">"</span>
       </div>
 
       {/* Quote */}
-      <blockquote className="text-center text-sm md:text-base text-[var(--foreground)] leading-relaxed mb-6">
+      <blockquote className="text-center text-xs sm:text-sm md:text-base text-[var(--foreground)] leading-relaxed mb-4 sm:mb-6 line-clamp-4 sm:line-clamp-none">
         {testimonial.quote}
       </blockquote>
 
       {/* Quote Mark (closing) */}
-      <div className="text-center mb-6">
+      <div className="text-center mb-4 sm:mb-6">
         <span className="quote-mark rotate-180 inline-block">"</span>
       </div>
 
       {/* Author Info */}
       <div className="text-center">
-        <p className="font-semibold text-[var(--foreground)]">
+        <p className="font-semibold text-sm sm:text-base text-[var(--foreground)]">
           {testimonial.author}
         </p>
-        <p className="text-sm text-[var(--foreground-muted)]">
+        <p className="text-xs sm:text-sm text-[var(--foreground-muted)]">
           {testimonial.batch}
         </p>
       </div>
@@ -115,7 +115,7 @@ export function TestimonialsSection({
   }, [testimonials.length]);
 
   return (
-    <section className="py-20 bg-[var(--background)] overflow-hidden">
+    <section className="py-12 sm:py-16 md:py-20 bg-[var(--background)] overflow-hidden">
       <Container>
         {/* Section Heading */}
         <SectionHeading
@@ -128,29 +128,29 @@ export function TestimonialsSection({
 
       {/* Carousel */}
       <div className="relative">
-        {/* Navigation Arrows */}
+        {/* Navigation Arrows - Hidden on small mobile */}
         <button
           onClick={goToPrev}
-          className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-[var(--surface)] border border-[var(--border)] flex items-center justify-center text-[var(--foreground)] hover:bg-[var(--muted)] transition-colors"
+          className="absolute left-2 sm:left-4 md:left-8 top-1/2 -translate-y-1/2 z-10 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-[var(--surface)] border border-[var(--border)] flex items-center justify-center text-[var(--foreground)] hover:bg-[var(--muted)] transition-colors touch-target"
           aria-label="Previous testimonial"
         >
-          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
           </svg>
         </button>
 
         <button
           onClick={goToNext}
-          className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-[var(--surface)] border border-[var(--border)] flex items-center justify-center text-[var(--foreground)] hover:bg-[var(--muted)] transition-colors"
+          className="absolute right-2 sm:right-4 md:right-8 top-1/2 -translate-y-1/2 z-10 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-[var(--surface)] border border-[var(--border)] flex items-center justify-center text-[var(--foreground)] hover:bg-[var(--muted)] transition-colors touch-target"
           aria-label="Next testimonial"
         >
-          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
           </svg>
         </button>
 
         {/* Testimonials Container */}
-        <div className="flex justify-center items-center gap-4 px-4">
+        <div className="flex justify-center items-center gap-2 sm:gap-4 px-2 sm:px-4 overflow-x-auto scrollbar-hide py-4">
           {testimonials.map((testimonial, index) => (
             <TestimonialCard
               key={testimonial.id}
@@ -161,15 +161,15 @@ export function TestimonialsSection({
         </div>
 
         {/* Dots Indicator */}
-        <div className="flex justify-center gap-2 mt-8">
+        <div className="flex justify-center gap-1.5 sm:gap-2 mt-4 sm:mt-8">
           {testimonials.map((_, index) => (
             <button
               key={index}
               onClick={() => goToSlide(index)}
               className={cn(
-                'w-2 h-2 rounded-full transition-all duration-300',
+                'w-2 h-2 rounded-full transition-all duration-300 touch-target',
                 index === activeIndex
-                  ? 'bg-[var(--color-primary)] w-8'
+                  ? 'bg-[var(--color-primary)] w-6 sm:w-8'
                   : 'bg-[var(--border)] hover:bg-[var(--foreground-muted)]'
               )}
               aria-label={`Go to testimonial ${index + 1}`}

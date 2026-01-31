@@ -15,7 +15,7 @@ interface LookingAheadSectionProps {
 
 export function LookingAheadSection({ features = SAMPLE_FEATURES }: LookingAheadSectionProps) {
   return (
-    <section className="py-20 bg-[var(--background)]">
+    <section className="py-12 sm:py-16 md:py-20 bg-[var(--background)]">
       <Container>
         {/* Section Heading */}
         <SectionHeading
@@ -25,8 +25,8 @@ export function LookingAheadSection({ features = SAMPLE_FEATURES }: LookingAhead
           align="center"
         />
 
-        {/* Features Grid - 3 columns */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {/* Features Grid - 1 col mobile, 2 col tablet, 3 col desktop */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
           {features.map((feature) => (
             <FeatureCard
               key={feature.id}

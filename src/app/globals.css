@@ -44,9 +44,11 @@
   --font-mono: var(--font-geist-mono), 'SF Mono', 'Monaco', 'Inconsolata', monospace;
   --font-script: 'Lucida Handwriting', 'Brush Script MT', cursive;
   
-  /* Spacing */
-  --nav-height: 4.5rem;
-  --section-padding: 5rem;
+  /* Spacing - Mobile First */
+  --nav-height: 4rem;
+  --section-padding: 3rem;
+  --section-padding-sm: 4rem;
+  --section-padding-lg: 5rem;
   
   /* Shadows */
   --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
@@ -107,6 +109,7 @@
 
 html {
   scroll-behavior: smooth;
+  font-size: 100%;
 }
 
 body {
@@ -116,6 +119,45 @@ body {
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  min-height: 100vh;
+  min-height: 100dvh; /* Dynamic viewport height for mobile */
+}
+
+/* Responsive section padding */
+@media (min-width: 640px) {
+  :root {
+    --nav-height: 4.5rem;
+    --section-padding: var(--section-padding-sm);
+  }
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --section-padding: var(--section-padding-lg);
+  }
+}
+
+/* Scrollbar Hide Utility */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Safe Area Support for Mobile */
+.safe-area-inset {
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* Touch-friendly tap targets */
+.touch-target {
+  min-height: 44px;
+  min-width: 44px;
 }
 
 /* =============================================================================
@@ -225,9 +267,15 @@ body {
 /* Quote Mark Styling */
 .quote-mark {
   color: var(--color-primary);
-  font-size: 4rem;
+  font-size: 2.5rem;
   line-height: 1;
   font-family: Georgia, serif;
+}
+
+@media (min-width: 768px) {
+  .quote-mark {
+    font-size: 4rem;
+  }
 }
 
 /* Scrollbar Styling */
