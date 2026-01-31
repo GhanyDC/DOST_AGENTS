@@ -57,20 +57,12 @@ function TestimonialCard({
         </div>
       </div>
 
-      {/* Quote Mark */}
-      <div className="text-center mb-2 sm:mb-4">
-        <span className="quote-mark">"</span>
-      </div>
-
       {/* Quote */}
-      <blockquote className="text-center text-xs sm:text-sm md:text-base text-[var(--foreground)] leading-relaxed mb-4 sm:mb-6 line-clamp-4 sm:line-clamp-none">
-        {testimonial.quote}
+      <blockquote className="text-center text-xs sm:text-sm md:text-base text-[var(--foreground)] leading-relaxed mb-4 sm:mb-6 px-2">
+        <span className="text-[var(--color-accent-yellow)] text-2xl sm:text-3xl font-serif leading-none align-top mr-1">"</span>
+        <span className="inline">{testimonial.quote}</span>
+        <span className="text-[var(--color-accent-yellow)] text-2xl sm:text-3xl font-serif leading-none align-top ml-1">"</span>
       </blockquote>
-
-      {/* Quote Mark (closing) */}
-      <div className="text-center mb-4 sm:mb-6">
-        <span className="quote-mark rotate-180 inline-block">"</span>
-      </div>
 
       {/* Author Info */}
       <div className="text-center">

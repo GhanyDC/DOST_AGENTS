@@ -55,39 +55,14 @@ export function IskoOpsSection() {
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
-              {/* Placeholder for ISKO-OPS poster image */}
-              <div className="absolute inset-0 flex items-center justify-center p-4 sm:p-6 md:p-8">
-                <div className="text-center">
-                  <div className="inline-block p-3 sm:p-4 bg-[var(--background)] rounded-lg sm:rounded-xl mb-3 sm:mb-4">
-                    <Image
-                      src="/agents_logo.png"
-                      alt="ISKO-OPS"
-                      width={60}
-                      height={60}
-                      className="opacity-80 sm:w-[80px] sm:h-[80px]"
-                    />
-                  </div>
-                  <h3 className="text-xl sm:text-2xl font-bold text-[var(--color-primary)]">
-                    ISKO-OPS
-                  </h3>
-                  <p className="text-base sm:text-lg text-[var(--foreground)]">2026</p>
-                  <div className="mt-3 sm:mt-4 p-2 sm:p-3 bg-[var(--background)] rounded-lg">
-                    <p className="text-[10px] sm:text-xs text-[var(--foreground-muted)]">
-                      Free Online Review Sessions for DOST
-                    </p>
-                    <p className="text-[10px] sm:text-xs text-[var(--foreground-muted)]">
-                      Undergraduate Qualifying Examination
-                    </p>
-                  </div>
-                  <div className="mt-3 sm:mt-4 p-2 bg-red-600 text-white rounded">
-                    <p className="text-[10px] sm:text-xs font-bold">REGISTRATION ENDS ON</p>
-                    <p className="text-xs sm:text-sm font-bold">{ISKO_OPS_CONTENT.registrationDeadline}</p>
-                  </div>
-                  <p className="mt-2 text-[10px] sm:text-xs text-[var(--foreground-muted)] break-all sm:break-normal">
-                    {ISKO_OPS_CONTENT.registrationLink}
-                  </p>
-                </div>
-              </div>
+              {/* ISKO-OPS poster image */}
+              <Image
+                src="/isko_ops_poster.png"
+                alt="ISKO-OPS 2026 - Free Online Review Sessions"
+                fill
+                className="object-cover"
+                priority
+              />
             </motion.div>
 
             {/* Content Side */}

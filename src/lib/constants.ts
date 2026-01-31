@@ -62,7 +62,7 @@ export const GROUP_PHOTO_CONTENT = {
     science: 'Science,',
     middle: 'Driven by',
     service: 'Service,',
-    suffix: 'Committed to',
+    suffix: 'committed to',
     progress: 'National Progress',
   },
   imageUrl: '/images/group-photo.jpg',
