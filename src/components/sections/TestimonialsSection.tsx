@@ -95,13 +95,6 @@ export function TestimonialsSection({
     return () => clearInterval(interval);
   }, [isAutoPlaying, testimonials.length]);
 
-  const goToSlide = useCallback((index: number) => {
-    setActiveIndex(index);
-    setIsAutoPlaying(false);
-    // Resume auto-play after 10 seconds of inactivity
-    setTimeout(() => setIsAutoPlaying(true), 10000);
-  }, []);
-
   const goToPrev = useCallback(() => {
     setActiveIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
     setIsAutoPlaying(false);
@@ -115,7 +108,7 @@ export function TestimonialsSection({
   }, [testimonials.length]);
 
   return (
-    <section className="py-12 sm:py-16 md:py-20 bg-[var(--background)] overflow-hidden">
+    <section className="min-h-screen py-12 sm:py-16 md:py-20 bg-[var(--background)] overflow-hidden flex flex-col justify-center">
       <Container>
         {/* Section Heading */}
         <SectionHeading
@@ -156,23 +149,6 @@ export function TestimonialsSection({
               key={testimonial.id}
               testimonial={testimonial}
               isActive={index === activeIndex}
-            />
-          ))}
-        </div>
-
-        {/* Dots Indicator */}
-        <div className="flex justify-center gap-1.5 sm:gap-2 mt-4 sm:mt-8">
-          {testimonials.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => goToSlide(index)}
-              className={cn(
-                'w-2 h-2 rounded-full transition-all duration-300 touch-target',
-                index === activeIndex
-                  ? 'bg-[var(--color-primary)] w-6 sm:w-8'
-                  : 'bg-[var(--border)] hover:bg-[var(--foreground-muted)]'
-              )}
-              aria-label={`Go to testimonial ${index + 1}`}
             />
           ))}
         </div>

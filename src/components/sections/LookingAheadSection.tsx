@@ -15,7 +15,7 @@ interface LookingAheadSectionProps {
 
 export function LookingAheadSection({ features = SAMPLE_FEATURES }: LookingAheadSectionProps) {
   return (
-    <section className="py-12 sm:py-16 md:py-20 bg-[var(--background)]">
+    <section className="min-h-screen py-12 sm:py-16 md:py-20 bg-[var(--background)] flex items-center">
       <Container>
         {/* Section Heading */}
         <SectionHeading

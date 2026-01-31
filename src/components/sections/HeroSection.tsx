@@ -10,7 +10,7 @@ import { HERO_CONTENT } from '@/lib/constants';
 
 export function HeroSection() {
   return (
-    <section className="relative min-h-[60vh] sm:min-h-[70vh] flex items-center justify-center bg-hero-gradient overflow-hidden">
+    <section className="relative min-h-screen flex items-center justify-center bg-hero-gradient overflow-hidden">
       {/* Background gradient overlay */}
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[var(--background)]/50" />
       

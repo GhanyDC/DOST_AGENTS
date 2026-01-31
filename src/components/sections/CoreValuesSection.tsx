@@ -38,7 +38,7 @@ export function CoreValuesSection() {
   const line2Values = values.slice(4); // SER, L
 
   return (
-    <section className="py-12 sm:py-16 md:py-20 bg-[var(--background)]">
+    <section className="min-h-screen py-12 sm:py-16 md:py-20 bg-[var(--background)] flex items-center">
       <Container className="text-center px-4 sm:px-6">
         {/* Title */}
         <h2 className="font-script text-2xl sm:text-3xl md:text-4xl text-[var(--color-accent-yellow)] italic mb-6 sm:mb-8">

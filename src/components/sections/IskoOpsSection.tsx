@@ -11,7 +11,7 @@ import { ISKO_OPS_CONTENT } from '@/lib/constants';
 
 export function IskoOpsSection() {
   return (
-    <section className="py-12 sm:py-16 md:py-20 bg-[var(--background)]">
+    <section className="min-h-screen py-12 sm:py-16 md:py-20 bg-[var(--background)] flex items-center">
       <Container>
         <div className="bg-[var(--card)] border border-[var(--card-border)] rounded-xl sm:rounded-2xl overflow-hidden">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-0 lg:gap-8">
