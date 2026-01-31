@@ -48,7 +48,7 @@ export const FOOTER_NAV: FooterNav[] = [
 // Hero Section Content
 export const HERO_CONTENT = {
   titleHighlight: 'AGENTS',
-  titleRest: 'Of Change, Excellence, and For The Common Good',
+  titleRest: 'of Change, Excellence, and For The Common Good',
   description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
   ctaText: 'Explore',
   ctaLink: '/about',
@@ -148,21 +148,21 @@ export const SAMPLE_TESTIMONIALS: Testimonial[] = [
     quote: "Being a DOST Scholar is not just about receiving stipend, it's about developing your potential to serve others through service",
     author: 'Janmar Christian T. Agilbao',
     batch: 'DOST Scholar - Batch 2021',
-    imageUrl: '/images/testimonial-1.jpg',
+    imageUrl: '/testimonial_avatar.png',
   },
   {
     id: '2',
     quote: "Being a DOST Scholar is not just about receiving stipend, it's about developing your potential to serve others through service",
     author: 'Janmar Christian T. Agilbao',
     batch: 'DOST Scholar - Batch 2021',
-    imageUrl: '/images/testimonial-2.jpg',
+   imageUrl: '/testimonial_avatar.png',
   },
   {
     id: '3',
     quote: "Being a DOST Scholar is not just about receiving stipend, it's about developing your potential to serve others through service",
     author: 'Janmar Christian T. Agilbao',
     batch: 'DOST Scholar - Batch 2021',
-    imageUrl: '/images/testimonial-3.jpg',
+    imageUrl: '/testimonial_avatar.png',
   },
 ];
 

@@ -8,11 +8,44 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { useState, useRef, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useTheme } from '@/app/providers/theme-provider';
 import { Container } from '@/components/ui/Container';
 import { Button } from '@/components/ui/Button';
 import { NAV_ITEMS } from '@/lib/constants';
 import { cn } from '@/lib/utils';
+
+const navItemVariants = {
+  hidden: { opacity: 0, y: -10 },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: {
+      delay: i * 0.1,
+      duration: 0.3,
+    },
+  }),
+};
+
+const mobileMenuVariants = {
+  hidden: { opacity: 0, height: 0 },
+  visible: { 
+    opacity: 1, 
+    height: 'auto',
+    transition: {
+      duration: 0.3,
+      ease: 'easeInOut' as const,
+    },
+  },
+  exit: { 
+    opacity: 0, 
+    height: 0,
+    transition: {
+      duration: 0.2,
+      ease: 'easeInOut' as const,
+    },
+  },
+};
 
 export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -46,49 +79,72 @@ export function Navbar() {
   };
 
   return (
-    <nav
+    <motion.nav
       ref={navRef}
       className="sticky top-0 z-50 bg-[var(--background)]/95 backdrop-blur-md border-b border-[var(--border)] safe-area-inset"
+      initial={{ y: -100, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.5, ease: 'easeOut' }}
     >
       <Container>
         <div className="flex items-center justify-between h-14 sm:h-16 md:h-[var(--nav-height)]">
           {/* Logo */}
-          <Link
-            href="/"
-            className="flex items-center gap-2 sm:gap-3 hover:opacity-90 transition-opacity"
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
           >
-            <Image
-              src="/agents_logo.png"
-              alt="AGENTS Logo"
-              width={32}
-              height={32}
-              className="object-contain sm:w-10 sm:h-10"
-            />
-            <span className="font-bold text-lg sm:text-xl tracking-tight text-[var(--foreground)]">
-              AGENTS
-            </span>
-          </Link>
+            <Link
+              href="/"
+              className="flex items-center gap-2 sm:gap-3 hover:opacity-90 transition-opacity"
+            >
+              <Image
+                src="/agents_logo.png"
+                alt="AGENTS Logo"
+                width={32}
+                height={32}
+                className="object-contain sm:w-10 sm:h-10"
+              />
+              <span className="font-bold text-lg sm:text-xl tracking-tight text-[var(--foreground)]">
+                AGENTS
+              </span>
+            </Link>
+          </motion.div>
 
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center gap-1">
-            {NAV_ITEMS.map((item) => (
-              <Link
+            {NAV_ITEMS.map((item, index) => (
+              <motion.div
                 key={item.label}
-                href={item.href!}
-                className="px-3 xl:px-4 py-2 text-sm font-medium text-[var(--foreground-muted)] hover:text-[var(--foreground)] rounded-lg hover:bg-[var(--muted)] transition-all duration-150"
+                custom={index}
+                variants={navItemVariants}
+                initial="hidden"
+                animate="visible"
               >
-                {item.label}
-              </Link>
+                <Link
+                  href={item.href!}
+                  className="px-3 xl:px-4 py-2 text-sm font-medium text-[var(--foreground-muted)] hover:text-[var(--foreground)] rounded-lg hover:bg-[var(--muted)] transition-all duration-150"
+                >
+                  {item.label}
+                </Link>
+              </motion.div>
             ))}
           </div>
 
           {/* Right Side Actions */}
-          <div className="flex items-center gap-2 sm:gap-3">
+          <motion.div 
+            className="flex items-center gap-2 sm:gap-3"
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+          >
             {/* Theme Toggle */}
-            <button
+            <motion.button
               onClick={toggleTheme}
               className="hidden lg:flex items-center justify-center w-9 h-9 sm:w-10 sm:h-10 rounded-lg text-[var(--foreground-muted)] hover:text-[var(--foreground)] hover:bg-[var(--muted)] transition-colors"
               aria-label="Toggle theme"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
             >
               {resolvedTheme === 'dark' ? (
                 <svg
@@ -119,7 +175,7 @@ export function Navbar() {
                   />
                 </svg>
               )}
-            </button>
+            </motion.button>
 
             {/* Contact Link */}
             <Link
@@ -131,16 +187,19 @@ export function Navbar() {
 
             {/* Join Us Button */}
             <Link href="/join" className="hidden lg:block">
-              <Button variant="outline" size="md">
-                Join Us
-              </Button>
+              <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+                <Button variant="outline" size="md">
+                  Join Us
+                </Button>
+              </motion.div>
             </Link>
 
             {/* Mobile Menu Toggle */}
-            <button
+            <motion.button
               aria-label="Toggle mobile menu"
               onClick={() => setMobileOpen(!mobileOpen)}
               className="lg:hidden inline-flex items-center justify-center p-2 rounded-lg text-[var(--foreground)] hover:bg-[var(--muted)] transition-colors touch-target"
+              whileTap={{ scale: 0.95 }}
             >
               <svg
                 className="w-6 h-6"
@@ -159,76 +218,92 @@ export function Navbar() {
                   }
                 />
               </svg>
-            </button>
-          </div>
+            </motion.button>
+          </motion.div>
         </div>
       </Container>
 
       {/* Mobile Menu */}
-      <div
-        className={cn(
-          'lg:hidden overflow-hidden transition-all duration-300 ease-in-out',
-          mobileOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
-        )}
-      >
-        <div className="bg-[var(--background)] border-t border-[var(--border)]">
-          <Container>
-            <div className="py-4 space-y-1">
-              {NAV_ITEMS.map((item) => (
-                <Link
-                  key={item.label}
-                  href={item.href!}
-                  className="block px-4 py-3 text-base font-medium text-[var(--foreground)] hover:bg-[var(--muted)] rounded-lg transition-colors"
-                  onClick={() => setMobileOpen(false)}
-                >
-                  {item.label}
-                </Link>
-              ))}
-              <div className="pt-4 flex flex-col gap-3">
-                <Link
-                  href="/contact"
-                  className="block px-4 py-3 text-base font-medium text-[var(--foreground)] hover:bg-[var(--muted)] rounded-lg transition-colors"
-                  onClick={() => setMobileOpen(false)}
-                >
-                  Contact
-                </Link>
-                <div className="px-4">
-                  <Link href="/join" className="block w-full">
-                    <Button
-                      variant="primary"
-                      size="lg"
-                      className="w-full"
+      <AnimatePresence>
+        {mobileOpen && (
+          <motion.div
+            className="lg:hidden overflow-hidden"
+            variants={mobileMenuVariants}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+          >
+            <div className="bg-[var(--background)] border-t border-[var(--border)]">
+              <Container>
+                <div className="py-4 space-y-1">
+                  {NAV_ITEMS.map((item, index) => (
+                    <motion.div
+                      key={item.label}
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: index * 0.05 }}
+                    >
+                      <Link
+                        href={item.href!}
+                        className="block px-4 py-3 text-base font-medium text-[var(--foreground)] hover:bg-[var(--muted)] rounded-lg transition-colors"
+                        onClick={() => setMobileOpen(false)}
+                      >
+                        {item.label}
+                      </Link>
+                    </motion.div>
+                  ))}
+                  <motion.div 
+                    className="pt-4 flex flex-col gap-3"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 0.2 }}
+                  >
+                    <Link
+                      href="/contact"
+                      className="block px-4 py-3 text-base font-medium text-[var(--foreground)] hover:bg-[var(--muted)] rounded-lg transition-colors"
                       onClick={() => setMobileOpen(false)}
                     >
-                      Join Us
-                    </Button>
-                  </Link>
+                      Contact
+                    </Link>
+                    <div className="px-4">
+                      <Link href="/join" className="block w-full">
+                        <Button
+                          variant="primary"
+                          size="lg"
+                          className="w-full"
+                          onClick={() => setMobileOpen(false)}
+                        >
+                          Join Us
+                        </Button>
+                      </Link>
+                    </div>
+                    <button
+                      onClick={toggleTheme}
+                      className="flex items-center gap-3 px-4 py-3 text-base font-medium text-[var(--foreground)] hover:bg-[var(--muted)] rounded-lg transition-colors"
+                    >
+                      {resolvedTheme === 'dark' ? (
+                        <>
+                          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                          </svg>
+                          Light Mode
+                        </>
+                      ) : (
+                        <>
+                          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                          </svg>
+                          Dark Mode
+                        </>
+                      )}
+                    </button>
+                  </motion.div>
                 </div>
-                <button
-                  onClick={toggleTheme}
-                  className="flex items-center gap-3 px-4 py-3 text-base font-medium text-[var(--foreground)] hover:bg-[var(--muted)] rounded-lg transition-colors"
-                >
-                  {resolvedTheme === 'dark' ? (
-                    <>
-                      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-                      </svg>
-                      Light Mode
-                    </>
-                  ) : (
-                    <>
-                      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-                      </svg>
-                      Dark Mode
-                    </>
-                  )}
-                </button>
-              </div>
+              </Container>
             </div>
-          </Container>
-        </div>
-      </div>
-    </nav>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.nav>
   );
 }

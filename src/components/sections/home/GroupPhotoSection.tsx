@@ -1,11 +1,37 @@
+'use client';
+
 // =============================================================================
 // Group Photo Section Component
 // Full-width image with tagline overlay
 // =============================================================================
 
 import Image from 'next/image';
+import { motion } from 'framer-motion';
 import { Container } from '@/components/ui/Container';
 import { GROUP_PHOTO_CONTENT } from '@/lib/constants';
+
+const fadeInUp = {
+  hidden: { opacity: 0, y: 40 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.8,
+      ease: [0.25, 0.46, 0.45, 0.94] as const,
+    },
+  },
+};
+
+const staggerContainer = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.3,
+      delayChildren: 0.2,
+    },
+  },
+};
 
 export function GroupPhotoSection() {
   const { tagline } = GROUP_PHOTO_CONTENT;
@@ -15,7 +41,13 @@ export function GroupPhotoSection() {
       {/* Group Photo Container */}
       <div className="relative w-full min-h-screen">
         {/* Group Photo */}
-        <div className="absolute inset-0">
+        <motion.div 
+          className="absolute inset-0"
+          initial={{ scale: 1.1, opacity: 0 }}
+          whileInView={{ scale: 1, opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1.2, ease: 'easeOut' }}
+        >
           <Image
             src="/group_photo.png"
             alt="AGENTS Group Photo"
@@ -26,17 +58,26 @@ export function GroupPhotoSection() {
           
           {/* Dark overlay for text readability */}
           <div className="absolute inset-0 bg-black/75" />
-        </div>
+        </motion.div>
         
         {/* Tagline Overlay - Centered */}
-        <div className="absolute inset-0 flex flex-col items-center justify-center px-4 sm:px-6">
+        <motion.div 
+          className="absolute inset-0 flex flex-col items-center justify-center px-4 sm:px-6"
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.3 }}
+        >
           {/* Subtitle */}
-          <p className="text-xs sm:text-sm md:text-base text-white/90 tracking-[0.3em] sm:tracking-[0.4em] uppercase mb-6 sm:mb-8 md:mb-10">
+          <motion.p 
+            className="text-xs sm:text-sm md:text-base text-white/90 tracking-[0.3em] sm:tracking-[0.4em] uppercase mb-6 sm:mb-8 md:mb-10"
+            variants={fadeInUp}
+          >
             {GROUP_PHOTO_CONTENT.subtitle}
-          </p>
+          </motion.p>
           
           {/* Main Tagline */}
-          <div className="text-center max-w-5xl">
+          <motion.div className="text-center max-w-5xl" variants={fadeInUp}>
             <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-semibold text-white leading-tight">
               {tagline.prefix}{' '}
               <span className="font-script text-[var(--color-accent-yellow)] italic">
@@ -54,8 +95,8 @@ export function GroupPhotoSection() {
                 {tagline.progress}
               </span>
             </h2>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       </div>
     </section>
   );

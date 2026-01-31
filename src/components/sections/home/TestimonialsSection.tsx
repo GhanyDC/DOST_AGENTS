@@ -7,6 +7,7 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import Image from 'next/image';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Container } from '@/components/ui/Container';
 import { SectionHeading } from '@/components/ui/SectionHeading';
 import { TESTIMONIALS_CONTENT, SAMPLE_TESTIMONIALS } from '@/lib/constants';
@@ -26,11 +27,17 @@ function TestimonialCard({
   isActive: boolean;
 }) {
   return (
-    <div
+    <motion.div
       className={cn(
         'flex-shrink-0 w-[260px] sm:w-[300px] md:w-[350px] lg:w-[400px] p-4 sm:p-6 rounded-xl transition-all duration-300',
         isActive ? 'opacity-100 scale-100' : 'opacity-50 scale-95'
       )}
+      initial={{ opacity: 0, scale: 0.8 }}
+      animate={{ 
+        opacity: isActive ? 1 : 0.5, 
+        scale: isActive ? 1 : 0.95 
+      }}
+      transition={{ duration: 0.4 }}
     >
       {/* Avatar */}
       <div className="flex justify-center mb-4 sm:mb-6">
@@ -74,7 +81,7 @@ function TestimonialCard({
           {testimonial.batch}
         </p>
       </div>
-    </div>
+    </motion.div>
   );
 }
 
@@ -111,12 +118,19 @@ export function TestimonialsSection({
     <section className="min-h-screen py-12 sm:py-16 md:py-20 bg-[var(--background)] overflow-hidden flex flex-col justify-center">
       <Container>
         {/* Section Heading */}
-        <SectionHeading
-          title={TESTIMONIALS_CONTENT.title}
-          titleHighlight={TESTIMONIALS_CONTENT.titleHighlight}
-          description={TESTIMONIALS_CONTENT.description}
-          align="center"
-        />
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
+          <SectionHeading
+            title={TESTIMONIALS_CONTENT.title}
+            titleHighlight={TESTIMONIALS_CONTENT.titleHighlight}
+            description={TESTIMONIALS_CONTENT.description}
+            align="center"
+          />
+        </motion.div>
       </Container>
 
       {/* Carousel */}

@@ -1,9 +1,12 @@
+'use client';
+
 // =============================================================================
 // Footer Component
 // Site footer with organization info, contact, social links, and navigation
 // =============================================================================
 
 import Link from 'next/link';
+import { motion } from 'framer-motion';
 import { Container } from '@/components/ui/Container';
 import {
   ORGANIZATION,
@@ -11,6 +14,29 @@ import {
   SOCIAL_LINKS,
   FOOTER_NAV,
 } from '@/lib/constants';
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.2,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.5,
+      ease: [0.25, 0.46, 0.45, 0.94] as const,
+    },
+  },
+};
 
 // Social Icons Component
 function SocialIcon({ platform }: { platform: string }) {
@@ -35,9 +61,15 @@ export function Footer() {
   return (
     <footer className="bg-[var(--background)] border-t border-[var(--border)] py-10 sm:py-12 md:py-16">
       <Container>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10 lg:gap-8">
+        <motion.div 
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10 lg:gap-8"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+        >
           {/* Organization Info */}
-          <div className="sm:col-span-2 lg:col-span-1">
+          <motion.div className="sm:col-span-2 lg:col-span-1" variants={itemVariants}>
             <h3 className="text-lg sm:text-xl font-bold text-[var(--foreground)] mb-2">
               {ORGANIZATION.name}
             </h3>
@@ -55,10 +87,10 @@ export function Footer() {
                 {ORGANIZATION.department}
               </p>
             </div>
-          </div>
+          </motion.div>
 
           {/* Contact Info */}
-          <div>
+          <motion.div variants={itemVariants}>
             <h4 className="text-[10px] sm:text-xs text-[var(--foreground-muted)] uppercase tracking-wider mb-3 sm:mb-4">
               Contact us
             </h4>
@@ -81,23 +113,25 @@ export function Footer() {
               </p>
               <div className="flex gap-2 sm:gap-3">
                 {SOCIAL_LINKS.map((social) => (
-                  <a
+                  <motion.a
                     key={social.platform}
                     href={social.url}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="w-9 h-9 sm:w-10 sm:h-10 flex items-center justify-center rounded-lg border border-[var(--border)] text-[var(--foreground-muted)] hover:text-[var(--foreground)] hover:border-[var(--foreground-muted)] transition-colors touch-target"
                     aria-label={social.platform}
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.95 }}
                   >
                     <SocialIcon platform={social.platform} />
-                  </a>
+                  </motion.a>
                 ))}
               </div>
             </div>
-          </div>
+          </motion.div>
 
           {/* Navigation */}
-          <div>
+          <motion.div variants={itemVariants}>
             <h4 className="text-[10px] sm:text-xs text-[var(--foreground-muted)] uppercase tracking-wider mb-3 sm:mb-4">
               Navigation
             </h4>
@@ -112,18 +146,24 @@ export function Footer() {
                 </Link>
               ))}
             </nav>
-          </div>
+          </motion.div>
 
           {/* Empty column for spacing on larger screens */}
           <div className="hidden lg:block" />
-        </div>
+        </motion.div>
 
         {/* Copyright */}
-        <div className="mt-8 sm:mt-10 md:mt-12 pt-6 sm:pt-8 border-t border-[var(--border)]">
+        <motion.div 
+          className="mt-8 sm:mt-10 md:mt-12 pt-6 sm:pt-8 border-t border-[var(--border)]"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.4, duration: 0.5 }}
+        >
           <p className="text-xs sm:text-sm text-[var(--foreground-muted)] text-center">
             © {new Date().getFullYear()} {ORGANIZATION.name}. All rights reserved.
           </p>
-        </div>
+        </motion.div>
       </Container>
     </footer>
   );
