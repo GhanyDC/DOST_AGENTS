@@ -56,7 +56,7 @@ export function GroupPhotoSection() {
           />
           
           {/* Dark overlay for text readability */}
-          <div className="absolute inset-0 bg-black/75" />
+          <div className="absolute inset-0 bg-linear-to-b from-black/70 via-black/70 to-black/85" />
         </motion.div>
         
         {/* Tagline Overlay - Centered */}
@@ -69,7 +69,7 @@ export function GroupPhotoSection() {
         >
           {/* Subtitle */}
           <motion.p 
-            className="text-xs sm:text-sm md:text-base text-white/90 tracking-[0.3em] sm:tracking-[0.4em] uppercase mb-6 sm:mb-8 md:mb-10"
+            className="text-[10px] sm:text-xs md:text-sm text-white/90 tracking-[0.35em] sm:tracking-[0.4em] uppercase mb-6 sm:mb-8 md:mb-10"
             variants={fadeInUp}
           >
             {GROUP_PHOTO_CONTENT.subtitle}
@@ -77,7 +77,7 @@ export function GroupPhotoSection() {
           
           {/* Main Tagline */}
           <motion.div className="text-center max-w-5xl" variants={fadeInUp}>
-            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-semibold text-white leading-tight">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-semibold text-white leading-tight">
               {tagline.prefix}{' '}
               <span className="font-script text-(--color-accent-yellow) italic">
                 {tagline.science}
@@ -88,7 +88,7 @@ export function GroupPhotoSection() {
               </span>
               {','}
             </h2>
-            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-semibold text-white mt-2 sm:mt-3 leading-tight">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-semibold text-white mt-2 sm:mt-3 leading-tight">
               {tagline.suffix}{' '}
               <span className="font-script text-(--color-accent-yellow) italic">
                 {tagline.progress}

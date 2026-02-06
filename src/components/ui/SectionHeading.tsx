@@ -29,11 +29,11 @@ export function SectionHeading({
   };
 
   return (
-    <div className={cn('mb-8 sm:mb-10 md:mb-12 px-2 sm:px-0', alignStyles[align], className)}>
-      <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-(--foreground)">
+    <div className={cn('mb-10 sm:mb-12 md:mb-14 px-2 sm:px-0', alignStyles[align], className)}>
+      <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold tracking-tight text-(--foreground)">
         {highlightPosition === 'before' && titleHighlight && (
           <>
-            <span className="font-script text-(--color-accent-yellow) italic">
+            <span className="font-script text-(--color-accent-yellow) italic drop-shadow-sm">
               {titleHighlight}
             </span>{' '}
           </>
@@ -42,7 +42,7 @@ export function SectionHeading({
         {highlightPosition === 'after' && titleHighlight && (
           <>
             {' '}
-            <span className="font-script text-(--color-accent-yellow) italic">
+            <span className="font-script text-(--color-accent-yellow) italic drop-shadow-sm">
               {titleHighlight}
             </span>
           </>

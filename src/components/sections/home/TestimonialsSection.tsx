@@ -30,8 +30,7 @@ function TestimonialCard({
     <motion.div
       className={cn(
         'shrink-0 w-65 sm:w-75 md:w-87.5 lg:w-100 p-6 sm:p-8 rounded-2xl transition-all duration-300',
-        'bg-(--card) border border-(--card-border)',
-        'shadow-lg hover:shadow-xl',
+        isActive ? 'glass-panel border border-(--border) shadow-xl' : 'bg-(--card) border border-(--card-border) shadow-md',
         isActive ? 'opacity-100 scale-100' : 'opacity-50 scale-95'
       )}
       initial={{ opacity: 0, scale: 0.8 }}
@@ -109,7 +108,7 @@ export function TestimonialsSection({
   }, [testimonials.length]);
 
   return (
-    <section className="min-h-screen py-12 sm:py-16 md:py-20 bg-(--background) overflow-hidden flex flex-col justify-center">
+    <section className="min-h-screen section-padding bg-(--background) overflow-hidden flex flex-col justify-center">
       <Container>
         {/* Section Heading */}
         <motion.div
@@ -132,7 +131,7 @@ export function TestimonialsSection({
         {/* Navigation Arrows - Hidden on small mobile */}
         <button
           onClick={goToPrev}
-          className="absolute left-2 sm:left-4 md:left-8 top-1/2 -translate-y-1/2 z-10 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-(--surface) border border-(--border) flex items-center justify-center text-(--foreground) hover:bg-(--muted) transition-colors touch-target"
+          className="hidden sm:flex absolute left-2 sm:left-4 md:left-8 top-1/2 -translate-y-1/2 z-10 w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-(--surface) border border-(--border) items-center justify-center text-(--foreground) hover:bg-(--muted) transition-colors touch-target"
           aria-label="Previous testimonial"
         >
           <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -142,7 +141,7 @@ export function TestimonialsSection({
 
         <button
           onClick={goToNext}
-          className="absolute right-2 sm:right-4 md:right-8 top-1/2 -translate-y-1/2 z-10 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-(--surface) border border-(--border) flex items-center justify-center text-(--foreground) hover:bg-(--muted) transition-colors touch-target"
+          className="hidden sm:flex absolute right-2 sm:right-4 md:right-8 top-1/2 -translate-y-1/2 z-10 w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-(--surface) border border-(--border) items-center justify-center text-(--foreground) hover:bg-(--muted) transition-colors touch-target"
           aria-label="Next testimonial"
         >
           <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
