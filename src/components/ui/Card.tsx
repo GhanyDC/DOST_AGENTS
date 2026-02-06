@@ -4,6 +4,7 @@
 // =============================================================================
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { cn } from '@/lib/utils';
 
 interface CardProps {
@@ -38,7 +39,7 @@ export function Card({ className, children }: CardProps) {
   return (
     <div
       className={cn(
-        'rounded-xl overflow-hidden bg-card border border-card-border card-hover',
+        'rounded-2xl overflow-hidden card-surface card-hover',
         className
       )}
     >
@@ -49,6 +50,8 @@ export function Card({ className, children }: CardProps) {
 
 // Card Image component with placeholder fallback
 export function CardImage({
+  src,
+  alt,
   className,
   aspectRatio = 'video',
 }: CardImageProps) {
@@ -60,12 +63,13 @@ export function CardImage({
 
   return (
     <div className={cn('relative overflow-hidden bg-muted', aspectRatioStyles[aspectRatio], className)}>
-      {/* Placeholder background */}
-      <div className="absolute inset-0 flex items-center justify-center bg-linear-to-br from-slate-700 to-slate-900">
-        <svg className="w-12 h-12 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-        </svg>
-      </div>
+      <Image
+        src={src}
+        alt={alt}
+        fill
+        className="object-cover"
+      />
+      <div className="absolute inset-0 bg-linear-to-br from-black/0 via-black/0 to-black/35" />
     </div>
   );
 }
@@ -117,7 +121,7 @@ export function ProjectCard({
     <Card>
       <CardImage src={imageUrl} alt={title} />
       <CardContent className="p-3 sm:p-4">
-        <CardTitle className="text-primary text-xs sm:text-sm line-clamp-2">
+        <CardTitle className="text-(--foreground) text-xs sm:text-sm line-clamp-2">
           {title}
         </CardTitle>
         <CardDescription className="text-[10px] sm:text-xs mt-1">
@@ -164,7 +168,7 @@ export function FeatureCard({
       )}
     >
       {/* Number Badge */}
-      <div className="inline-flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 mb-3 sm:mb-4 rounded-lg bg-muted text-foreground font-bold text-xs sm:text-sm">
+      <div className="feature-badge inline-flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 mb-3 sm:mb-4 rounded-lg bg-muted text-foreground font-bold text-xs sm:text-sm">
         {number}
       </div>
       

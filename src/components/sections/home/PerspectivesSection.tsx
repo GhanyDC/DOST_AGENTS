@@ -45,7 +45,7 @@ export function PerspectivesSection({ projects = SAMPLE_PROJECTS }: Perspectives
   const secondRow = projects.slice(4, 8);
 
   return (
-    <section className="min-h-screen py-12 sm:py-16 md:py-20 bg-(--background) overflow-hidden flex flex-col justify-center">
+    <section className="min-h-screen section-padding bg-section-gradient overflow-hidden flex flex-col justify-center">
       <Container>
         {/* Section Heading */}
         <motion.div
