@@ -58,7 +58,7 @@ export function CoreValuesSection() {
   const { title, description } = CORE_VALUES_CONTENT;
 
   return (
-    <section className="py-8 sm:py-10 md:py-12 pb-16 sm:pb-20 md:pb-24 bg-(--background) flex items-center">
+    <section className="section-padding bg-(--background) flex items-center">
       <Container className="text-center px-4 sm:px-6">
         <motion.div
           variants={containerVariants}

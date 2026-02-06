@@ -37,10 +37,10 @@ const itemVariants = {
 
 export function IskoOpsSection() {
   return (
-    <section className="min-h-screen py-12 sm:py-16 md:py-20 bg-(--background) flex items-center">
+    <section className="min-h-screen section-padding bg-section-gradient flex items-center">
       <Container>
         <motion.div 
-          className="bg-(--card) border border-(--card-border) rounded-xl sm:rounded-2xl overflow-hidden"
+          className="card-surface rounded-2xl sm:rounded-3xl overflow-hidden"
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -63,6 +63,7 @@ export function IskoOpsSection() {
                 className="object-cover"
                 priority
               />
+              <div className="absolute inset-0 bg-linear-to-t from-black/35 via-black/0 to-transparent" />
             </motion.div>
 
             {/* Content Side */}

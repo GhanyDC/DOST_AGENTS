@@ -17,11 +17,11 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 
 const variantStyles: Record<ButtonVariant, string> = {
   primary:
-    'bg-(--color-primary) text-white hover:bg-(--color-primary-hover) shadow-md hover:shadow-lg',
+    'bg-(--color-primary) text-[#111827] hover:bg-(--color-primary-hover) shadow-[0_14px_30px_-18px_var(--color-primary-glow)] hover:shadow-[0_18px_38px_-18px_var(--color-primary-glow)] border border-transparent',
   secondary:
-    'bg-(--surface) text-(--foreground) border border-(--border) hover:bg-(--muted)',
+    'bg-(--surface) text-(--foreground) border border-(--border) hover:bg-(--muted) hover:border-(--border-muted)',
   outline:
-    'bg-transparent text-(--foreground) border border-(--border) hover:bg-(--muted)',
+    'bg-transparent text-(--foreground) border border-(--border) hover:bg-(--muted) hover:border-(--foreground-muted)',
   ghost:
     'bg-transparent text-(--foreground) hover:bg-(--muted)',
 };
@@ -51,7 +51,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       <button
         ref={ref}
         className={cn(
-          'inline-flex items-center justify-center gap-2 font-semibold transition-all duration-200 focus-ring disabled:opacity-50 disabled:cursor-not-allowed',
+            'inline-flex items-center justify-center gap-2 font-semibold transition-all duration-200 focus-ring disabled:opacity-50 disabled:cursor-not-allowed tracking-wide',
           variantStyles[variant],
           sizeStyles[size],
           className
