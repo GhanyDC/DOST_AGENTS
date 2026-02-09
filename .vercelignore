@@ -1,0 +1,29 @@
+# Vercel Ignore File
+# Files and directories to ignore during Vercel deployment
+
+# Documentation (optional - uncomment if you want to exclude docs from deployment)
+# DEPLOYMENT.md
+# CHECKLIST.md
+# SUPABASE_FRONTEND_GUIDE.md
+
+# Test files
+**/*.test.ts
+**/*.test.tsx
+**/*.spec.ts
+**/*.spec.tsx
+
+# Development files
+.vscode/
+.idea/
+
+# Git
+.git/
+.gitignore
+
+# Local env files (already handled by .gitignore, but added for clarity)
+.env.local
+.env*.local
+
+# Other
+testfork.txt
+*.log
