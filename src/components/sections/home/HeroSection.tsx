@@ -53,28 +53,24 @@ export function HeroSection() {
           initial="hidden"
           animate="visible"
         >
-          <motion.p
-            className="text-[10px] sm:text-xs uppercase tracking-[0.35em] text-(--foreground-muted) mb-4"
-            variants={itemVariants}
-          >
-            Science • Service • Nation
-          </motion.p>
           {/* Main Title */}
           <motion.h1 
-            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-semibold leading-tight tracking-tight mb-4 sm:mb-6"
+            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl leading-tight tracking-tight mb-4 sm:mb-6"
+            style={{ fontFamily: 'var(--font-romanesco)' }}
             variants={itemVariants}
           >
-            <span className="text-(--color-primary) italic">
+            <span className="text-[#FFE500] italic">
               {HERO_CONTENT.titleHighlight}
             </span>{' '}
-            <span className="text-(--foreground)">
+            <span className="text-white italic">
               {HERO_CONTENT.titleRest}
             </span>
           </motion.h1>
           
           {/* Description */}
           <motion.p 
-            className="text-xs sm:text-sm md:text-base text-(--foreground-muted) max-w-2xl mx-auto leading-relaxed mb-8 sm:mb-10 md:mb-12 px-2"
+            className="text-xs sm:text-sm md:text-base text-white/70 max-w-2xl mx-auto leading-relaxed mb-8 sm:mb-10 md:mb-12 px-2"
+            style={{ fontFamily: 'var(--font-manrope)' }}
             variants={itemVariants}
           >
             {HERO_CONTENT.description}

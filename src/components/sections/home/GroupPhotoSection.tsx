@@ -69,32 +69,49 @@ export function GroupPhotoSection() {
         >
           {/* Subtitle */}
           <motion.p 
-            className="text-[10px] sm:text-xs md:text-sm text-white/90 tracking-[0.35em] sm:tracking-[0.4em] uppercase mb-6 sm:mb-8 md:mb-10"
+            className="text-[10px] sm:text-xs text-white/80 tracking-[0.15em] uppercase mb-6 sm:mb-8"
+            style={{ fontFamily: 'var(--font-poppins)' }}
             variants={fadeInUp}
           >
             {GROUP_PHOTO_CONTENT.subtitle}
           </motion.p>
-          
+
           {/* Main Tagline */}
           <motion.div className="text-center max-w-5xl" variants={fadeInUp}>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-semibold text-white leading-tight">
+            <h2 
+              className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl leading-tight text-white font-normal"
+              style={{ fontFamily: 'var(--font-manrope)' }}   // ✅ Regular text = Manrope
+            >
               {tagline.prefix}{' '}
-              <span className="font-script text-(--color-accent-yellow) italic">
+              <span 
+                className="text-[#FFE500] italic text-4xl sm:text-5xl md:text-6xl lg:text-7xl"
+                style={{ fontFamily: 'var(--font-romanesco)' }}  // ✅ Yellow words = Romanesco
+              >
                 {tagline.science}
               </span>
               {' '}{tagline.middle}{' '}
-              <span className="font-script text-(--color-accent-yellow) italic">
+              <span 
+                className="text-[#FFE500] italic text-4xl sm:text-5xl md:text-6xl lg:text-7xl"
+                style={{ fontFamily: 'var(--font-romanesco)' }}
+              >
                 {tagline.service}
               </span>
-              {','}
             </h2>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-semibold text-white mt-2 sm:mt-3 leading-tight">
+
+            <h2 
+              className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl mt-2 sm:mt-3 leading-tight text-white font-normal"
+              style={{ fontFamily: 'var(--font-manrope)' }}
+            >
               {tagline.suffix}{' '}
-              <span className="font-script text-(--color-accent-yellow) italic">
+              <span 
+                className="text-[#FFE500] italic text-4xl sm:text-5xl md:text-6xl lg:text-7xl"
+                style={{ fontFamily: 'var(--font-romanesco)' }}
+              >
                 {tagline.progress}
               </span>
             </h2>
           </motion.div>
+
         </motion.div>
       </div>
     </section>
