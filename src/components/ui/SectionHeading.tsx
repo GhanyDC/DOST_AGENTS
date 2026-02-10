@@ -30,26 +30,35 @@ export function SectionHeading({
 
   return (
     <div className={cn('mb-10 sm:mb-12 md:mb-14 px-2 sm:px-0', alignStyles[align], className)}>
-      <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold tracking-tight text-(--foreground)">
+      <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold tracking-tight text-(--foreground)">
         {highlightPosition === 'before' && titleHighlight && (
           <>
-            <span className="font-script text-(--color-accent-yellow) italic drop-shadow-sm">
+            <span 
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-[#FFE500] italic drop-shadow-sm"
+              style={{ fontFamily: 'var(--font-romanesco)' }}
+            >
               {titleHighlight}
             </span>{' '}
           </>
         )}
-        <span>{title}</span>
+        <span style={{ fontFamily: 'var(--font-manrope)' }}>{title}</span>
         {highlightPosition === 'after' && titleHighlight && (
           <>
             {' '}
-            <span className="font-script text-(--color-accent-yellow) italic drop-shadow-sm">
+            <span 
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-[#FFE500] italic drop-shadow-sm"
+              style={{ fontFamily: 'var(--font-romanesco)' }}
+            >
               {titleHighlight}
             </span>
           </>
         )}
       </h2>
       {description && (
-        <p className="mt-3 sm:mt-4 text-xs sm:text-sm md:text-base text-(--foreground-muted) max-w-3xl mx-auto leading-relaxed">
+        <p 
+          className="mt-3 sm:mt-4 text-xs sm:text-sm md:text-base text-(--foreground-muted) max-w-3xl mx-auto leading-relaxed"
+          style={{ fontFamily: 'var(--font-poppins)' }}
+        >
           {description}
         </p>
       )}
