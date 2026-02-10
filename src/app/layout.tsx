@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Geist, Geist_Mono } from 'next/font/google';
+import { Poppins, Manrope, Romanesco } from 'next/font/google';
 import { ThemeProvider } from '@/app/providers/theme-provider';
 import './globals.css';
 
@@ -7,14 +7,22 @@ import './globals.css';
 // Font Configuration
 // =============================================================================
 
-const geistSans = Geist({
-  variable: '--font-geist-sans',
+const poppins = Poppins({
+  variable: '--font-poppins',
   subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
 });
 
-const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
+const manrope = Manrope({
+  variable: '--font-manrope',
   subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+});
+
+const romanesco = Romanesco({
+  variable: '--font-romanesco',
+  subsets: ['latin'],
+  weight: ['400'],
 });
 
 // =============================================================================
@@ -77,7 +85,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen`}
+        className={`${poppins.variable} ${manrope.variable} ${romanesco.variable} antialiased min-h-screen`}
       >
         <ThemeProvider>
           {children}
