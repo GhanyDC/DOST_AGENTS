@@ -3,7 +3,6 @@
 // Export all custom hooks from a single entry point
 // =============================================================================
 
-export { useTheme } from '@/app/providers/theme-provider';
 export { useSupabase } from '@/app/providers/supabase-provider';
 
 // Future hooks can be added here:

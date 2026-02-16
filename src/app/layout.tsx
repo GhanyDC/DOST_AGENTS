@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
 import { Poppins, Manrope, Romanesco } from 'next/font/google';
-import { ThemeProvider } from '@/app/providers/theme-provider';
 import './globals.css';
 
 // =============================================================================
@@ -64,32 +63,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <head>
-        {/* Prevent flash of incorrect theme */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              (function() {
-                try {
-                  var theme = localStorage.getItem('agents-theme');
-                  var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-                  var resolved = theme === 'dark' || (theme !== 'light' && prefersDark) ? 'dark' : 'light';
-                  document.documentElement.classList.add(resolved);
-                } catch (e) {
-                  document.documentElement.classList.add('dark');
-                }
-              })();
-            `,
-          }}
-        />
-      </head>
+    <html lang="en" className="dark">
       <body
         className={`${poppins.variable} ${manrope.variable} ${romanesco.variable} antialiased min-h-screen`}
       >
-        <ThemeProvider>
-          {children}
-        </ThemeProvider>
+        {children}
       </body>
     </html>
   );

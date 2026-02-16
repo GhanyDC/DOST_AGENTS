@@ -66,9 +66,6 @@ export type FooterNav = {
   href: string;
 };
 
-// Theme Types
-export type Theme = 'light' | 'dark' | 'system';
-
 // Button Variants
 export type ButtonVariant = 'primary' | 'secondary' | 'outline' | 'ghost';
 export type ButtonSize = 'sm' | 'md' | 'lg';
