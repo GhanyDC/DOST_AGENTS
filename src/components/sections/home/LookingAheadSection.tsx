@@ -42,7 +42,7 @@ const cardVariants = {
 
 export function LookingAheadSection({ features = SAMPLE_FEATURES }: LookingAheadSectionProps) {
   return (
-    <section className="min-h-screen py-12 sm:py-16 md:py-20 bg-(--background) flex items-center">
+    <section className="min-h-screen section-padding bg-section-gradient flex items-center">
       <Container>
         {/* Section Heading */}
         <motion.div
@@ -67,12 +67,13 @@ export function LookingAheadSection({ features = SAMPLE_FEATURES }: LookingAhead
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
         >
-          {features.map((feature) => (
+          {features.map((feature, index) => (
             <motion.div key={feature.id} variants={cardVariants}>
               <FeatureCard
                 number={feature.number}
                 title={feature.title}
                 description={feature.description}
+                className={index === 0 ? 'feature-card-highlight' : undefined}
               />
             </motion.div>
           ))}

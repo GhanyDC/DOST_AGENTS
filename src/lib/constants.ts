@@ -48,10 +48,12 @@ export const FOOTER_NAV: FooterNav[] = [
 // Hero Section Content
 export const HERO_CONTENT = {
   titleHighlight: 'AGENTS',
-  titleRest: 'of Change, Excellence, and For The Common Good',
+  titleRest: 'Of Change, Excellence and For The Common Good',
   description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-  ctaText: 'Explore',
-  ctaLink: '/about',
+  ctaText: 'Explore Projects',
+  ctaLink: '/updates',
+  secondaryCtaText: 'Learn More',
+  secondaryCtaLink: '/about',
 };
 
 // Group Photo Section
@@ -77,14 +79,14 @@ export const PERSPECTIVES_CONTENT = {
 
 // Sample Projects Data
 export const SAMPLE_PROJECTS: Project[] = [
-  { id: '1', title: 'Project Namnama', date: 'December 21, 2025', imageUrl: '/images/project-1.jpg' },
-  { id: '2', title: 'Project Namnama', date: 'December 21, 2025', imageUrl: '/images/project-2.jpg' },
-  { id: '3', title: 'Project Namnama', date: 'December 21, 2025', imageUrl: '/images/project-3.jpg' },
-  { id: '4', title: 'Project Namnama', date: 'December 21, 2025', imageUrl: '/images/project-4.jpg' },
-  { id: '5', title: 'Project Namnama', date: 'December 21, 2025', imageUrl: '/images/project-5.jpg' },
-  { id: '6', title: 'Project Namnama', date: 'December 21, 2025', imageUrl: '/images/project-6.jpg' },
-  { id: '7', title: 'Project Namnama', date: 'December 21, 2025', imageUrl: '/images/project-7.jpg' },
-  { id: '8', title: 'Project Namnama', date: 'December 21, 2025', imageUrl: '/images/project-8.jpg' },
+  { id: '1', title: 'Project Namnama', date: 'December 21, 2025', imageUrl: '/group_photo.png' },
+  { id: '2', title: 'Project Namnama', date: 'December 21, 2025', imageUrl: '/group_photo.png' },
+  { id: '3', title: 'Project Namnama', date: 'December 21, 2025', imageUrl: '/group_photo.png' },
+  { id: '4', title: 'Project Namnama', date: 'December 21, 2025', imageUrl: '/group_photo.png' },
+  { id: '5', title: 'Project Namnama', date: 'December 21, 2025', imageUrl: '/group_photo.png' },
+  { id: '6', title: 'Project Namnama', date: 'December 21, 2025', imageUrl: '/group_photo.png' },
+  { id: '7', title: 'Project Namnama', date: 'December 21, 2025', imageUrl: '/group_photo.png' },
+  { id: '8', title: 'Project Namnama', date: 'December 21, 2025', imageUrl: '/group_photo.png' },
 ];
 
 // Looking Ahead Section

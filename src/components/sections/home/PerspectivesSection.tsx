@@ -2,13 +2,11 @@
 
 // =============================================================================
 // Perspectives Section Component
-// Project cards showcasing organization initiatives
+// Project cards with infinite marquee scrolling rows
 // =============================================================================
 
+import Image from 'next/image';
 import { motion } from 'framer-motion';
-import { Container } from '@/components/ui/Container';
-import { SectionHeading } from '@/components/ui/SectionHeading';
-import { ProjectCard } from '@/components/ui/Card';
 import { PERSPECTIVES_CONTENT, SAMPLE_PROJECTS } from '@/lib/constants';
 import type { Project } from '@/types';
 
@@ -16,102 +14,113 @@ interface PerspectivesSectionProps {
   projects?: Project[];
 }
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1,
-      delayChildren: 0.2,
-    },
-  },
-};
-
-const cardVariants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.5,
-      ease: [0.25, 0.46, 0.45, 0.94] as const,
-    },
-  },
-};
+function MarqueeCard({ title, date, imageUrl }: { title: string; date: string; imageUrl: string }) {
+  return (
+    <div className="shrink-0 w-52 sm:w-60 md:w-72 lg:w-80">
+      <div className="rounded-xl overflow-hidden bg-(--card) border border-(--card-border)">
+        <div className="relative aspect-video overflow-hidden">
+          <Image
+            src={imageUrl}
+            alt={title}
+            fill
+            className="object-cover"
+          />
+        </div>
+        <div className="p-2 sm:p-3">
+          <h3 
+            className="text-xs sm:text-sm font-semibold text-(--foreground)"
+            style={{ fontFamily: 'var(--font-poppins)' }}
+          >
+            {title}
+          </h3>
+          <p 
+            className="text-[9px] sm:text-[10px] text-(--foreground-muted) mt-0.5"
+            style={{ fontFamily: 'var(--font-poppins)' }}
+          >
+            {date}
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export function PerspectivesSection({ projects = SAMPLE_PROJECTS }: PerspectivesSectionProps) {
-  // Split projects into two rows for the design
   const firstRow = projects.slice(0, 4);
   const secondRow = projects.slice(4, 8);
 
+  // Duplicate items for seamless loop
+  const firstRowDuped = [...firstRow, ...firstRow, ...firstRow];
+  const secondRowDuped = [...secondRow, ...secondRow, ...secondRow];
+
   return (
-    <section className="min-h-screen py-12 sm:py-16 md:py-20 bg-(--background) overflow-hidden flex flex-col justify-center">
-      <Container>
-        {/* Section Heading */}
+    <section className="h-screen pt-12 sm:pt-16 pb-6 sm:pb-8 bg-section-gradient overflow-x-clip flex flex-col justify-center">
+      {/* Section Heading */}
+      <div className="text-center mb-4 sm:mb-6 px-4 shrink-0">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <SectionHeading
-            title={PERSPECTIVES_CONTENT.title}
-            titleHighlight={PERSPECTIVES_CONTENT.titleHighlight}
-            description={PERSPECTIVES_CONTENT.description}
-            align="center"
-          />
-        </motion.div>
-      </Container>
-
-      {/* Projects Grid - First Row - Horizontal scroll on mobile */}
-      <div className="px-4 sm:px-0">
-        <Container className="overflow-visible">
-          <motion.div 
-            className="flex gap-4 sm:gap-6 overflow-x-auto pb-4 scrollbar-hide sm:grid sm:grid-cols-2 lg:grid-cols-4 sm:overflow-visible sm:pb-0 -mx-4 px-4 sm:mx-0 sm:px-0"
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.2 }}
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold tracking-tight text-(--foreground)">
+            <span style={{ fontFamily: 'var(--font-manrope)' }}>{PERSPECTIVES_CONTENT.title}</span>
+            {' '}
+            <span 
+              className="text-3xl sm:text-4xl md:text-5xl text-[#FFE500] italic font-normal tracking-wide"
+              style={{ fontFamily: 'var(--font-romanesco)' }}
+            >
+              {PERSPECTIVES_CONTENT.titleHighlight}
+            </span>
+          </h2>
+          <p 
+            className="mt-2 sm:mt-3 text-[10px] sm:text-xs md:text-sm text-(--foreground-muted) max-w-2xl mx-auto leading-relaxed"
+            style={{ fontFamily: 'var(--font-poppins)' }}
           >
-            {firstRow.map((project) => (
-              <motion.div key={project.id} className="shrink-0 w-65 sm:w-auto" variants={cardVariants}>
-                <ProjectCard
-                  title={project.title}
-                  date={project.date}
-                  imageUrl={project.imageUrl}
-                  href={project.slug ? `/projects/${project.slug}` : undefined}
-                />
-              </motion.div>
-            ))}
-          </motion.div>
-        </Container>
+            {PERSPECTIVES_CONTENT.description}
+          </p>
+        </motion.div>
       </div>
 
-      {/* Projects Grid - Second Row */}
-      {secondRow.length > 0 && (
-        <div className="px-4 sm:px-0 mt-4 sm:mt-6">
-          <Container className="overflow-visible">
-            <motion.div 
-              className="flex gap-4 sm:gap-6 overflow-x-auto pb-4 scrollbar-hide sm:grid sm:grid-cols-2 lg:grid-cols-4 sm:overflow-visible sm:pb-0 -mx-4 px-4 sm:mx-0 sm:px-0"
-              variants={containerVariants}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.2 }}
-            >
-              {secondRow.map((project) => (
-                <motion.div key={project.id} className="shrink-0 w-65 sm:w-auto" variants={cardVariants}>
-                  <ProjectCard
-                    title={project.title}
-                    date={project.date}
-                    imageUrl={project.imageUrl}
-                    href={project.slug ? `/projects/${project.slug}` : undefined}
-                  />
-                </motion.div>
-              ))}
-            </motion.div>
-          </Container>
+      {/* Top Row - Scrolls Left */}
+      <motion.div
+        className="w-full overflow-hidden flex-1 min-h-0"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6, delay: 0.2 }}
+      >
+        <div className="flex gap-3 sm:gap-5 marquee-left h-full items-center">
+          {firstRowDuped.map((project, i) => (
+            <MarqueeCard
+              key={`top-${project.id}-${i}`}
+              title={project.title}
+              date={project.date}
+              imageUrl={project.imageUrl}
+            />
+          ))}
         </div>
-      )}
+      </motion.div>
+
+      {/* Bottom Row - Scrolls Right */}
+      <motion.div
+        className="w-full overflow-hidden mt-3 sm:mt-4 flex-1 min-h-0"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6, delay: 0.4 }}
+      >
+        <div className="flex gap-3 sm:gap-5 marquee-right h-full items-center">
+          {secondRowDuped.map((project, i) => (
+            <MarqueeCard
+              key={`bottom-${project.id}-${i}`}
+              title={project.title}
+              date={project.date}
+              imageUrl={project.imageUrl}
+            />
+          ))}
+        </div>
+      </motion.div>
     </section>
   );
 }
