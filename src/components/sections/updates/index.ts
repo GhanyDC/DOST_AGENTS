@@ -1,7 +1,6 @@
 // =============================================================================
-// Section Components Index
-// Export all section components from a single entry point
+// Updates Page Sections Export
 // =============================================================================
 
-export * from './home';
-export * from './updates';
+export { UpdatesPageContent } from './UpdatesPageContent';
+export { UpdateDetailContent } from './UpdateDetailContent';
