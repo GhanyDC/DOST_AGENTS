@@ -53,28 +53,31 @@ export function TestimonialsSection({
 
   const slideVariants = {
     enter: (direction: number) => ({
-      x: direction > 0 ? 1000 : -1000,
+      x: direction > 0 ? 300 : -300,
       opacity: 0,
-      scale: 0.9,
+      scale: 0.95,
+      filter: 'blur(4px)',
     }),
     center: {
       x: 0,
       opacity: 1,
       scale: 1,
+      filter: 'blur(0px)',
     },
     exit: (direction: number) => ({
-      x: direction < 0 ? 1000 : -1000,
+      x: direction < 0 ? 300 : -300,
       opacity: 0,
-      scale: 0.9,
+      scale: 0.95,
+      filter: 'blur(4px)',
     }),
   };
 
   return (
-    <section className="relative min-h-screen pt-20 sm:pt-24 md:pt-28 pb-16 sm:pb-20 md:pb-24 bg-gradient-to-b from-[#0a0a1a] via-[#0f0f1e] to-[#1a1a2e] overflow-hidden flex flex-col justify-center">
-      {/* Background Effects */}
-      <div className="absolute inset-0 opacity-30">
-        <div className="absolute top-1/3 left-1/4 w-72 h-72 bg-[#FFE500]/15 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute bottom-1/3 right-1/4 w-96 h-96 bg-[#42a5f5]/10 rounded-full blur-3xl" />
+    <section className="relative min-h-screen pt-20 sm:pt-24 md:pt-28 pb-16 sm:pb-20 md:pb-24 bg-gradient-to-b from-[#0b0e22] via-[#0e1328] to-[#0c1020] overflow-hidden flex flex-col justify-center noise-overlay">
+      {/* Background Effects — warm glow behind testimonial card */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-[radial-gradient(circle,rgba(255,229,0,0.05),transparent_65%)] animate-pulse-glow" />
+        <div className="absolute top-[25%] right-[20%] w-[300px] h-[300px] bg-[radial-gradient(circle,rgba(66,165,245,0.06),transparent_70%)] animate-pulse-glow" style={{ animationDelay: '2s' }} />
       </div>
 
       {/* Section Heading */}
@@ -83,7 +86,7 @@ export function TestimonialsSection({
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
+          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
         >
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-normal tracking-tight text-white mb-6">
             <span style={{ fontFamily: 'var(--font-manrope)' }}>{TESTIMONIALS_CONTENT.title}</span>
@@ -96,7 +99,7 @@ export function TestimonialsSection({
             </span>
           </h2>
           <p 
-            className="mt-3 sm:mt-4 text-xs sm:text-sm md:text-base text-white/70 max-w-3xl mx-auto leading-relaxed"
+            className="mt-3 sm:mt-4 text-xs sm:text-sm md:text-base text-white/60 max-w-3xl mx-auto leading-relaxed"
             style={{ fontFamily: 'var(--font-poppins)' }}
           >
             {TESTIMONIALS_CONTENT.description}
@@ -111,11 +114,11 @@ export function TestimonialsSection({
           <button
             onClick={goToPrev}
             disabled={testimonials.length <= 1}
-            className="absolute left-0 sm:-left-4 md:-left-8 top-1/2 -translate-y-1/2 z-20 group flex items-center justify-center w-11 h-11 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-full bg-white/5 border border-white/20 hover:bg-[#FFE500] hover:border-[#FFE500] disabled:opacity-30 disabled:cursor-not-allowed transition-all duration-300 shadow-lg hover:shadow-[0_0_25px_rgba(255,229,0,0.4)]"
+            className="absolute left-0 sm:-left-4 md:-left-8 top-1/2 -translate-y-1/2 z-20 group flex items-center justify-center w-11 h-11 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-full bg-white/[0.04] border border-white/10 hover:bg-[#FFE500] hover:border-[#FFE500] disabled:opacity-30 disabled:cursor-not-allowed transition-all duration-300 shadow-lg hover:shadow-[0_0_25px_rgba(255,229,0,0.3)]"
             aria-label="Previous testimonial"
           >
             <svg className="w-5 h-5 sm:w-6 sm:h-6 text-white group-hover:text-black transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M15 19l-7-7 7-7" />
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
             </svg>
           </button>
 
@@ -123,11 +126,11 @@ export function TestimonialsSection({
           <button
             onClick={goToNext}
             disabled={testimonials.length <= 1}
-            className="absolute right-0 sm:-right-4 md:-right-8 top-1/2 -translate-y-1/2 z-20 group flex items-center justify-center w-11 h-11 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-full bg-white/5 border border-white/20 hover:bg-[#FFE500] hover:border-[#FFE500] disabled:opacity-30 disabled:cursor-not-allowed transition-all duration-300 shadow-lg hover:shadow-[0_0_25px_rgba(255,229,0,0.4)]"
+            className="absolute right-0 sm:-right-4 md:-right-8 top-1/2 -translate-y-1/2 z-20 group flex items-center justify-center w-11 h-11 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-full bg-white/[0.04] border border-white/10 hover:bg-[#FFE500] hover:border-[#FFE500] disabled:opacity-30 disabled:cursor-not-allowed transition-all duration-300 shadow-lg hover:shadow-[0_0_25px_rgba(255,229,0,0.3)]"
             aria-label="Next testimonial"
           >
             <svg className="w-5 h-5 sm:w-6 sm:h-6 text-white group-hover:text-black transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
             </svg>
           </button>
 
@@ -140,16 +143,17 @@ export function TestimonialsSection({
               animate="center"
               exit="exit"
               transition={{
-                x: { type: "spring", stiffness: 300, damping: 30 },
-                opacity: { duration: 0.4 },
-                scale: { duration: 0.4 },
+                x: { type: "spring", stiffness: 250, damping: 28 },
+                opacity: { duration: 0.35 },
+                scale: { duration: 0.35 },
+                filter: { duration: 0.3 },
               }}
               className="absolute inset-0 flex items-center justify-center px-12 sm:px-16 md:px-20"
             >
-              <div className="w-full max-w-3xl p-6 sm:p-8 md:p-10 lg:p-12 rounded-2xl sm:rounded-3xl bg-gradient-to-br from-[#1a1a2e]/70 to-[#16213e]/70 border border-white/10 backdrop-blur-md shadow-[0_20px_70px_rgba(0,0,0,0.3)]">
+              <div className="w-full max-w-3xl p-6 sm:p-8 md:p-10 lg:p-12 rounded-2xl sm:rounded-3xl bg-gradient-to-br from-[#111a30]/60 to-[#0d1526]/60 border border-white/[0.06] backdrop-blur-md shadow-[0_12px_48px_rgba(0,0,0,0.25)]">
                 {/* Avatar */}
                 <div className="flex justify-center mb-6 sm:mb-8">
-                  <div className="relative w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 rounded-full overflow-hidden bg-white/5 border-3 border-[#FFE500]/30 shadow-[0_0_30px_rgba(255,229,0,0.2)]">
+                  <div className="relative w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 rounded-full overflow-hidden bg-white/[0.03] border-2 border-[#FFE500]/20 shadow-[0_0_24px_rgba(255,229,0,0.1)]">
                     {currentTestimonial.imageUrl ? (
                       <Image
                         src={currentTestimonial.imageUrl}
@@ -167,21 +171,21 @@ export function TestimonialsSection({
 
                 {/* Quote Marks */}
                 <div className="flex justify-center mb-4">
-                  <svg className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 text-[#FFE500] opacity-80" fill="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 text-[#FFE500]/60" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
                   </svg>
                 </div>
 
                 {/* Quote */}
                 <blockquote 
-                  className="text-center text-sm sm:text-base md:text-lg lg:text-xl text-white leading-relaxed mb-6 sm:mb-8 px-2 sm:px-4"
+                  className="text-center text-sm sm:text-base md:text-lg lg:text-xl text-white/90 leading-relaxed mb-6 sm:mb-8 px-2 sm:px-4 italic"
                   style={{ fontFamily: 'var(--font-poppins)' }}
                 >
-                  {currentTestimonial.quote}
+                  &ldquo;{currentTestimonial.quote}&rdquo;
                 </blockquote>
 
                 {/* Author Info */}
-                <div className="text-center border-t border-white/10 pt-6">
+                <div className="text-center border-t border-white/[0.06] pt-6">
                   <p 
                     className="font-bold text-base sm:text-lg md:text-xl text-white mb-1"
                     style={{ fontFamily: 'var(--font-manrope)' }}
@@ -189,7 +193,7 @@ export function TestimonialsSection({
                     {currentTestimonial.author}
                   </p>
                   <p 
-                    className="text-xs sm:text-sm md:text-base text-[#FFE500]/80 font-medium"
+                    className="text-xs sm:text-sm md:text-base text-[#FFE500]/70 font-medium"
                     style={{ fontFamily: 'var(--font-poppins)' }}
                   >
                     {currentTestimonial.batch}
@@ -213,8 +217,8 @@ export function TestimonialsSection({
               }}
               className={`transition-all duration-300 rounded-full ${
                 index === activeIndex
-                  ? 'w-8 sm:w-10 h-2 sm:h-2.5 bg-[#FFE500] shadow-[0_0_15px_rgba(255,229,0,0.6)]'
-                  : 'w-2 sm:w-2.5 h-2 sm:h-2.5 bg-white/30 hover:bg-white/50'
+                  ? 'w-8 sm:w-10 h-2 sm:h-2.5 bg-[#FFE500] shadow-[0_0_12px_rgba(255,229,0,0.4)]'
+                  : 'w-2 sm:w-2.5 h-2 sm:h-2.5 bg-white/20 hover:bg-white/40'
               }`}
               aria-label={`Go to testimonial ${index + 1}`}
             />

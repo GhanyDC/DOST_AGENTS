@@ -8,7 +8,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { Button } from '@/components/ui/Button';
 import { ISKO_OPS_CONTENT } from '@/lib/constants';
 
 const containerVariants = {
@@ -16,51 +15,50 @@ const containerVariants = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.1,
-      delayChildren: 0.2,
+      staggerChildren: 0.08,
+      delayChildren: 0.15,
     },
   },
 };
 
 const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
+  hidden: { opacity: 0, y: 18 },
   visible: {
     opacity: 1,
     y: 0,
     transition: {
-      duration: 0.5,
-      ease: [0.25, 0.46, 0.45, 0.94] as const,
+      duration: 0.6,
+      ease: [0.22, 1, 0.36, 1] as const,
     },
   },
 };
 
 export function IskoOpsSection() {
   return (
-    <section className="relative min-h-screen pt-20 sm:pt-24 md:pt-28 pb-16 sm:pb-20 md:pb-24 bg-gradient-to-b from-[#0a0a1a] via-[#0f0f1e] to-[#1a1a2e] overflow-hidden flex items-center">
+    <section className="relative min-h-screen pt-20 sm:pt-24 md:pt-28 pb-16 sm:pb-20 md:pb-24 bg-gradient-to-b from-[#0d1228] via-[#0a0f1a] to-[#080c14] overflow-hidden flex items-center noise-overlay">
       {/* Background Effects */}
-      <div className="absolute inset-0 opacity-25">
-        <div className="absolute top-1/3 left-1/4 w-80 h-80 bg-[#42a5f5]/20 rounded-full blur-3xl" />
-        <div className="absolute bottom-1/3 right-1/4 w-96 h-96 bg-[#FFE500]/10 rounded-full blur-3xl animate-pulse" />
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-[25%] left-[15%] w-[500px] h-[500px] bg-[radial-gradient(circle,rgba(66,165,245,0.06),transparent_70%)] animate-pulse-glow" />
+        <div className="absolute bottom-[20%] right-[20%] w-[400px] h-[400px] bg-[radial-gradient(circle,rgba(255,229,0,0.05),transparent_70%)] animate-pulse-glow" style={{ animationDelay: '2.5s' }} />
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8">
         <motion.div 
-          className="rounded-2xl sm:rounded-3xl overflow-hidden bg-gradient-to-br from-[#1a1a2e]/70 to-[#16213e]/70 border border-white/10 backdrop-blur-md shadow-[0_20px_70px_rgba(0,0,0,0.3)]"
+          className="rounded-2xl sm:rounded-3xl overflow-hidden bg-gradient-to-br from-[#111a30]/50 to-[#0d1526]/50 border border-white/[0.06] backdrop-blur-md shadow-[0_12px_48px_rgba(0,0,0,0.3)]"
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.7 }}
+          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
         >
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
             {/* Image Side */}
             <motion.div 
-              className="relative min-h-[300px] sm:min-h-[400px] lg:min-h-[600px] bg-black/20"
+              className="relative min-h-[300px] sm:min-h-[400px] lg:min-h-[600px] bg-black/20 overflow-hidden"
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.2 }}
+              transition={{ duration: 0.7, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
             >
-              {/* ISKO-OPS poster image */}
               <Image
                 src="/isko_ops_poster.png"
                 alt="ISKO-OPS 2026 - Free Online Review Sessions"
@@ -68,7 +66,9 @@ export function IskoOpsSection() {
                 className="object-cover"
                 priority
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
+              {/* Right edge blend for large screens */}
+              <div className="hidden lg:block absolute top-0 bottom-0 right-0 w-16 bg-gradient-to-l from-[#111a30]/50 to-transparent" />
             </motion.div>
 
             {/* Content Side */}
@@ -97,55 +97,55 @@ export function IskoOpsSection() {
 
               {/* Description */}
               <motion.p 
-                className="text-sm sm:text-base text-white/80 mb-4 leading-relaxed"
+                className="text-sm sm:text-base text-white/70 mb-4 leading-relaxed"
                 style={{ fontFamily: 'var(--font-poppins)' }}
                 variants={itemVariants}
               >
-                A <span className="font-semibold text-white">FREE Online Review Program</span> designed to help aspiring scholars in Cagayan Valley confidently prepare for the <span className="font-semibold text-white">2026 DOST-SEI Undergraduate Scholarship Qualifying Examination</span>.
+                A <span className="font-semibold text-white/90">FREE Online Review Program</span> designed to help aspiring scholars in Cagayan Valley confidently prepare for the <span className="font-semibold text-white/90">2026 DOST-SEI Undergraduate Scholarship Qualifying Examination</span>.
               </motion.p>
 
               {/* Details */}
               <motion.p 
-                className="text-sm sm:text-base text-white/80 mb-4 leading-relaxed"
+                className="text-sm sm:text-base text-white/70 mb-4 leading-relaxed"
                 style={{ fontFamily: 'var(--font-poppins)' }}
                 variants={itemVariants}
               >
-                Anchored on <span className="font-semibold text-white">Agham na Ramdam</span>, ISKO-OPS brings science closer through guided tutoring, review sessions, and meaningful mentorship, <span className="text-[#FFE500]">transforming learning into opportunities and solutions for the youth</span>.
+                Anchored on <span className="font-semibold text-white/90">Agham na Ramdam</span>, ISKO-OPS brings science closer through guided tutoring, review sessions, and meaningful mentorship, <span className="text-[#FFE500]/80">transforming learning into opportunities and solutions for the youth</span>.
               </motion.p>
 
               <motion.p 
-                className="text-sm sm:text-base text-white/80 mb-4 leading-relaxed hidden md:block"
+                className="text-sm sm:text-base text-white/70 mb-4 leading-relaxed hidden md:block"
                 style={{ fontFamily: 'var(--font-poppins)' }}
                 variants={itemVariants}
               >
-                Powered by <span className="font-semibold text-white">DOST Cagayan Valley, DOST ACCESS, and DOST-SEI Scholars Organizations in Cagayan Valley</span>, this initiative brings together top-performing scholars, outstanding alumni, and expert mentors ready to guide you every step of the way. Expect high-yield lessons, proven exam strategies, mock exams, and real insights from those who&apos;ve been in your shoes—and succeeded.
+                Powered by <span className="font-semibold text-white/90">DOST Cagayan Valley, DOST ACCESS, and DOST-SEI Scholars Organizations in Cagayan Valley</span>, this initiative brings together top-performing scholars, outstanding alumni, and expert mentors ready to guide you every step of the way.
               </motion.p>
 
               {/* Tagline */}
               <motion.p 
-                className="text-sm sm:text-base text-white mb-2 font-medium"
+                className="text-sm sm:text-base text-white/90 mb-2 font-medium"
                 style={{ fontFamily: 'var(--font-poppins)' }}
                 variants={itemVariants}
               >
                 <span className="font-bold text-[#FFE500]">TARA:</span> Sama-sama nating buuin ang kinabukasang hinuhubog ng kaalaman at malasakit.
               </motion.p>
               <motion.p 
-                className="text-sm sm:text-base text-white/90 mb-6 sm:mb-8"
+                className="text-sm sm:text-base text-white/80 mb-6 sm:mb-8"
                 style={{ fontFamily: 'var(--font-poppins)' }}
                 variants={itemVariants}
               >
-                Your journey to becoming a <span className="font-semibold text-[#FFE500]">DOST-SEI Scholar</span> starts here.
+                Your journey to becoming a <span className="font-semibold text-[#FFE500]/90">DOST-SEI Scholar</span> starts here.
               </motion.p>
 
               {/* CTA Buttons */}
               <motion.div className="flex flex-col sm:flex-row gap-3 sm:gap-4" variants={itemVariants}>
                 <Link href="/isko-ops" className="w-full sm:w-auto">
-                  <button className="w-full sm:w-auto px-6 py-3 rounded-lg font-semibold transition-all duration-300 bg-transparent border-2 border-white/30 text-white hover:bg-white hover:text-black hover:border-white">
+                  <button className="w-full sm:w-auto px-6 py-3 rounded-lg font-semibold transition-all duration-300 bg-transparent border border-white/20 text-white hover:bg-white hover:text-black hover:border-white">
                     Read More
                   </button>
                 </Link>
                 <Link href={`https://${ISKO_OPS_CONTENT.registrationLink}`} target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto">
-                  <button className="w-full sm:w-auto px-6 py-3 rounded-lg font-semibold transition-all duration-300 bg-[#FFE500] text-black hover:bg-[#FFD700] hover:shadow-[0_0_25px_rgba(255,229,0,0.5)]">
+                  <button className="w-full sm:w-auto px-6 py-3 rounded-lg font-semibold transition-all duration-300 bg-[#FFE500] text-black hover:bg-[#FFD700] hover:shadow-[0_0_20px_rgba(255,229,0,0.3)]">
                     Register Now
                   </button>
                 </Link>
@@ -154,6 +154,9 @@ export function IskoOpsSection() {
           </div>
         </motion.div>
       </div>
+
+      {/* Bottom gradient — fades to near-black for footer transition */}
+      <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-b from-transparent to-[#060a10] pointer-events-none z-[2]" />
     </section>
   );
 }

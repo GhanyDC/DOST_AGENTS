@@ -453,6 +453,125 @@ body {
    Marquee Animations
    ============================================================================= */
 
+/* =============================================================================
+   Floating Particles
+   ============================================================================= */
+
+@keyframes float-up {
+  0% {
+    transform: translateY(0) translateX(0) scale(1);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 0.3;
+  }
+  90% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateY(-100vh) translateX(30px) scale(0.5);
+    opacity: 0;
+  }
+}
+
+@keyframes float-drift {
+  0%, 100% {
+    transform: translateY(0) translateX(0);
+  }
+  25% {
+    transform: translateY(-10px) translateX(5px);
+  }
+  50% {
+    transform: translateY(-5px) translateX(-5px);
+  }
+  75% {
+    transform: translateY(-15px) translateX(3px);
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    opacity: 0.15;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.3;
+    transform: scale(1.1);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+@keyframes gentle-bob {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.animate-float-up {
+  animation: float-up var(--particle-duration, 18s) var(--particle-delay, 0s) linear infinite;
+}
+
+.animate-float-drift {
+  animation: float-drift 6s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 4s ease-in-out infinite;
+}
+
+.animate-shimmer {
+  background-size: 200% auto;
+  animation: shimmer 3s linear infinite;
+}
+
+.animate-gentle-bob {
+  animation: gentle-bob 3s ease-in-out infinite;
+}
+
+/* =============================================================================
+   Section Flow & Connectors
+   ============================================================================= */
+
+/* Seamless section connector - gradient bridge between sections */
+.section-connector {
+  position: relative;
+  height: 120px;
+  margin-top: -60px;
+  margin-bottom: -60px;
+  z-index: 5;
+  pointer-events: none;
+}
+
+/* Noise texture overlay for depth */
+.noise-overlay::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* =============================================================================
+   Marquee Animations
+   ============================================================================= */
+
 @keyframes marquee-left {
   0% {
     transform: translateX(0);
@@ -472,12 +591,12 @@ body {
 }
 
 .marquee-left {
-  animation: marquee-left 30s linear infinite;
+  animation: marquee-left 35s linear infinite;
   will-change: transform;
 }
 
 .marquee-right {
-  animation: marquee-right 30s linear infinite;
+  animation: marquee-right 35s linear infinite;
   will-change: transform;
 }
 
@@ -489,6 +608,14 @@ body {
 @media (prefers-reduced-motion: reduce) {
   .marquee-left,
   .marquee-right {
+    animation: none;
+  }
+
+  .animate-float-up,
+  .animate-float-drift,
+  .animate-pulse-glow,
+  .animate-shimmer,
+  .animate-gentle-bob {
     animation: none;
   }
 }

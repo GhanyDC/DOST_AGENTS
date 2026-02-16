@@ -10,13 +10,52 @@ import { CORE_VALUES_CONTENT } from '@/lib/constants';
 
 // Helper function to highlight specific letters in a word
 function HighlightedWord({ word, highlight }: { word: string; highlight: string }) {
-  // Find where the highlight starts in the word (case-insensitive)
   const upperWord = word.toUpperCase();
+  
+  // If no highlight or empty string, return plain text
+  if (!highlight || highlight.trim() === '') {
+    return <span className="text-white/80">{word}</span>;
+  }
+  
+  // Handle multiple highlights (comma-separated)
+  if (highlight.includes(',')) {
+    const highlights = highlight.split(',').map(h => h.trim().toUpperCase());
+    const chars = word.split('');
+    const highlightIndices = new Set<number>();
+    
+    // For LEADERSHIP: L at position 0, E at position 4 (after LEAD)
+    if (upperWord === 'LEADERSHIP' && highlights.includes('L') && highlights.includes('E')) {
+      highlightIndices.add(0); // L
+      highlightIndices.add(4); // E (after D)
+    }
+    
+    return (
+      <span>
+        {chars.map((char, idx) => {
+          if (highlightIndices.has(idx)) {
+            return (
+              <motion.span
+                key={idx}
+                className="text-[#FFE500] inline-block"
+                animate={{ textShadow: ['0 0 10px rgba(255,229,0,0.2)', '0 0 20px rgba(255,229,0,0.4)', '0 0 10px rgba(255,229,0,0.2)'] }}
+                transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
+              >
+                {char}
+              </motion.span>
+            );
+          }
+          return <span key={idx} className="text-white/80">{char}</span>;
+        })}
+      </span>
+    );
+  }
+  
+  // Single highlight (original logic)
   const upperHighlight = highlight.toUpperCase();
   const highlightIndex = upperWord.indexOf(upperHighlight);
   
   if (highlightIndex === -1) {
-    return <span className="text-white">{word}</span>;
+    return <span className="text-white/80">{word}</span>;
   }
 
   const before = word.slice(0, highlightIndex);
@@ -25,9 +64,15 @@ function HighlightedWord({ word, highlight }: { word: string; highlight: string 
 
   return (
     <span>
-      {before && <span className="text-white">{before}</span>}
-      <span className="text-[#FFE500]">{highlighted}</span>
-      {after && <span className="text-white">{after}</span>}
+      {before && <span className="text-white/80">{before}</span>}
+      <motion.span 
+        className="text-[#FFE500] inline-block"
+        animate={{ textShadow: ['0 0 10px rgba(255,229,0,0.2)', '0 0 20px rgba(255,229,0,0.4)', '0 0 10px rgba(255,229,0,0.2)'] }}
+        transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
+      >
+        {highlighted}
+      </motion.span>
+      {after && <span className="text-white/80">{after}</span>}
     </span>
   );
 }
@@ -37,20 +82,32 @@ const containerVariants = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.2,
+      staggerChildren: 0.15,
       delayChildren: 0.1,
     },
   },
 };
 
 const itemVariants = {
-  hidden: { opacity: 0, y: 30 },
+  hidden: { opacity: 0, y: 25 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.7,
+      ease: [0.22, 1, 0.36, 1] as const,
+    },
+  },
+};
+
+const wordLineVariants = {
+  hidden: { opacity: 0, y: 20 },
   visible: {
     opacity: 1,
     y: 0,
     transition: {
       duration: 0.6,
-      ease: [0.25, 0.46, 0.45, 0.94] as const,
+      ease: [0.22, 1, 0.36, 1] as const,
     },
   },
 };
@@ -59,11 +116,11 @@ export function CoreValuesSection() {
   const { title, description, values } = CORE_VALUES_CONTENT;
 
   return (
-    <section className="relative min-h-screen pt-20 sm:pt-24 md:pt-28 pb-16 sm:pb-20 md:pb-24 bg-gradient-to-b from-[#0a0a1a] via-[#0f0f1e] to-[#1a1a2e] overflow-hidden flex flex-col justify-center">
-      {/* Background Effects */}
-      <div className="absolute inset-0 opacity-25">
-        <div className="absolute top-1/4 right-1/3 w-80 h-80 bg-[#FFE500]/15 rounded-full blur-3xl" />
-        <div className="absolute bottom-1/4 left-1/3 w-96 h-96 bg-[#42a5f5]/10 rounded-full blur-3xl" />
+    <section className="relative min-h-screen pt-20 sm:pt-24 md:pt-28 pb-16 sm:pb-20 md:pb-24 bg-gradient-to-b from-[#0c1020] via-[#0a0e1c] to-[#0d1228] overflow-hidden flex flex-col justify-center noise-overlay">
+      {/* Background Effects — centered glow */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[600px] bg-[radial-gradient(ellipse,rgba(255,229,0,0.04),transparent_60%)]" />
+        <div className="absolute top-[20%] left-[15%] w-[400px] h-[400px] bg-[radial-gradient(circle,rgba(66,165,245,0.05),transparent_70%)] animate-pulse-glow" style={{ animationDelay: '1s' }} />
       </div>
 
       <div className="relative z-10 max-w-6xl mx-auto w-full px-4 sm:px-6 lg:px-8">
@@ -85,35 +142,48 @@ export function CoreValuesSection() {
 
           {/* Core Values Display */}
           <motion.div className="mb-8 sm:mb-10 md:mb-12 space-y-3 sm:space-y-4" variants={itemVariants}>
-            {/* Line 1: PROFESSIONAL EXCELLENCE | SOCIAL RESPONSIBILITY */}
-            <div 
-              className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-x-3 sm:gap-x-4 gap-y-2 text-lg sm:text-2xl md:text-3xl lg:text-4xl font-bold tracking-wide"
+            {/* Line 1: PROFESSIONAL EXCELLENCE */}
+            <motion.div 
+              className="flex flex-wrap items-center justify-center gap-x-3 sm:gap-x-4 text-lg sm:text-2xl md:text-3xl lg:text-4xl font-bold tracking-wider"
               style={{ fontFamily: 'var(--font-manrope)' }}
+              variants={wordLineVariants}
             >
-              <div className="flex flex-wrap items-center justify-center gap-x-3 sm:gap-x-4">
-                <HighlightedWord word={values[0].name} highlight={values[0].highlight} />
-                <HighlightedWord word={values[1].name} highlight={values[1].highlight} />
-              </div>
-              <span className="hidden sm:inline text-white/40 mx-2 text-2xl md:text-3xl">|</span>
-              <div className="flex flex-wrap items-center justify-center gap-x-3 sm:gap-x-4">
-                <HighlightedWord word={values[2].name} highlight={values[2].highlight} />
-                <HighlightedWord word={values[3].name} highlight={values[3].highlight} />
-              </div>
-            </div>
+              <HighlightedWord word={values[0].name} highlight={values[0].highlight} />
+              <HighlightedWord word={values[1].name} highlight={values[1].highlight} />
+            </motion.div>
 
-            {/* Line 2: SERVANT LEADERSHIP */}
-            <div 
-              className="flex flex-wrap items-center justify-center gap-x-3 sm:gap-x-4 text-lg sm:text-2xl md:text-3xl lg:text-4xl font-bold tracking-wide"
+            {/* Line 2: SOCIAL RESPONSIBILITY */}
+            <motion.div 
+              className="flex flex-wrap items-center justify-center gap-x-3 sm:gap-x-4 text-lg sm:text-2xl md:text-3xl lg:text-4xl font-bold tracking-wider"
               style={{ fontFamily: 'var(--font-manrope)' }}
+              variants={wordLineVariants}
+            >
+              <HighlightedWord word={values[2].name} highlight={values[2].highlight} />
+              <HighlightedWord word={values[3].name} highlight={values[3].highlight} />
+            </motion.div>
+
+            {/* Line 3: SERVANT LEADERSHIP */}
+            <motion.div 
+              className="flex flex-wrap items-center justify-center gap-x-3 sm:gap-x-4 text-lg sm:text-2xl md:text-3xl lg:text-4xl font-bold tracking-wider"
+              style={{ fontFamily: 'var(--font-manrope)' }}
+              variants={wordLineVariants}
             >
               <HighlightedWord word={values[4].name} highlight={values[4].highlight} />
               <HighlightedWord word={values[5].name} highlight={values[5].highlight} />
-            </div>
+            </motion.div>
+          </motion.div>
+
+          {/* Decorative line */}
+          <motion.div 
+            className="flex justify-center mb-8 sm:mb-10"
+            variants={itemVariants}
+          >
+            <div className="w-16 h-px bg-gradient-to-r from-transparent via-[#FFE500]/40 to-transparent" />
           </motion.div>
 
           {/* Description */}
           <motion.p 
-            className="max-w-3xl mx-auto text-sm sm:text-base md:text-lg text-white/70 leading-relaxed"
+            className="max-w-3xl mx-auto text-sm sm:text-base md:text-lg text-white/60 leading-relaxed"
             style={{ fontFamily: 'var(--font-poppins)' }}
             variants={itemVariants}
           >

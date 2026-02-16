@@ -177,8 +177,8 @@ export const CORE_VALUES_CONTENT = {
     { name: 'EXCELLENCE', highlight: 'E' },
     { name: 'SOCIAL', highlight: 'O' },
     { name: 'RESPONSIBILITY', highlight: 'P' },
-    { name: 'SERVANT', highlight: 'E' },
-    { name: 'LEADERSHIP', highlight: 'L' },
+    { name: 'SERVANT', highlight: '' },
+    { name: 'LEADERSHIP', highlight: 'L,E' },
   ],
 };
 
