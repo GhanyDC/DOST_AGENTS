@@ -194,12 +194,12 @@ export function UpdatesPageContent({ updates = SAMPLE_UPDATES }: UpdatesPageCont
           </div>
         </motion.div>
 
-        {/* Updates Grid */}
+        {/* Updates Grid — CSS columns masonry layout matching reference */}
         {filteredUpdates.length > 0 ? (
           <div
             className={
               viewMode === 'grid'
-                ? 'grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 gap-3 sm:gap-4 md:gap-5'
+                ? 'columns-2 sm:columns-3 gap-3 sm:gap-4 md:gap-5'
                 : 'flex flex-col gap-4'
             }
           >

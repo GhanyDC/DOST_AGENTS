@@ -143,7 +143,7 @@ export function UpdateDetailContent({ update }: UpdateDetailContentProps) {
               ))}
             </motion.article>
 
-            {/* Sidebar - 4 columns */}
+            {/* Sidebar - 4 columns (static, not sticky) */}
             <motion.aside
               className="lg:col-span-4"
               initial={{ opacity: 0, x: 30 }}
@@ -151,7 +151,7 @@ export function UpdateDetailContent({ update }: UpdateDetailContentProps) {
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.3 }}
             >
-              <div className="sticky top-28 space-y-0 rounded-xl overflow-hidden border border-(--card-border) bg-(--card)">
+              <div className="space-y-0 rounded-xl overflow-hidden border border-(--card-border) bg-(--card)">
                 {/* Academic Year */}
                 <div className="px-5 sm:px-6 pt-5 sm:pt-6 pb-4">
                   <h4
@@ -190,57 +190,6 @@ export function UpdateDetailContent({ update }: UpdateDetailContentProps) {
                 {/* Divider */}
                 <div className="mx-5 sm:mx-6 border-t border-(--border)" />
 
-                {/* Lead Officers / Authors */}
-                {update.authors && update.authors.length > 0 && (
-                  <>
-                    <div className="px-5 sm:px-6 py-4">
-                      <h4
-                        className="text-[10px] sm:text-xs text-(--foreground-muted) uppercase tracking-widest mb-3 font-medium"
-                        style={{ fontFamily: 'var(--font-poppins)' }}
-                      >
-                        Lead Officers
-                      </h4>
-                      <div className="space-y-3">
-                        {update.authors.map((author, index) => (
-                          <div key={index} className="flex items-center gap-3">
-                            <div className="relative w-9 h-9 sm:w-10 sm:h-10 rounded-full overflow-hidden bg-(--muted) border border-(--border) shrink-0">
-                              {author.imageUrl ? (
-                                <Image
-                                  src={author.imageUrl}
-                                  alt={author.name}
-                                  fill
-                                  className="object-cover"
-                                />
-                              ) : (
-                                <div className="w-full h-full flex items-center justify-center bg-(--color-primary)/20 text-(--color-primary) text-sm font-bold">
-                                  {author.name.charAt(0)}
-                                </div>
-                              )}
-                            </div>
-                            <div className="min-w-0">
-                              <p
-                                className="text-xs sm:text-sm font-semibold text-(--foreground) truncate"
-                                style={{ fontFamily: 'var(--font-poppins)' }}
-                              >
-                                {author.name}
-                              </p>
-                              {author.role && (
-                                <p
-                                  className="text-[10px] sm:text-xs text-(--foreground-muted) truncate"
-                                  style={{ fontFamily: 'var(--font-poppins)' }}
-                                >
-                                  {author.role}
-                                </p>
-                              )}
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                    <div className="mx-5 sm:mx-6 border-t border-(--border)" />
-                  </>
-                )}
-
                 {/* Share Button */}
                 <div className="px-5 sm:px-6 py-4 sm:py-5">
                   <Button
@@ -275,52 +224,59 @@ export function UpdateDetailContent({ update }: UpdateDetailContentProps) {
         </Container>
       </div>
 
-      {/* Photo Gallery Section */}
+      {/* Photo Gallery Section — constrained to not exceed sidebar row */}
       <section className="pb-16 sm:pb-20 md:pb-24">
         <Container>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="mb-6 sm:mb-8"
-          >
-            <h2
-              className="text-3xl sm:text-4xl md:text-5xl text-[#FFE500] italic"
-              style={{ fontFamily: 'var(--font-romanesco)' }}
-            >
-              Photo Gallery
-            </h2>
-          </motion.div>
-
-          {/* Gallery Grid — 2 equal-height columns */}
-          <motion.div
-            className="grid grid-cols-2 gap-3 sm:gap-4"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
-            {galleryImages.map((image, index) => (
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10">
+            {/* Gallery takes up the same 8-col width as main content */}
+            <div className="lg:col-span-8">
               <motion.div
-                key={index}
-                initial={{ opacity: 0, scale: 0.95 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true, amount: 0.1 }}
-                transition={{ duration: 0.4, delay: index * 0.06 }}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+                className="mb-6 sm:mb-8"
               >
-                <div className="relative overflow-hidden rounded-xl sm:rounded-2xl bg-(--muted) border border-(--card-border) group cursor-pointer aspect-[4/3]">
-                  <Image
-                    src={image}
-                    alt={`${update.title} photo ${index + 1}`}
-                    fill
-                    className="object-cover transition-transform duration-500 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300" />
-                </div>
+                <h2
+                  className="text-3xl sm:text-4xl md:text-5xl text-[#FFE500] italic"
+                  style={{ fontFamily: 'var(--font-romanesco)' }}
+                >
+                  Photo Gallery
+                </h2>
               </motion.div>
-            ))}
-          </motion.div>
+
+              {/* Gallery Grid — 2 equal-height columns */}
+              <motion.div
+                className="grid grid-cols-2 gap-3 sm:gap-4"
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+              >
+                {galleryImages.map((image, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true, amount: 0.1 }}
+                    transition={{ duration: 0.4, delay: index * 0.06 }}
+                  >
+                    <div className="relative overflow-hidden rounded-xl sm:rounded-2xl bg-(--muted) border border-(--card-border) group cursor-pointer aspect-[4/3]">
+                      <Image
+                        src={image}
+                        alt={`${update.title} photo ${index + 1}`}
+                        fill
+                        className="object-cover transition-transform duration-500 group-hover:scale-105"
+                      />
+                      <div className="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300" />
+                    </div>
+                  </motion.div>
+                ))}
+              </motion.div>
+            </div>
+            {/* Empty 4-col space to align with sidebar above */}
+            <div className="hidden lg:block lg:col-span-4" />
+          </div>
         </Container>
       </section>
     </main>
