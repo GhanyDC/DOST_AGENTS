@@ -3,6 +3,7 @@
 // =============================================================================
 // Update Detail Content
 // Full article view with hero, content, sidebar, and photo gallery
+// Matches design: back button, yellow Romanesco title, sidebar metadata, gallery
 // =============================================================================
 
 import Image from 'next/image';
@@ -33,44 +34,76 @@ const staggerContainer = {
   },
 };
 
+// Placeholder content for articles that have no content yet
+const PLACEHOLDER_PARAGRAPHS = [
+  'The rain paused just long enough for the city to exhale, leaving the sidewalks glossy and the air faintly metallic, as if the night had been charging itself. Somewhere above the street, a window flickered on and off, signaling a life mid-thought, while a busker tuned a guitar with the patience of someone who believed the next song might change everything. Time felt elastic in that moment—stretching, folding, refusing to settle—until a breeze carried the smell of coffee and wet paper, and the world quietly decided to keep going.',
+  'The rain paused just long enough for the city to exhale, leaving the sidewalks glossy and the air faintly metallic, as if the night had been charging itself. Somewhere above the street, a window flickered on and off, signaling a life mid-thought, while a busker tuned a guitar with the patience of someone who believed the next song might change everything. Time felt elastic in that moment—stretching, folding, refusing to settle—until a breeze carried the smell of coffee and wet paper, and the world quietly decided to keep going.',
+  'The rain paused just long enough for the city to exhale, leaving the sidewalks glossy and the air faintly metallic, as if the night had been charging itself. Somewhere above the street, a window flickered on and off, signaling a life mid-thought, while a busker tuned a guitar with the patience of someone who believed the next song might change everything. Time felt elastic in that moment—stretching, folding, refusing to settle—until a breeze carried the smell of coffee and wet paper, and the world quietly decided to keep going. The rain paused just long enough for the city to exhale, leaving the sidewalks glossy and the air faintly metallic, as if the night had been charging itself. Somewhere above the street, a window flickered on and off, signaling a life mid-thought, while a busker tuned a guitar with the patience of someone who believed the next song might change everything. Time felt elastic in that moment—stretching, folding, refusing to settle—until a breeze carried the smell of coffee and wet paper, and the world quietly decided to keep going.',
+];
+
+// Placeholder gallery images (using existing assets with varied aspect ratios)
+const PLACEHOLDER_GALLERY = [
+  '/group_photo.png',
+  '/isko_ops_poster.png',
+  '/group_photo.png',
+  '/testimonial_avatar.png',
+  '/group_photo.png',
+  '/isko_ops_poster.png',
+];
+
 export function UpdateDetailContent({ update }: UpdateDetailContentProps) {
+  const contentParagraphs =
+    update.content.length > 0 ? update.content : PLACEHOLDER_PARAGRAPHS;
+  const galleryImages =
+    update.galleryImages && update.galleryImages.length > 0
+      ? update.galleryImages
+      : PLACEHOLDER_GALLERY;
+
   return (
-    <main className="min-h-screen bg-(--background) pt-20 sm:pt-24 pb-16 sm:pb-20">
+    <main className="min-h-screen bg-(--background)">
       {/* Hero Section with Background Image */}
-      <section className="relative w-full min-h-[50vh] sm:min-h-[60vh] flex items-end overflow-hidden">
+      <section className="relative w-full h-[55vh] sm:h-[60vh] md:h-[65vh] flex items-end overflow-hidden">
         {/* Background Image */}
         <div className="absolute inset-0">
           <Image
             src={update.imageUrl}
             alt={update.title}
             fill
-            className="object-cover"
+            className="object-cover object-top"
             priority
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-black/30" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0a0f1a] via-black/50 to-black/20" />
         </div>
 
         {/* Hero Content */}
-        <Container className="relative z-10 pb-8 sm:pb-12 md:pb-16">
+        <Container className="relative z-10 pb-10 sm:pb-14 md:pb-16">
           <motion.div
             variants={staggerContainer}
             initial="hidden"
             animate="visible"
           >
-            {/* Category/Breadcrumb */}
-            <motion.div className="mb-3 sm:mb-4" variants={fadeInUp}>
+            {/* Back to Updates link */}
+            <motion.div className="mb-4 sm:mb-5" variants={fadeInUp}>
               <Link
                 href="/updates"
-                className="text-[10px] sm:text-xs text-white/60 hover:text-white/90 transition-colors uppercase tracking-wider"
+                className="inline-flex items-center gap-2 text-xs sm:text-sm text-[#FFE500] hover:text-[#FFE500]/80 transition-colors uppercase tracking-widest font-medium"
                 style={{ fontFamily: 'var(--font-poppins)' }}
               >
-                DOST/AGENTS &amp; PROJECTS
+                <svg
+                  className="w-4 h-4 sm:w-5 sm:h-5"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                </svg>
+                Back to Updates
               </Link>
             </motion.div>
 
             {/* Title */}
             <motion.h1
-              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-white italic leading-tight max-w-4xl"
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-[#FFE500] italic leading-[1.1] max-w-4xl"
               style={{ fontFamily: 'var(--font-romanesco)' }}
               variants={fadeInUp}
             >
@@ -81,189 +114,210 @@ export function UpdateDetailContent({ update }: UpdateDetailContentProps) {
       </section>
 
       {/* Content Section */}
-      <Container className="mt-8 sm:mt-12 md:mt-16">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12">
-          {/* Main Content - 2 columns */}
-          <motion.div
-            className="lg:col-span-2"
-            variants={staggerContainer}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-          >
-            {/* Article Body */}
-            {update.content.length > 0 ? (
-              update.content.map((paragraph, index) => (
+      <div className="bg-(--background)">
+        <Container className="py-10 sm:py-14 md:py-16">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10">
+            {/* Main Content - 8 columns */}
+            <motion.article
+              className="lg:col-span-8"
+              variants={staggerContainer}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+            >
+              {contentParagraphs.map((paragraph, index) => (
                 <motion.p
                   key={index}
-                  className="text-xs sm:text-sm md:text-base text-(--foreground-muted) leading-relaxed mb-4 sm:mb-6"
+                  className="text-xs sm:text-sm md:text-[15px] text-(--foreground-muted) leading-[1.8] sm:leading-[1.85] mb-5 sm:mb-7"
                   style={{ fontFamily: 'var(--font-poppins)' }}
                   variants={fadeInUp}
                 >
                   {paragraph}
                 </motion.p>
-              ))
-            ) : (
-              <motion.p
-                className="text-xs sm:text-sm md:text-base text-(--foreground-muted) leading-relaxed mb-4 sm:mb-6"
-                style={{ fontFamily: 'var(--font-poppins)' }}
-                variants={fadeInUp}
-              >
-                Content for this update is coming soon. Check back later for the full article.
-              </motion.p>
-            )}
-          </motion.div>
+              ))}
+            </motion.article>
 
-          {/* Sidebar - 1 column */}
-          <motion.aside
-            className="lg:col-span-1"
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-          >
-            <div className="sticky top-28 space-y-6">
-              {/* Academic Year */}
-              <div className="glass-panel rounded-xl p-4 sm:p-5">
-                <h4
-                  className="text-[10px] sm:text-xs text-(--foreground-muted) uppercase tracking-wider mb-2"
-                  style={{ fontFamily: 'var(--font-poppins)' }}
-                >
-                  Academic Year
-                </h4>
-                <p
-                  className="text-sm sm:text-base font-semibold text-(--foreground)"
-                  style={{ fontFamily: 'var(--font-manrope)' }}
-                >
-                  {update.academicYear}
-                </p>
-              </div>
-
-              {/* Category */}
-              <div className="glass-panel rounded-xl p-4 sm:p-5">
-                <h4
-                  className="text-[10px] sm:text-xs text-(--foreground-muted) uppercase tracking-wider mb-2"
-                  style={{ fontFamily: 'var(--font-poppins)' }}
-                >
-                  Category
-                </h4>
-                <span className="inline-block px-3 py-1 text-xs font-semibold rounded-full bg-(--color-primary) text-[#111827] capitalize">
-                  {update.category}
-                </span>
-              </div>
-
-              {/* DOST Officers / Authors */}
-              {update.authors && update.authors.length > 0 && (
-                <div className="glass-panel rounded-xl p-4 sm:p-5">
+            {/* Sidebar - 4 columns */}
+            <motion.aside
+              className="lg:col-span-4"
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+            >
+              <div className="sticky top-28 space-y-0 rounded-xl overflow-hidden border border-(--card-border) bg-(--card)">
+                {/* Academic Year */}
+                <div className="px-5 sm:px-6 pt-5 sm:pt-6 pb-4">
                   <h4
-                    className="text-[10px] sm:text-xs text-(--foreground-muted) uppercase tracking-wider mb-3"
+                    className="text-[10px] sm:text-xs text-(--foreground-muted) uppercase tracking-widest mb-2 font-medium"
                     style={{ fontFamily: 'var(--font-poppins)' }}
                   >
-                    DOST Officers
+                    Academic Year
                   </h4>
-                  <div className="space-y-3">
-                    {update.authors.map((author, index) => (
-                      <div key={index} className="flex items-center gap-3">
-                        <div className="relative w-8 h-8 sm:w-9 sm:h-9 rounded-full overflow-hidden bg-(--muted) border border-(--border)">
-                          {author.imageUrl ? (
-                            <Image
-                              src={author.imageUrl}
-                              alt={author.name}
-                              fill
-                              className="object-cover"
-                            />
-                          ) : (
-                            <div className="w-full h-full flex items-center justify-center text-(--foreground-muted) text-xs font-semibold">
-                              {author.name.charAt(0)}
-                            </div>
-                          )}
-                        </div>
-                        <span
-                          className="text-xs sm:text-sm text-(--foreground)"
-                          style={{ fontFamily: 'var(--font-poppins)' }}
-                        >
-                          {author.name}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
+                  <p
+                    className="text-base sm:text-lg font-bold text-(--foreground)"
+                    style={{ fontFamily: 'var(--font-manrope)' }}
+                  >
+                    {update.academicYear}
+                  </p>
                 </div>
-              )}
 
-              {/* Share Button */}
-              <Button
-                variant="outline"
-                size="md"
-                className="w-full"
-                onClick={() => {
-                  if (typeof navigator !== 'undefined' && navigator.clipboard) {
-                    navigator.clipboard.writeText(window.location.href);
-                  }
-                }}
-              >
-                <svg
-                  className="w-4 h-4 mr-2"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"
-                  />
-                </svg>
-                Share Project
-              </Button>
-            </div>
-          </motion.aside>
-        </div>
-      </Container>
+                {/* Divider */}
+                <div className="mx-5 sm:mx-6 border-t border-(--border)" />
+
+                {/* Category */}
+                <div className="px-5 sm:px-6 py-4">
+                  <h4
+                    className="text-[10px] sm:text-xs text-(--foreground-muted) uppercase tracking-widest mb-2.5 font-medium"
+                    style={{ fontFamily: 'var(--font-poppins)' }}
+                  >
+                    Category
+                  </h4>
+                  <span
+                    className="inline-block px-3 py-1 text-[10px] sm:text-xs font-bold rounded-md bg-(--color-primary) text-[#111827] uppercase tracking-wider"
+                    style={{ fontFamily: 'var(--font-poppins)' }}
+                  >
+                    {update.category === 'events' ? 'Outreach' : update.category}
+                  </span>
+                </div>
+
+                {/* Divider */}
+                <div className="mx-5 sm:mx-6 border-t border-(--border)" />
+
+                {/* Lead Officers / Authors */}
+                {update.authors && update.authors.length > 0 && (
+                  <>
+                    <div className="px-5 sm:px-6 py-4">
+                      <h4
+                        className="text-[10px] sm:text-xs text-(--foreground-muted) uppercase tracking-widest mb-3 font-medium"
+                        style={{ fontFamily: 'var(--font-poppins)' }}
+                      >
+                        Lead Officers
+                      </h4>
+                      <div className="space-y-3">
+                        {update.authors.map((author, index) => (
+                          <div key={index} className="flex items-center gap-3">
+                            <div className="relative w-9 h-9 sm:w-10 sm:h-10 rounded-full overflow-hidden bg-(--muted) border border-(--border) shrink-0">
+                              {author.imageUrl ? (
+                                <Image
+                                  src={author.imageUrl}
+                                  alt={author.name}
+                                  fill
+                                  className="object-cover"
+                                />
+                              ) : (
+                                <div className="w-full h-full flex items-center justify-center bg-(--color-primary)/20 text-(--color-primary) text-sm font-bold">
+                                  {author.name.charAt(0)}
+                                </div>
+                              )}
+                            </div>
+                            <div className="min-w-0">
+                              <p
+                                className="text-xs sm:text-sm font-semibold text-(--foreground) truncate"
+                                style={{ fontFamily: 'var(--font-poppins)' }}
+                              >
+                                {author.name}
+                              </p>
+                              {author.role && (
+                                <p
+                                  className="text-[10px] sm:text-xs text-(--foreground-muted) truncate"
+                                  style={{ fontFamily: 'var(--font-poppins)' }}
+                                >
+                                  {author.role}
+                                </p>
+                              )}
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                    <div className="mx-5 sm:mx-6 border-t border-(--border)" />
+                  </>
+                )}
+
+                {/* Share Button */}
+                <div className="px-5 sm:px-6 py-4 sm:py-5">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="w-full text-xs uppercase tracking-wider font-semibold"
+                    onClick={() => {
+                      if (typeof navigator !== 'undefined' && navigator.clipboard) {
+                        navigator.clipboard.writeText(window.location.href);
+                      }
+                    }}
+                  >
+                    <svg
+                      className="w-3.5 h-3.5 mr-2"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"
+                      />
+                    </svg>
+                    Share Project
+                  </Button>
+                </div>
+              </div>
+            </motion.aside>
+          </div>
+        </Container>
+      </div>
 
       {/* Photo Gallery Section */}
-      {update.galleryImages && update.galleryImages.length > 0 && (
-        <section className="mt-12 sm:mt-16 md:mt-20">
-          <Container>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
+      <section className="pb-16 sm:pb-20 md:pb-24">
+        <Container>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="mb-6 sm:mb-8"
+          >
+            <h2
+              className="text-3xl sm:text-4xl md:text-5xl text-[#FFE500] italic"
+              style={{ fontFamily: 'var(--font-romanesco)' }}
             >
-              <h2
-                className="text-2xl sm:text-3xl md:text-4xl text-(--color-accent-yellow) italic mb-8 sm:mb-10"
-                style={{ fontFamily: 'var(--font-romanesco)' }}
-              >
-                Photo Gallery
-              </h2>
-            </motion.div>
+              Photo Gallery
+            </h2>
+          </motion.div>
 
-            {/* Masonry-like Gallery Grid */}
-            <motion.div
-              className="columns-2 md:columns-3 gap-3 sm:gap-4 space-y-3 sm:space-y-4"
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-            >
-              {update.galleryImages.map((image, index) => (
+          {/* Gallery Grid — 2 columns on mobile, 3 on md+ with masonry-like varied aspect ratios */}
+          <motion.div
+            className="columns-2 md:columns-3 gap-3 sm:gap-4"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
+            {galleryImages.map((image, index) => {
+              // Vary aspect ratios to create masonry effect matching the reference
+              const aspects = [
+                'aspect-[3/4]',   // portrait tall
+                'aspect-[4/3]',   // landscape
+                'aspect-square',  // square
+                'aspect-[3/4]',   // portrait tall
+                'aspect-[4/3]',   // landscape
+                'aspect-square',  // square
+              ];
+              const aspect = aspects[index % aspects.length];
+
+              return (
                 <motion.div
                   key={index}
-                  className="break-inside-avoid rounded-xl overflow-hidden"
-                  initial={{ opacity: 0, scale: 0.9 }}
+                  className="break-inside-avoid mb-3 sm:mb-4"
+                  initial={{ opacity: 0, scale: 0.95 }}
                   whileInView={{ opacity: 1, scale: 1 }}
                   viewport={{ once: true, amount: 0.1 }}
-                  transition={{ duration: 0.4, delay: index * 0.08 }}
+                  transition={{ duration: 0.4, delay: index * 0.06 }}
                 >
                   <div
-                    className={`relative overflow-hidden rounded-xl bg-(--muted) border border-(--card-border) group ${
-                      index % 3 === 0
-                        ? 'aspect-[3/4]'
-                        : index % 3 === 1
-                          ? 'aspect-square'
-                          : 'aspect-[4/3]'
-                    }`}
+                    className={`relative overflow-hidden rounded-xl sm:rounded-2xl bg-(--muted) border border-(--card-border) group cursor-pointer ${aspect}`}
                   >
                     <Image
                       src={image}
@@ -271,14 +325,14 @@ export function UpdateDetailContent({ update }: UpdateDetailContentProps) {
                       fill
                       className="object-cover transition-transform duration-500 group-hover:scale-105"
                     />
-                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300" />
+                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300" />
                   </div>
                 </motion.div>
-              ))}
-            </motion.div>
-          </Container>
-        </section>
-      )}
+              );
+            })}
+          </motion.div>
+        </Container>
+      </section>
     </main>
   );
 }
