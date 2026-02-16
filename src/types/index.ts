@@ -72,3 +72,34 @@ export type Theme = 'light' | 'dark' | 'system';
 // Button Variants
 export type ButtonVariant = 'primary' | 'secondary' | 'outline' | 'ghost';
 export type ButtonSize = 'sm' | 'md' | 'lg';
+
+// Update/Article Types
+export type UpdateCategory = 'all' | 'projects' | 'events' | 'announcements' | 'merchandise';
+
+export type Update = {
+  id: string;
+  slug: string;
+  title: string;
+  description: string;
+  content: string[];
+  category: UpdateCategory;
+  date: string;
+  academicYear: string;
+  imageUrl: string;
+  galleryImages?: string[];
+  tags?: string[];
+  authors?: UpdateAuthor[];
+  isFeatured?: boolean;
+};
+
+export type UpdateAuthor = {
+  name: string;
+  role?: string;
+  imageUrl?: string;
+};
+
+export type UpdateFilterOption = {
+  label: string;
+  value: UpdateCategory;
+  count?: number;
+};
