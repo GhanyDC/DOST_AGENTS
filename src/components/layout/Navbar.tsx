@@ -10,7 +10,6 @@ import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { useState, useRef, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useTheme } from '@/app/providers/theme-provider';
 import { Container } from '@/components/ui/Container';
 import { Button } from '@/components/ui/Button';
 import { NAV_ITEMS } from '@/lib/constants';
@@ -53,7 +52,6 @@ export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
   const [hasEntered, setHasEntered] = useState(false);
-  const { setTheme, resolvedTheme } = useTheme();
   const navRef = useRef<HTMLElement | null>(null);
   const pathname = usePathname();
   const lastScrollY = useRef(0);
@@ -141,10 +139,6 @@ export function Navbar() {
   useEffect(() => {
     setMobileOpen(false);
   }, [pathname]);
-
-  const toggleTheme = () => {
-    setTheme(resolvedTheme === 'dark' ? 'light' : 'dark');
-  };
 
   return (
     <nav
@@ -346,26 +340,6 @@ export function Navbar() {
                         </Button>
                       </Link>
                     </div>
-                    <button
-                      onClick={toggleTheme}
-                      className="flex items-center gap-3 px-4 py-3 text-base font-medium text-white/70 hover:text-white hover:bg-white/[0.04] rounded-lg transition-colors"
-                    >
-                      {resolvedTheme === 'dark' ? (
-                        <>
-                          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-                          </svg>
-                          Light Mode
-                        </>
-                      ) : (
-                        <>
-                          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-                          </svg>
-                          Dark Mode
-                        </>
-                      )}
-                    </button>
                   </motion.div>
                 </div>
               </Container>
