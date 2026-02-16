@@ -19,9 +19,23 @@ interface UpdateCardProps {
 }
 
 export function UpdateCard({ update, className, index = 0 }: UpdateCardProps) {
-  // Staggered height: alternate between taller and shorter cards per column position
-  // In a 3-col grid, col positions cycle 0,1,2. We stagger by index.
-  const isEvenIndex = index % 2 === 0;
+  // Column position in a 3-col grid: 0=left(short), 1=center(tall), 2=right(medium)
+  const colPos = index % 3;
+
+  // Stagger pattern matching reference image 3:
+  // Col 0 (left):  shorter cards
+  // Col 1 (center): tallest cards
+  // Col 2 (right): medium cards
+  const aspectByCol = [
+    'aspect-[3/4]',   // col 0 — shorter
+    'aspect-[4/5]',   // col 1 — tallest
+    'aspect-[7/9]',   // col 2 — medium
+  ];
+  const offsetByCol = [
+    'mt-0',              // col 0 — flush
+    'mt-4 sm:mt-6',      // col 1 — pushed down a bit
+    'mt-2 sm:mt-3',      // col 2 — slight push
+  ];
 
   return (
     <motion.div
@@ -29,7 +43,7 @@ export function UpdateCard({ update, className, index = 0 }: UpdateCardProps) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.1 }}
       transition={{ duration: 0.5, delay: index * 0.04 }}
-      className={isEvenIndex ? 'mt-0' : 'mt-6 sm:mt-8'}
+      className={offsetByCol[colPos]}
     >
       <Link
         href={`/updates/${update.slug}`}
@@ -39,7 +53,7 @@ export function UpdateCard({ update, className, index = 0 }: UpdateCardProps) {
           {/* Image */}
           <div className={cn(
             'relative overflow-hidden bg-(--muted)',
-            isEvenIndex ? 'aspect-[3/4]' : 'aspect-[4/5]'
+            aspectByCol[colPos]
           )}>
             {/* Year Badge - top left */}
             <div className="absolute top-2 left-2 sm:top-3 sm:left-3 z-10">

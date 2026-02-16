@@ -62,40 +62,46 @@ export function UpdateDetailContent({ update }: UpdateDetailContentProps) {
   return (
     <main className="min-h-screen bg-(--background)">
       {/* Hero Section with Background Image */}
-      <section className="relative w-full h-[55vh] sm:h-[60vh] md:h-[65vh] flex items-end overflow-hidden">
-        {/* Background Image */}
+      <section className="relative w-full h-[40vh] sm:h-[44vh] md:h-[48vh] flex items-end overflow-hidden">
+        {/* Background Image with blur */}
         <div className="absolute inset-0">
           <Image
             src={update.imageUrl}
             alt={update.title}
             fill
-            className="object-cover object-top"
+            className="object-cover object-center"
             priority
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#0a0f1a] via-black/50 to-black/20" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0a0f1a] via-[#0a0f1a]/60 to-black/30" />
         </div>
 
-        {/* Hero Content */}
-        <Container className="relative z-10 pb-10 sm:pb-14 md:pb-16">
+        {/* Hero Content — pinned to bottom */}
+        <Container className="relative z-10 pb-6 sm:pb-8 md:pb-10">
           <motion.div
             variants={staggerContainer}
             initial="hidden"
             animate="visible"
           >
-            {/* Back to Updates link */}
-            <motion.div className="mb-4 sm:mb-5" variants={fadeInUp}>
+            {/* Back to Updates link — matching reference icon |← */}
+            <motion.div className="mb-3 sm:mb-4" variants={fadeInUp}>
               <Link
                 href="/updates"
-                className="inline-flex items-center gap-2 text-xs sm:text-sm text-[#FFE500] hover:text-[#FFE500]/80 transition-colors uppercase tracking-widest font-medium"
+                className="inline-flex items-center gap-2 text-[11px] sm:text-xs text-[#FFE500] hover:text-[#FFE500]/80 transition-colors uppercase tracking-[0.15em] font-medium"
                 style={{ fontFamily: 'var(--font-poppins)' }}
               >
+                {/* Bar + Arrow icon matching reference */}
                 <svg
-                  className="w-4 h-4 sm:w-5 sm:h-5"
+                  className="w-4 h-4"
+                  viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
-                  viewBox="0 0 24 24"
+                  strokeWidth={2}
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                 >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                  <line x1="4" y1="5" x2="4" y2="19" />
+                  <polyline points="12 5 5 12 12 19" />
+                  <line x1="5" y1="12" x2="20" y2="12" />
                 </svg>
                 Back to Updates
               </Link>
@@ -103,7 +109,7 @@ export function UpdateDetailContent({ update }: UpdateDetailContentProps) {
 
             {/* Title */}
             <motion.h1
-              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-[#FFE500] italic leading-[1.1] max-w-4xl"
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-[#FFE500] italic leading-[1.1] max-w-4xl"
               style={{ fontFamily: 'var(--font-romanesco)' }}
               variants={fadeInUp}
             >
@@ -287,49 +293,33 @@ export function UpdateDetailContent({ update }: UpdateDetailContentProps) {
             </h2>
           </motion.div>
 
-          {/* Gallery Grid — 2 columns on mobile, 3 on md+ with masonry-like varied aspect ratios */}
+          {/* Gallery Grid — 2 equal-height columns */}
           <motion.div
-            className="columns-2 md:columns-3 gap-3 sm:gap-4"
+            className="grid grid-cols-2 gap-3 sm:gap-4"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            {galleryImages.map((image, index) => {
-              // Vary aspect ratios to create masonry effect matching the reference
-              const aspects = [
-                'aspect-[3/4]',   // portrait tall
-                'aspect-[4/3]',   // landscape
-                'aspect-square',  // square
-                'aspect-[3/4]',   // portrait tall
-                'aspect-[4/3]',   // landscape
-                'aspect-square',  // square
-              ];
-              const aspect = aspects[index % aspects.length];
-
-              return (
-                <motion.div
-                  key={index}
-                  className="break-inside-avoid mb-3 sm:mb-4"
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true, amount: 0.1 }}
-                  transition={{ duration: 0.4, delay: index * 0.06 }}
-                >
-                  <div
-                    className={`relative overflow-hidden rounded-xl sm:rounded-2xl bg-(--muted) border border-(--card-border) group cursor-pointer ${aspect}`}
-                  >
-                    <Image
-                      src={image}
-                      alt={`${update.title} photo ${index + 1}`}
-                      fill
-                      className="object-cover transition-transform duration-500 group-hover:scale-105"
-                    />
-                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300" />
-                  </div>
-                </motion.div>
-              );
-            })}
+            {galleryImages.map((image, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true, amount: 0.1 }}
+                transition={{ duration: 0.4, delay: index * 0.06 }}
+              >
+                <div className="relative overflow-hidden rounded-xl sm:rounded-2xl bg-(--muted) border border-(--card-border) group cursor-pointer aspect-[4/3]">
+                  <Image
+                    src={image}
+                    alt={`${update.title} photo ${index + 1}`}
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300" />
+                </div>
+              </motion.div>
+            ))}
           </motion.div>
         </Container>
       </section>
