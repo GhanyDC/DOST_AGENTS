@@ -101,19 +101,19 @@ export const SAMPLE_FEATURES: Feature[] = [
   {
     id: '1',
     number: 1,
-    title: 'Handy Expressionism',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+    title: 'AGENTS Goes Digital',
+    description: 'Upgrade your skills, streamline your processes. Click into the future with us! From workshops to automations, we\'re upgrading how organizations get things done—sharper, smarter, and better. Register now and secure your spot today!',
   },
   {
     id: '2',
     number: 1,
-    title: 'Handy Expressionism',
+    title: 'ISKOlympics',
     description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
   },
   {
     id: '3',
     number: 1,
-    title: 'Handy Expressionism',
+    title: 'Star Awards',
     description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
   },
   {
@@ -175,9 +175,9 @@ export const CORE_VALUES_CONTENT = {
   values: [
     { name: 'PROFESSIONAL', highlight: 'P' },
     { name: 'EXCELLENCE', highlight: 'E' },
-    { name: 'SOCIAL', highlight: 'SO' },
-    { name: 'RESPONSIBILITY', highlight: 'R' },
-    { name: 'SERVANT', highlight: 'SER' },
+    { name: 'SOCIAL', highlight: 'O' },
+    { name: 'RESPONSIBILITY', highlight: 'P' },
+    { name: 'SERVANT', highlight: 'E' },
     { name: 'LEADERSHIP', highlight: 'L' },
   ],
 };
