@@ -138,9 +138,6 @@ body {
   overflow-x: hidden;
   min-height: 100vh;
   min-height: 100dvh; /* Dynamic viewport height for mobile */
-  /* GPU acceleration for smoother animations */
-  transform: translateZ(0);
-  -webkit-transform: translateZ(0);
 }
 
 /* Responsive section padding */
