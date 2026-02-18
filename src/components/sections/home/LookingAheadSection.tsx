@@ -33,8 +33,8 @@ function EnhancedFeatureCard({
     <motion.div
       className={cn(
         'group relative p-5 sm:p-6 md:p-7 rounded-xl sm:rounded-2xl overflow-hidden',
-        'bg-gradient-to-br from-[#111a30]/60 to-[#0d1526]/60',
-        'border border-white/[0.06]',
+        'bg-linear-to-br from-[#111a30]/60 to-[#0d1526]/60',
+        'border border-white/6',
         'shadow-[0_4px_24px_rgb(0,0,0,0.2)]',
         'hover:shadow-[0_16px_48px_rgba(255,229,0,0.15)]',
         'transition-all duration-500 ease-out',
@@ -46,12 +46,12 @@ function EnhancedFeatureCard({
       }}
     >
       {/* Yellow gradient overlay on hover */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[#FFE500] to-[#f5c518] opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-xl sm:rounded-2xl" />
+      <div className="absolute inset-0 bg-linear-to-br from-[#FFE500] to-[#f5c518] opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-xl sm:rounded-2xl" />
 
       {/* Content */}
       <div className="relative z-10">
         {/* Number Badge */}
-        <div className="inline-flex items-center justify-center w-9 h-9 sm:w-11 sm:h-11 mb-4 sm:mb-5 rounded-lg bg-white/[0.06] text-white/80 font-bold text-sm sm:text-base group-hover:bg-black/15 group-hover:text-black transition-all duration-300">
+        <div className="inline-flex items-center justify-center w-9 h-9 sm:w-11 sm:h-11 mb-4 sm:mb-5 rounded-lg bg-white/6 text-white/80 font-bold text-sm sm:text-base group-hover:bg-black/15 group-hover:text-black transition-all duration-300">
           {String(index + 1).padStart(2, '0')}
         </div>
         
@@ -100,11 +100,11 @@ const cardVariants = {
 
 export function LookingAheadSection({ features = SAMPLE_FEATURES }: LookingAheadSectionProps) {
   return (
-    <section className="relative min-h-screen pt-20 sm:pt-24 md:pt-28 pb-16 sm:pb-20 md:pb-24 bg-gradient-to-b from-[#0f152c] via-[#0d1028] to-[#0b0e22] overflow-hidden flex flex-col justify-center noise-overlay">
+    <section className="relative min-h-screen pt-20 sm:pt-24 md:pt-28 pb-16 sm:pb-20 md:pb-24 bg-linear-to-b from-[#0f152c] via-[#0d1028] to-[#0b0e22] overflow-hidden flex flex-col justify-center noise-overlay">
       {/* Background Effects — shifted positions to differentiate from Perspectives */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-[30%] right-[15%] w-[400px] h-[400px] bg-[radial-gradient(circle,rgba(255,229,0,0.08),transparent_70%)] animate-pulse-glow" style={{ animationDelay: '1s' }} />
-        <div className="absolute bottom-[20%] left-[10%] w-[500px] h-[500px] bg-[radial-gradient(circle,rgba(66,165,245,0.06),transparent_70%)] animate-pulse-glow" style={{ animationDelay: '3s' }} />
+        <div className="absolute top-[30%] right-[15%] w-100 h-100 bg-[radial-gradient(circle,rgba(255,229,0,0.08),transparent_70%)] animate-pulse-glow" style={{ animationDelay: '1s' }} />
+        <div className="absolute bottom-[20%] left-[10%] w-100 h-100 bg-[radial-gradient(circle,rgba(66,165,245,0.06),transparent_70%)] animate-pulse-glow" style={{ animationDelay: '3s' }} />
       </div>
 
       {/* Section Heading */}
@@ -115,16 +115,18 @@ export function LookingAheadSection({ features = SAMPLE_FEATURES }: LookingAhead
           viewport={{ once: true }}
           transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
         >
-          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-normal tracking-tight text-white mb-6">
-            <span style={{ fontFamily: 'var(--font-manrope)' }}>{LOOKING_AHEAD_CONTENT.title}</span>
-            {' '}
-            <span 
-              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-[#FFE500] italic font-normal tracking-wide block sm:inline mt-2 sm:mt-0"
-              style={{ fontFamily: 'var(--font-romanesco)' }}
-            >
-              {LOOKING_AHEAD_CONTENT.titleHighlight}
-            </span>
-          </h2>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-medium tracking-tight text-white mb-6">
+              <span style={{ fontFamily: 'var(--font-manrope)' }}>
+                {LOOKING_AHEAD_CONTENT.title}
+              </span>
+              {' '}
+              <span
+                className="text-[#FFE500]"
+                style={{ fontFamily: 'var(--font-manrope)' }}
+              >
+                {LOOKING_AHEAD_CONTENT.titleHighlight}
+              </span>
+            </h2>
           <p 
             className="mt-3 sm:mt-4 text-xs sm:text-sm md:text-base text-white/60 max-w-2xl mx-auto leading-relaxed"
             style={{ fontFamily: 'var(--font-poppins)' }}

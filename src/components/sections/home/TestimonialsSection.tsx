@@ -73,11 +73,11 @@ export function TestimonialsSection({
   };
 
   return (
-    <section className="relative min-h-screen pt-20 sm:pt-24 md:pt-28 pb-16 sm:pb-20 md:pb-24 bg-gradient-to-b from-[#0b0e22] via-[#0e1328] to-[#0c1020] overflow-hidden flex flex-col justify-center noise-overlay">
+    <section className="relative min-h-screen pt-20 sm:pt-24 md:pt-28 pb-16 sm:pb-20 md:pb-24 bg-linear-to-b from-[#0b0e22] via-[#0e1328] to-[#0c1020] overflow-hidden flex flex-col justify-center noise-overlay">
       {/* Background Effects — warm glow behind testimonial card */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-[radial-gradient(circle,rgba(255,229,0,0.05),transparent_65%)] animate-pulse-glow" />
-        <div className="absolute top-[25%] right-[20%] w-[300px] h-[300px] bg-[radial-gradient(circle,rgba(66,165,245,0.06),transparent_70%)] animate-pulse-glow" style={{ animationDelay: '2s' }} />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-175 h-175 bg-[radial-gradient(circle,rgba(255,229,0,0.05),transparent_65%)] animate-pulse-glow" />
+        <div className="absolute top-[25%] right-[20%] w-75 h-75 bg-[radial-gradient(circle,rgba(66,165,245,0.06),transparent_70%)] animate-pulse-glow" style={{ animationDelay: '2s' }} />
       </div>
 
       {/* Section Heading */}
@@ -88,16 +88,18 @@ export function TestimonialsSection({
           viewport={{ once: true }}
           transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
         >
-          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-normal tracking-tight text-white mb-6">
-            <span style={{ fontFamily: 'var(--font-manrope)' }}>{TESTIMONIALS_CONTENT.title}</span>
-            {' '}
-            <span 
-              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-[#FFE500] italic font-normal tracking-wide block sm:inline mt-2 sm:mt-0"
-              style={{ fontFamily: 'var(--font-romanesco)' }}
-            >
-              {TESTIMONIALS_CONTENT.titleHighlight}
-            </span>
-          </h2>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-medium tracking-tight text-white mb-6">
+              <span style={{ fontFamily: 'var(--font-manrope)' }}>
+                {TESTIMONIALS_CONTENT.title}
+              </span>
+              {' '}
+              <span
+                className="text-[#FFE500]"
+                style={{ fontFamily: 'var(--font-manrope)' }}
+              >
+                {TESTIMONIALS_CONTENT.titleHighlight}
+              </span>
+            </h2>
           <p 
             className="mt-3 sm:mt-4 text-xs sm:text-sm md:text-base text-white/60 max-w-3xl mx-auto leading-relaxed"
             style={{ fontFamily: 'var(--font-poppins)' }}
@@ -109,12 +111,12 @@ export function TestimonialsSection({
 
       {/* Testimonial Carousel */}
       <div className="relative z-10 max-w-6xl mx-auto w-full px-4 sm:px-6 lg:px-8">
-        <div className="relative min-h-[400px] sm:min-h-[450px] md:min-h-[500px] flex items-center justify-center">
+        <div className="relative min-h-100 sm:min-h-112 md:min-h-125 flex items-center justify-center">
           {/* Previous Button - Left Side */}
           <button
             onClick={goToPrev}
             disabled={testimonials.length <= 1}
-            className="absolute left-0 sm:-left-4 md:-left-8 top-1/2 -translate-y-1/2 z-20 group flex items-center justify-center w-11 h-11 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-full bg-white/[0.04] border border-white/10 hover:bg-[#FFE500] hover:border-[#FFE500] disabled:opacity-30 disabled:cursor-not-allowed transition-all duration-300 shadow-lg hover:shadow-[0_0_25px_rgba(255,229,0,0.3)]"
+            className="absolute left-0 sm:-left-4 md:-left-8 top-1/2 -translate-y-1/2 z-20 group flex items-center justify-center w-11 h-11 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-full bg-white/4 border border-white/10 hover:bg-[#FFE500] hover:border-[#FFE500] disabled:opacity-30 disabled:cursor-not-allowed transition-all duration-300 shadow-lg hover:shadow-[0_0_25px_rgba(255,229,0,0.3)]"
             aria-label="Previous testimonial"
           >
             <svg className="w-5 h-5 sm:w-6 sm:h-6 text-white group-hover:text-black transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -126,7 +128,7 @@ export function TestimonialsSection({
           <button
             onClick={goToNext}
             disabled={testimonials.length <= 1}
-            className="absolute right-0 sm:-right-4 md:-right-8 top-1/2 -translate-y-1/2 z-20 group flex items-center justify-center w-11 h-11 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-full bg-white/[0.04] border border-white/10 hover:bg-[#FFE500] hover:border-[#FFE500] disabled:opacity-30 disabled:cursor-not-allowed transition-all duration-300 shadow-lg hover:shadow-[0_0_25px_rgba(255,229,0,0.3)]"
+            className="absolute right-0 sm:-right-4 md:-right-8 top-1/2 -translate-y-1/2 z-20 group flex items-center justify-center w-11 h-11 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-full bg-white/4 border border-white/10 hover:bg-[#FFE500] hover:border-[#FFE500] disabled:opacity-30 disabled:cursor-not-allowed transition-all duration-300 shadow-lg hover:shadow-[0_0_25px_rgba(255,229,0,0.3)]"
             aria-label="Next testimonial"
           >
             <svg className="w-5 h-5 sm:w-6 sm:h-6 text-white group-hover:text-black transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -150,10 +152,10 @@ export function TestimonialsSection({
               }}
               className="absolute inset-0 flex items-center justify-center px-12 sm:px-16 md:px-20"
             >
-              <div className="w-full max-w-3xl p-6 sm:p-8 md:p-10 lg:p-12 rounded-2xl sm:rounded-3xl bg-gradient-to-br from-[#111a30]/60 to-[#0d1526]/60 border border-white/[0.06] backdrop-blur-md shadow-[0_12px_48px_rgba(0,0,0,0.25)]">
+              <div className="w-full max-w-3xl p-6 sm:p-8 md:p-10 lg:p-12 rounded-2xl sm:rounded-3xl bg-linear-to-br from-[#111a30]/60 to-[#0d1526]/60 border border-white/6 backdrop-blur-md shadow-[0_12px_48px_rgba(0,0,0,0.25)]">
                 {/* Avatar */}
                 <div className="flex justify-center mb-6 sm:mb-8">
-                  <div className="relative w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 rounded-full overflow-hidden bg-white/[0.03] border-2 border-[#FFE500]/20 shadow-[0_0_24px_rgba(255,229,0,0.1)]">
+                  <div className="relative w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 rounded-full overflow-hidden bg-white/3 border-2 border-[#FFE500]/20 shadow-[0_0_24px_rgba(255,229,0,0.1)]">
                     {currentTestimonial.imageUrl ? (
                       <Image
                         src={currentTestimonial.imageUrl}
@@ -185,7 +187,7 @@ export function TestimonialsSection({
                 </blockquote>
 
                 {/* Author Info */}
-                <div className="text-center border-t border-white/[0.06] pt-6">
+                <div className="text-center border-t border-white/6 pt-6">
                   <p 
                     className="font-bold text-base sm:text-lg md:text-xl text-white mb-1"
                     style={{ fontFamily: 'var(--font-manrope)' }}

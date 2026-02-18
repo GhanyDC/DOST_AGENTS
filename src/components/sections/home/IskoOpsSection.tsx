@@ -35,16 +35,16 @@ const itemVariants = {
 
 export function IskoOpsSection() {
   return (
-    <section className="relative min-h-screen pt-20 sm:pt-24 md:pt-28 pb-16 sm:pb-20 md:pb-24 bg-gradient-to-b from-[#0d1228] via-[#0a0f1a] to-[#080c14] overflow-hidden flex items-center noise-overlay">
+    <section className="relative min-h-screen pt-20 sm:pt-24 md:pt-28 pb-16 sm:pb-20 md:pb-24 bg-linear-to-b from-[#0d1228] via-[#0a0f1a] to-[#080c14] overflow-hidden flex items-center noise-overlay">
       {/* Background Effects */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-[25%] left-[15%] w-[500px] h-[500px] bg-[radial-gradient(circle,rgba(66,165,245,0.06),transparent_70%)] animate-pulse-glow" />
-        <div className="absolute bottom-[20%] right-[20%] w-[400px] h-[400px] bg-[radial-gradient(circle,rgba(255,229,0,0.05),transparent_70%)] animate-pulse-glow" style={{ animationDelay: '2.5s' }} />
+        <div className="absolute top-[25%] left-[15%] w-125 h-125 bg-[radial-gradient(circle,rgba(66,165,245,0.06),transparent_70%)] animate-pulse-glow" />
+        <div className="absolute bottom-[20%] right-[20%] w-100 h-100 bg-[radial-gradient(circle,rgba(255,229,0,0.05),transparent_70%)] animate-pulse-glow" style={{ animationDelay: '2.5s' }} />
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8">
         <motion.div 
-          className="rounded-2xl sm:rounded-3xl overflow-hidden bg-gradient-to-br from-[#111a30]/50 to-[#0d1526]/50 border border-white/[0.06] backdrop-blur-md shadow-[0_12px_48px_rgba(0,0,0,0.3)]"
+          className="rounded-2xl sm:rounded-3xl overflow-hidden bg-linear-to-br from-[#111a30]/50 to-[#0d1526]/50 border border-white/6 backdrop-blur-md shadow-[0_12px_48px_rgba(0,0,0,0.3)]"
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -53,7 +53,7 @@ export function IskoOpsSection() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
             {/* Image Side */}
             <motion.div 
-              className="relative min-h-[300px] sm:min-h-[400px] lg:min-h-[600px] bg-black/20 overflow-hidden"
+              className="relative min-h-75 sm:min-h-100 lg:min-h-150 bg-black/20 overflow-hidden"
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
@@ -66,9 +66,9 @@ export function IskoOpsSection() {
                 className="object-cover"
                 priority
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
+              <div className="absolute inset-0 bg-linear-to-t from-black/40 via-transparent to-transparent" />
               {/* Right edge blend for large screens */}
-              <div className="hidden lg:block absolute top-0 bottom-0 right-0 w-16 bg-gradient-to-l from-[#111a30]/50 to-transparent" />
+              <div className="hidden lg:block absolute top-0 bottom-0 right-0 w-16 bg-linear-to-l from-[#111a30]/50 to-transparent" />
             </motion.div>
 
             {/* Content Side */}
@@ -156,7 +156,7 @@ export function IskoOpsSection() {
       </div>
 
       {/* Bottom gradient — fades to near-black for footer transition */}
-      <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-b from-transparent to-[#060a10] pointer-events-none z-[2]" />
+      <div className="absolute bottom-0 left-0 right-0 h-24 bg-linear-to-b from-transparent to-[#060a10] pointer-events-none z-2" />
     </section>
   );
 }

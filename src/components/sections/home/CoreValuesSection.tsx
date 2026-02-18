@@ -116,11 +116,11 @@ export function CoreValuesSection() {
   const { title, description, values } = CORE_VALUES_CONTENT;
 
   return (
-    <section className="relative min-h-screen pt-20 sm:pt-24 md:pt-28 pb-16 sm:pb-20 md:pb-24 bg-gradient-to-b from-[#0c1020] via-[#0a0e1c] to-[#0d1228] overflow-hidden flex flex-col justify-center noise-overlay">
+    <section className="relative min-h-screen pt-20 sm:pt-24 md:pt-28 pb-16 sm:pb-20 md:pb-24 bg-linear-to-b from-[#0c1020] via-[#0a0e1c] to-[#0d1228] overflow-hidden flex flex-col justify-center noise-overlay">
       {/* Background Effects — centered glow */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[600px] bg-[radial-gradient(ellipse,rgba(255,229,0,0.04),transparent_60%)]" />
-        <div className="absolute top-[20%] left-[15%] w-[400px] h-[400px] bg-[radial-gradient(circle,rgba(66,165,245,0.05),transparent_70%)] animate-pulse-glow" style={{ animationDelay: '1s' }} />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-200 h-150 g-[radial-gradient(ellipse,rgba(255,229,0,0.04),transparent_60%)]" />
+        <div className="absolute top-[20%] left-[15%] w-100 h-100 bg-[radial-gradient(circle,rgba(66,165,245,0.05),transparent_70%)] animate-pulse-glow" style={{ animationDelay: '1s' }} />
       </div>
 
       <div className="relative z-10 max-w-6xl mx-auto w-full px-4 sm:px-6 lg:px-8">
@@ -132,9 +132,9 @@ export function CoreValuesSection() {
           className="text-center"
         >
           {/* Title */}
-          <motion.h2 
-            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-[#FFE500] italic mb-10 sm:mb-12 md:mb-16"
-            style={{ fontFamily: 'var(--font-romanesco)' }}
+          <motion.h2
+            className="text-3xl sm:text-4xl md:text-5xl font-medium tracking-tight text-[#FFE500] mb-10 sm:mb-12 md:mb-16"
+            style={{ fontFamily: 'var(--font-manrope)' }}
             variants={itemVariants}
           >
             {title}
@@ -144,7 +144,7 @@ export function CoreValuesSection() {
           <motion.div className="mb-8 sm:mb-10 md:mb-12 space-y-3 sm:space-y-4" variants={itemVariants}>
             {/* Line 1: PROFESSIONAL EXCELLENCE */}
             <motion.div 
-              className="flex flex-wrap items-center justify-center gap-x-3 sm:gap-x-4 text-lg sm:text-2xl md:text-3xl lg:text-4xl font-bold tracking-wider"
+              className="flex flex-wrap items-center justify-center gap-x-3 sm:gap-x-4 text-lg sm:text-2xl md:text-3xl lg:text-4xl font-medium tracking-wider"
               style={{ fontFamily: 'var(--font-manrope)' }}
               variants={wordLineVariants}
             >
@@ -154,7 +154,7 @@ export function CoreValuesSection() {
 
             {/* Line 2: SOCIAL RESPONSIBILITY */}
             <motion.div 
-              className="flex flex-wrap items-center justify-center gap-x-3 sm:gap-x-4 text-lg sm:text-2xl md:text-3xl lg:text-4xl font-bold tracking-wider"
+              className="flex flex-wrap items-center justify-center gap-x-3 sm:gap-x-4 text-lg sm:text-2xl md:text-3xl lg:text-4xl font-medium tracking-wider"
               style={{ fontFamily: 'var(--font-manrope)' }}
               variants={wordLineVariants}
             >
@@ -164,7 +164,7 @@ export function CoreValuesSection() {
 
             {/* Line 3: SERVANT LEADERSHIP */}
             <motion.div 
-              className="flex flex-wrap items-center justify-center gap-x-3 sm:gap-x-4 text-lg sm:text-2xl md:text-3xl lg:text-4xl font-bold tracking-wider"
+              className="flex flex-wrap items-center justify-center gap-x-3 sm:gap-x-4 text-lg sm:text-2xl md:text-3xl lg:text-4xl font-medium tracking-wider"
               style={{ fontFamily: 'var(--font-manrope)' }}
               variants={wordLineVariants}
             >
@@ -178,12 +178,12 @@ export function CoreValuesSection() {
             className="flex justify-center mb-8 sm:mb-10"
             variants={itemVariants}
           >
-            <div className="w-16 h-px bg-gradient-to-r from-transparent via-[#FFE500]/40 to-transparent" />
+            <div className="w-16 h-px bg-linear-to-r from-transparent via-[#FFE500]/40 to-transparent" />
           </motion.div>
 
           {/* Description */}
           <motion.p 
-            className="max-w-3xl mx-auto text-sm sm:text-base md:text-lg text-white/60 leading-relaxed"
+            className="max-w-6xl mx-auto text-sm sm:text-base md:text-lg text-white/60 leading-relaxed"
             style={{ fontFamily: 'var(--font-poppins)' }}
             variants={itemVariants}
           >

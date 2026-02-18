@@ -49,7 +49,7 @@ export const FOOTER_NAV: FooterNav[] = [
 export const HERO_CONTENT = {
   titleHighlight: 'AGENTS',
   titleRest: 'Of Change, Excellence and For The Common Good',
-  description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+  description: 'We cultivate leaders who embody integrity, excellence, and service. Through innovation and collaboration, we strive to create meaningful impact in our communities.  As Agents of Change, we are committed to advancing progress for the common good.',
   ctaText: 'Explore Projects',
   ctaLink: '/updates',
   secondaryCtaText: 'Learn More',
