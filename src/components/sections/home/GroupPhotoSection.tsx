@@ -60,8 +60,14 @@ export function GroupPhotoSection() {
 
   return (
     <section ref={sectionRef} className="relative py-0">
-      {/* Top gradient bridge — blends from Hero */}
-      <div className="absolute top-0 left-0 right-0 h-32 sm:h-40 bg-gradient-to-b from-[#0a0f1a] via-[#0a0f1a]/60 to-transparent z-10 pointer-events-none" />
+      {/* Top gradient bridge — seamless fade from Hero into photo */}
+      <div
+        className="absolute top-0 left-0 right-0 z-10 pointer-events-none"
+        style={{
+          height: '280px',
+          background: 'linear-gradient(to bottom, #080e1a 0%, rgba(8,14,26,0.80) 30%, rgba(8,14,26,0.35) 60%, rgba(8,14,26,0.08) 85%, transparent 100%)',
+        }}
+      />
 
       {/* Group Photo Container */}
       <div className="relative w-full min-h-screen">
