@@ -146,7 +146,7 @@ export function Navbar() {
       className={[
         'fixed top-0 left-0 right-0 z-50',
         isScrolled
-          ? 'bg-[#0a0f1a]/80 backdrop-blur-xl shadow-[0_1px_20px_rgba(0,0,0,0.3)] border-b border-white/[0.06]'
+          ? 'bg-[#0a0f1a]/80 backdrop-blur-xl shadow-[0_1px_20px_rgba(0,0,0,0.3)] border-b border-white/6'
           : 'bg-transparent shadow-none border-b border-transparent',
       ].join(' ')}
       style={{
@@ -157,7 +157,7 @@ export function Navbar() {
       }}
     >
       <Container>
-        <div className="flex items-center justify-between h-16 sm:h-[4.5rem]">
+        <div className="flex items-center justify-between h-16 sm:h-18">
           {/* Logo */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
@@ -202,14 +202,14 @@ export function Navbar() {
                       'relative px-4 xl:px-5 py-2 text-sm font-medium rounded-lg transition-all duration-200',
                       isActive
                         ? 'text-[#FFE500]'
-                        : 'text-white/60 hover:text-white hover:bg-white/[0.04]',
+                        : 'text-white/60 hover:text-white hover:bg-white/4',
                     ].join(' ')}
                     style={{ fontFamily: 'var(--font-poppins)' }}
                   >
                     {item.label}
                     {isActive && (
                       <motion.div
-                        className="absolute bottom-0.5 left-1/2 -translate-x-1/2 h-[2px] w-5 bg-[#FFE500] rounded-full"
+                        className="absolute bottom-0.5 left-1/2 -translate-x-1/2 h-0.5 w-5 bg-[#FFE500] rounded-full"
                         layoutId="nav-indicator"
                         transition={{ type: 'spring', stiffness: 350, damping: 30 }}
                       />
@@ -233,7 +233,7 @@ export function Navbar() {
                 <Button
                   variant="outline"
                   size="md"
-                  className="border-white/20 hover:bg-white/[0.06] hover:border-white/30 text-white"
+                  className="border-white/20 hover:bg-white/6 hover:border-white/30 text-white"
                 >
                   Contact
                 </Button>
@@ -253,7 +253,7 @@ export function Navbar() {
             <motion.button
               aria-label="Toggle mobile menu"
               onClick={() => setMobileOpen(!mobileOpen)}
-              className="lg:hidden inline-flex items-center justify-center p-2 rounded-lg text-white hover:bg-white/[0.06] transition-colors touch-target"
+              className="lg:hidden inline-flex items-center justify-center p-2 rounded-lg text-white hover:bg-white/6 transition-colors touch-target"
               whileTap={{ scale: 0.95 }}
             >
               <svg
@@ -288,7 +288,7 @@ export function Navbar() {
             animate="visible"
             exit="exit"
           >
-            <div className="bg-[#0a0f1a]/95 backdrop-blur-xl border-t border-white/[0.06]">
+            <div className="bg-[#0a0f1a]/95 backdrop-blur-xl border-t border-white/6">
               <Container>
                 <div className="py-4 space-y-1">
                   {NAV_ITEMS.map((item, index) => {
@@ -305,8 +305,8 @@ export function Navbar() {
                           className={[
                             'block px-4 py-3 text-base font-medium rounded-lg transition-colors',
                             isActive
-                              ? 'text-[#FFE500] bg-white/[0.04]'
-                              : 'text-white/70 hover:text-white hover:bg-white/[0.04]',
+                              ? 'text-[#FFE500] bg-white/4'
+                              : 'text-white/70 hover:text-white hover:bg-white/4',
                           ].join(' ')}
                           onClick={() => setMobileOpen(false)}
                         >
@@ -316,14 +316,14 @@ export function Navbar() {
                     );
                   })}
                   <motion.div 
-                    className="pt-4 flex flex-col gap-3 border-t border-white/[0.06] mt-2"
+                    className="pt-4 flex flex-col gap-3 border-t border-white/6 mt-2"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: 0.2 }}
                   >
                     <Link
                       href="/contact"
-                      className="block px-4 py-3 text-base font-medium text-white/70 hover:text-white hover:bg-white/[0.04] rounded-lg transition-colors"
+                      className="block px-4 py-3 text-base font-medium text-white/70 hover:text-white hover:bg-white/4 rounded-lg transition-colors"
                       onClick={() => setMobileOpen(false)}
                     >
                       Contact

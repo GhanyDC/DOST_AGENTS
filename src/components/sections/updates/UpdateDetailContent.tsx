@@ -72,7 +72,7 @@ export function UpdateDetailContent({ update }: UpdateDetailContentProps) {
             className="object-cover object-center"
             priority
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#0a0f1a] via-[#0a0f1a]/60 to-black/30" />
+          <div className="absolute inset-0 bg-linear-to-t from-[#0a0f1a] via-[#0a0f1a]/60 to-black/30" />
         </div>
 
         {/* Hero Content — pinned to bottom */}
@@ -261,7 +261,7 @@ export function UpdateDetailContent({ update }: UpdateDetailContentProps) {
                     viewport={{ once: true, amount: 0.1 }}
                     transition={{ duration: 0.4, delay: index * 0.06 }}
                   >
-                    <div className="relative overflow-hidden rounded-xl sm:rounded-2xl bg-(--muted) border border-(--card-border) group cursor-pointer aspect-[4/3]">
+                    <div className="relative overflow-hidden rounded-xl sm:rounded-2xl bg-(--muted) border border-(--card-border) group cursor-pointer aspect-4/3">
                       <Image
                         src={image}
                         alt={`${update.title} photo ${index + 1}`}

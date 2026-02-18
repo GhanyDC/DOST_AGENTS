@@ -63,7 +63,7 @@ export function HeroSection() {
 
       {/* Bottom center blur half-circle glow */}
       <div
-        className="absolute bottom-0 left-1/2 -translate-x-1/2 pointer-events-none z-[1]"
+        className="absolute bottom-0 left-1/2 -translate-x-1/2 pointer-events-none z-1"
         style={{
           width: '110vw',
           height: '55vh',
@@ -77,7 +77,7 @@ export function HeroSection() {
 
       {/* Bottom fade — bridges into GroupPhoto section */}
       <div
-        className="absolute bottom-0 left-0 right-0 pointer-events-none z-[2]"
+        className="absolute bottom-0 left-0 right-0 pointer-events-none z-2"
         style={{
           height: '180px',
           background: 'linear-gradient(to bottom, transparent 0%, #080e1a 100%)',
@@ -123,7 +123,7 @@ export function HeroSection() {
         >
           {/* Main Title */}
           <motion.h1
-            className="leading-tight tracking-tight mb-5 sm:mb-7 max-w-[960px] mx-auto"
+            className="leading-tight tracking-tight mb-5 sm:mb-7 max-w-240 mx-auto"
             style={{
               fontFamily: 'var(--font-poppins)',
               fontWeight: 500,

@@ -89,15 +89,15 @@ export function GroupPhotoSection() {
           />
           
           {/* Multi-layered overlays for depth */}
-          <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/50 to-black/80" />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#0a0e1e]/90 via-transparent to-transparent" />
+          <div className="absolute inset-0 bg-linear-to-b from-black/60 via-black/50 to-black/80" />
+          <div className="absolute inset-0 bg-linear-to-t from-[#0a0e1e]/90 via-transparent to-transparent" />
           {/* Side vignette */}
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_40%,rgba(0,0,0,0.4)_100%)]" />
         </motion.div>
         
         {/* Tagline Overlay - Centered */}
         <motion.div 
-          className="absolute inset-0 flex flex-col items-center justify-center px-4 sm:px-6 z-[5]"
+          className="absolute inset-0 flex flex-col items-center justify-center px-4 sm:px-6 z-5"
           variants={staggerContainer}
           initial="hidden"
           whileInView="visible"
@@ -165,7 +165,7 @@ export function GroupPhotoSection() {
       </div>
 
       {/* Bottom gradient bridge — blends into Perspectives */}
-      <div className="absolute bottom-0 left-0 right-0 h-32 sm:h-40 bg-gradient-to-t from-[#0a0e1e] via-[#0a0e1e]/70 to-transparent z-10 pointer-events-none" />
+      <div className="absolute bottom-0 left-0 right-0 h-32 sm:h-40 bg-linear-to-t from-[#0a0e1e] via-[#0a0e1e]/70 to-transparent z-10 pointer-events-none" />
     </section>
   );
 }

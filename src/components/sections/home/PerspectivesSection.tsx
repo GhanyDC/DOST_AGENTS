@@ -18,7 +18,7 @@ function MarqueeCard({ title, date, imageUrl }: { title: string; date: string; i
   return (
     <div className="shrink-0 w-64 sm:w-72 md:w-80 lg:w-96">
       <motion.div 
-        className="group relative rounded-2xl overflow-hidden bg-gradient-to-br from-[#111a30]/60 to-[#0d1526]/60 border border-white/[0.06] backdrop-blur-sm shadow-[0_4px_24px_rgb(0,0,0,0.2)] hover:border-[#FFE500]/60 hover:shadow-[0_8px_32px_rgba(255,229,0,0.12)] transition-all duration-400 ease-out"
+        className="group relative rounded-2xl overflow-hidden bg-linear-to-br from-[#111a30]/60 to-[#0d1526]/60 border border-white/6 backdrop-blur-sm shadow-[0_4px_24px_rgb(0,0,0,0.2)] hover:border-[#FFE500]/60 hover:shadow-[0_8px_32px_rgba(255,229,0,0.12)] transition-all duration-400 ease-out"
         whileHover={{ 
           y: -4,
           transition: { duration: 0.3, ease: [0.22, 1, 0.36, 1] }
@@ -33,7 +33,7 @@ function MarqueeCard({ title, date, imageUrl }: { title: string; date: string; i
             className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
           />
           {/* Gradient Overlay */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent opacity-70 group-hover:opacity-50 transition-opacity duration-400" />
+          <div className="absolute inset-0 bg-linear-to-t from-black/70 via-black/10 to-transparent opacity-70 group-hover:opacity-50 transition-opacity duration-400" />
         </div>
 
         {/* Content */}
@@ -65,11 +65,11 @@ export function PerspectivesSection({ projects = SAMPLE_PROJECTS }: Perspectives
   const secondRowDuped = [...secondRow, ...secondRow, ...secondRow];
 
   return (
-    <section className="relative min-h-screen pt-20 sm:pt-24 md:pt-28 pb-12 sm:pb-16 bg-gradient-to-b from-[#0a0e1e] via-[#0c1224] to-[#0f152c] overflow-x-clip flex flex-col justify-center noise-overlay">
+    <section className="relative min-h-screen pt-20 sm:pt-24 md:pt-28 pb-12 sm:pb-16 bg-linear-to-b from-[#0a0e1e] via-[#0c1224] to-[#0f152c] overflow-x-clip flex flex-col justify-center noise-overlay">
       {/* Background Effects — unique to this section */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-[20%] left-[10%] w-[500px] h-[500px] bg-[radial-gradient(circle,rgba(66,165,245,0.1),transparent_70%)] animate-pulse-glow" />
-        <div className="absolute bottom-[15%] right-[10%] w-[600px] h-[600px] bg-[radial-gradient(circle,rgba(255,229,0,0.06),transparent_70%)] animate-pulse-glow" style={{ animationDelay: '2s' }} />
+        <div className="absolute top-[20%] left-[10%] w-100 h-100 bg-[radial-gradient(circle,rgba(66,165,245,0.1),transparent_70%)] animate-pulse-glow" />
+        <div className="absolute bottom-[15%] right-[10%] w-100 h-100 bg-[radial-gradient(circle,rgba(255,229,0,0.06),transparent_70%)] animate-pulse-glow" style={{ animationDelay: '2s' }} />
       </div>
 
       {/* Section Heading */}
@@ -142,8 +142,8 @@ export function PerspectivesSection({ projects = SAMPLE_PROJECTS }: Perspectives
       </motion.div>
 
       {/* Edge fades for marquee */}
-      <div className="absolute top-0 bottom-0 left-0 w-8 sm:w-12 bg-gradient-to-r from-[#0a0e1e] to-transparent z-20 pointer-events-none" />
-      <div className="absolute top-0 bottom-0 right-0 w-8 sm:w-12 bg-gradient-to-l from-[#0f152c] to-transparent z-20 pointer-events-none" />
+      <div className="absolute top-0 bottom-0 left-0 w-8 sm:w-12 bg-linear-to-r from-[#0a0e1e] to-transparent z-20 pointer-events-none" />
+      <div className="absolute top-0 bottom-0 right-0 w-8 sm:w-12 bg-linear-to-l from-[#0f152c] to-transparent z-20 pointer-events-none" />
     </section>
   );
 }
