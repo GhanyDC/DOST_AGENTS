@@ -88,16 +88,18 @@ export function TestimonialsSection({
           viewport={{ once: true }}
           transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
         >
-          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-normal tracking-tight text-white mb-6">
-            <span style={{ fontFamily: 'var(--font-manrope)' }}>{TESTIMONIALS_CONTENT.title}</span>
-            {' '}
-            <span 
-              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-[#FFE500] italic font-normal tracking-wide block sm:inline mt-2 sm:mt-0"
-              style={{ fontFamily: 'var(--font-romanesco)' }}
-            >
-              {TESTIMONIALS_CONTENT.titleHighlight}
-            </span>
-          </h2>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-medium tracking-tight text-white mb-6">
+              <span style={{ fontFamily: 'var(--font-manrope)' }}>
+                {TESTIMONIALS_CONTENT.title}
+              </span>
+              {' '}
+              <span
+                className="text-[#FFE500]"
+                style={{ fontFamily: 'var(--font-manrope)' }}
+              >
+                {TESTIMONIALS_CONTENT.titleHighlight}
+              </span>
+            </h2>
           <p 
             className="mt-3 sm:mt-4 text-xs sm:text-sm md:text-base text-white/60 max-w-3xl mx-auto leading-relaxed"
             style={{ fontFamily: 'var(--font-poppins)' }}

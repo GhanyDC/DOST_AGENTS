@@ -132,9 +132,9 @@ export function CoreValuesSection() {
           className="text-center"
         >
           {/* Title */}
-          <motion.h2 
-            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-[#FFE500] italic mb-10 sm:mb-12 md:mb-16"
-            style={{ fontFamily: 'var(--font-romanesco)' }}
+          <motion.h2
+            className="text-3xl sm:text-4xl md:text-5xl font-medium tracking-tight text-[#FFE500] mb-10 sm:mb-12 md:mb-16"
+            style={{ fontFamily: 'var(--font-manrope)' }}
             variants={itemVariants}
           >
             {title}
@@ -144,7 +144,7 @@ export function CoreValuesSection() {
           <motion.div className="mb-8 sm:mb-10 md:mb-12 space-y-3 sm:space-y-4" variants={itemVariants}>
             {/* Line 1: PROFESSIONAL EXCELLENCE */}
             <motion.div 
-              className="flex flex-wrap items-center justify-center gap-x-3 sm:gap-x-4 text-lg sm:text-2xl md:text-3xl lg:text-4xl font-bold tracking-wider"
+              className="flex flex-wrap items-center justify-center gap-x-3 sm:gap-x-4 text-lg sm:text-2xl md:text-3xl lg:text-4xl font-medium tracking-wider"
               style={{ fontFamily: 'var(--font-manrope)' }}
               variants={wordLineVariants}
             >
@@ -154,7 +154,7 @@ export function CoreValuesSection() {
 
             {/* Line 2: SOCIAL RESPONSIBILITY */}
             <motion.div 
-              className="flex flex-wrap items-center justify-center gap-x-3 sm:gap-x-4 text-lg sm:text-2xl md:text-3xl lg:text-4xl font-bold tracking-wider"
+              className="flex flex-wrap items-center justify-center gap-x-3 sm:gap-x-4 text-lg sm:text-2xl md:text-3xl lg:text-4xl font-medium tracking-wider"
               style={{ fontFamily: 'var(--font-manrope)' }}
               variants={wordLineVariants}
             >
@@ -164,7 +164,7 @@ export function CoreValuesSection() {
 
             {/* Line 3: SERVANT LEADERSHIP */}
             <motion.div 
-              className="flex flex-wrap items-center justify-center gap-x-3 sm:gap-x-4 text-lg sm:text-2xl md:text-3xl lg:text-4xl font-bold tracking-wider"
+              className="flex flex-wrap items-center justify-center gap-x-3 sm:gap-x-4 text-lg sm:text-2xl md:text-3xl lg:text-4xl font-medium tracking-wider"
               style={{ fontFamily: 'var(--font-manrope)' }}
               variants={wordLineVariants}
             >
@@ -183,7 +183,7 @@ export function CoreValuesSection() {
 
           {/* Description */}
           <motion.p 
-            className="max-w-3xl mx-auto text-sm sm:text-base md:text-lg text-white/60 leading-relaxed"
+            className="max-w-6xl mx-auto text-sm sm:text-base md:text-lg text-white/60 leading-relaxed"
             style={{ fontFamily: 'var(--font-poppins)' }}
             variants={itemVariants}
           >
