@@ -2,7 +2,7 @@
 // Application Constants
 // =============================================================================
 
-import type { NavItem, Feature, Testimonial, Project, FooterNav, SocialLink, ContactInfo, Update, UpdateFilterOption } from '@/types';
+import type { NavItem, Feature, Testimonial, Project, FooterNav, SocialLink, ContactInfo, Update, UpdateFilterOption, ScholarshipApplicationData } from '@/types';
 
 // Site Information
 export const SITE_NAME = 'AGENTS';
@@ -33,7 +33,14 @@ export const SOCIAL_LINKS: SocialLink[] = [
 export const NAV_ITEMS: NavItem[] = [
   { label: 'Home', href: '/' },
   { label: 'Updates', href: '/updates' },
-  { label: 'Scholarship', href: '/scholarship' },
+  {
+    label: 'Scholarship',
+    dropdown: [
+      { label: 'Application', href: '/scholarship/application' },
+      { label: 'Sources', href: '/scholarship/sources' },
+      { label: 'Undergraduate', href: '/scholarship/undergraduate' },
+    ],
+  },
   { label: 'About', href: '/about' },
 ];
 
@@ -497,4 +504,138 @@ export const SAMPLE_UPDATE_DETAIL: Update = {
     { name: 'Mechelle Abinoja', role: 'Business Manager', imageUrl: '/testimonial_avatar.png' },
     { name: 'Mechelle Abinoja', role: 'Business Manager', imageUrl: '/testimonial_avatar.png' },
   ],
+};
+
+// =============================================================================
+// Scholarship Page Constants
+// =============================================================================
+
+export const SCHOLARSHIP_APPLICATION_DATA: ScholarshipApplicationData = {
+  hero: {
+    title: 'DOST – SEI',
+    titleHighlight: 'Scholarship',
+    description:
+      'The Department of Science and Technology – Science Education Institute (DOST-SEI) Undergraduate Scholarship Program supports talented Filipino students who will pursue priority programs in science, technology, engineering, and mathematics (STEM). The scholarship provides financial assistance, academic support, and national service opportunities to help develop the country\'s scientific and technological workforce.',
+  },
+  scholarshipTypes: [
+    {
+      id: 'ra-7687',
+      name: 'RA 7687 Scholarship',
+      description: '',
+      bulletPoints: [
+        'For financially needy but academically capable students',
+        'Family gross annual income must not exceed the set DOST income threshold',
+      ],
+    },
+    {
+      id: 'merit',
+      name: 'DOST-SEI Merit Scholarship',
+      description: '',
+      bulletPoints: [
+        'For students with high aptitude in science and mathematics',
+        'Primarily merit-based; income is not the main qualifying factor',
+      ],
+    },
+  ],
+  eligibilityRequirements: [
+    { id: 'er-1', text: 'Natural-born Filipino' },
+    { id: 'er-2', text: 'Of good moral character and in good health' },
+    {
+      id: 'er-3',
+      text: 'Graduating Grade 12 student (current academic year) or Graduate of Grade 12 who has not enrolled in any college program',
+    },
+    {
+      id: 'er-4',
+      text: 'STEM strand student or Non-STEM student belonging to the top 5% of the graduating class',
+    },
+    { id: 'er-5', text: 'Must not have previously earned any post-secondary units' },
+    { id: 'er-6', text: 'Must pass the DOST-SEI Scholarship Examination' },
+  ],
+  requiredDocuments: [
+    { id: 'rd-1', text: 'Certified true copy of Grade 11 and Grade 12 report cards' },
+    { id: 'rd-2', text: 'Certificate of good moral character' },
+    { id: 'rd-3', text: 'Proof of family income (for RA 7687 applicants)' },
+    { id: 'rd-4', text: 'Income tax Return (ITR) of parents/guardians' },
+    { id: 'rd-5', text: 'Certificate of Indigency' },
+    { id: 'rd-6', text: 'Birth certificate' },
+    { id: 'rd-7', text: 'Recent ID picture (as specified in guidelines)' },
+    { id: 'rd-8', text: 'School certification (strand and ranking, if non-STEM)' },
+  ],
+  applicationSteps: [
+    {
+      id: 'as-1',
+      icon: 'folder',
+      title: 'Online application',
+      description: 'Comply in Online application opens (typically during first semester of Grade 12)',
+    },
+    {
+      id: 'as-2',
+      icon: 'edit',
+      title: 'Create account',
+      description: 'Create an account in the official DOST-SEI E-Application System',
+    },
+    {
+      id: 'as-3',
+      icon: 'play',
+      title: 'Complete details',
+      description: 'Complete personal, academic, and family information',
+    },
+    {
+      id: 'as-4',
+      icon: 'target',
+      title: 'Upload documents',
+      description: 'Upload required documents before the deadline',
+    },
+  ],
+  importantDates: [
+    { id: 'id-1', label: 'Announcement of List of Qualified Examinees', date: 'January 30, 2026' },
+    { id: 'id-2', label: 'Release of Test Permits to Qualified Examinees', date: 'February 1–9, 2026' },
+    { id: 'id-3', label: 'Schedule of Qualifying Examination', date: 'February 21–22, 2026' },
+  ],
+  resultsRelease: [
+    'Official list of qualifiers published on DOST-SEI website',
+    'Email notification sent to successful applicants',
+  ],
+  postQualification: [
+    { id: 'pq-1', text: 'Attend scholar orientation' },
+    { id: 'pq-2', text: 'Submit additional requirements (if requested)' },
+    { id: 'pq-3', text: 'Sign the Scholarship Agreement' },
+    { id: 'pq-4', text: 'Coordinate with school scholarship coordinator' },
+  ],
+  serviceObligation:
+    'All scholars must render service in the Philippines in a field related to their degree for a duration equivalent to the number of years they received the scholarship.',
+  contactPersons: [
+    {
+      id: 'cp-1',
+      name: 'Kris Andrew P. Evangulla',
+      role: 'Project Technical Assistant I',
+      imageUrl: '/images/contacts/evangulla.jpg',
+    },
+    {
+      id: 'cp-2',
+      name: 'Madelyn P. Bulaqui',
+      role: 'Project Staff – Scholarship',
+      imageUrl: '/images/contacts/bulaqui.jpg',
+    },
+    {
+      id: 'cp-3',
+      name: 'Mary Ann P. Maglasin',
+      role: 'ARD – FASS, DOST Region 2',
+      imageUrl: '/images/contacts/maglasin.jpg',
+    },
+    {
+      id: 'cp-4',
+      name: 'Cecilia S. Calagui',
+      role: 'SRS II/CM for S&T Scholarships DOST Region 2',
+      imageUrl: '/images/contacts/calagui.jpg',
+    },
+  ],
+  cta: {
+    title: 'Ready to begin your journey?',
+    description: 'Join over 500,000 scholars who have already transformed their futures through our program',
+    buttonText: 'Apply Now',
+    buttonLink: 'https://www.sei.dost.gov.ph/',
+  },
+  eligibilityImageUrl: '/images/dost-building.jpg',
+  documentsImageUrl: '/images/dost-building.jpg',
 };

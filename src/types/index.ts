@@ -100,3 +100,74 @@ export type UpdateFilterOption = {
   value: UpdateCategory;
   count?: number;
 };
+
+// =============================================================================
+// Scholarship Types
+// =============================================================================
+
+export type ScholarshipType = {
+  id: string;
+  name: string;
+  description: string;
+  bulletPoints: string[];
+};
+
+export type EligibilityRequirement = {
+  id: string;
+  text: string;
+};
+
+export type RequiredDocument = {
+  id: string;
+  text: string;
+};
+
+export type ApplicationStep = {
+  id: string;
+  icon: 'folder' | 'edit' | 'play' | 'target';
+  title: string;
+  description: string;
+};
+
+export type ImportantDate = {
+  id: string;
+  label: string;
+  date: string;
+};
+
+export type PostQualificationStep = {
+  id: string;
+  text: string;
+};
+
+export type ContactPerson = {
+  id: string;
+  name: string;
+  role: string;
+  imageUrl: string;
+};
+
+export type ScholarshipApplicationData = {
+  hero: {
+    title: string;
+    titleHighlight: string;
+    description: string;
+  };
+  scholarshipTypes: ScholarshipType[];
+  eligibilityRequirements: EligibilityRequirement[];
+  requiredDocuments: RequiredDocument[];
+  applicationSteps: ApplicationStep[];
+  importantDates: ImportantDate[];
+  resultsRelease: string[];
+  postQualification: PostQualificationStep[];
+  serviceObligation: string;
+  contactPersons: ContactPerson[];
+  cta: {
+    title: string;
+    description: string;
+    buttonText: string;
+    buttonLink: string;
+  };
+  eligibilityImageUrl: string;
+  documentsImageUrl: string;
+};
