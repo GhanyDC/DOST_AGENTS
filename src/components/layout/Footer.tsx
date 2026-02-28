@@ -59,7 +59,7 @@ function SocialIcon({ platform }: { platform: string }) {
 
 export function Footer() {
   return (
-    <footer className="bg-(--background) border-t border-(--border) py-10 sm:py-12 md:py-16">
+    <footer className="relative z-10 bg-(--background) border-t border-(--border) py-10 sm:py-12 md:py-16">
       <Container>
         <motion.div 
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10 lg:gap-8"

@@ -102,6 +102,32 @@ export type UpdateFilterOption = {
 };
 
 // =============================================================================
+// Scholarship Sources Types
+// =============================================================================
+
+export type Office = {
+  id: string;
+  name: string;
+  image: string;
+  location: string;
+  email: string;
+  link: string;
+};
+
+export type StudyArea = {
+  id: number;
+  title: string;
+  description: string;
+};
+
+export type PrepStrategy = {
+  id: string;
+  icon: 'clock' | 'map' | 'users';
+  title: string;
+  description: string;
+};
+
+// =============================================================================
 // Scholarship Types
 // =============================================================================
 

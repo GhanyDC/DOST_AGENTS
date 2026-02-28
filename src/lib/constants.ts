@@ -2,7 +2,7 @@
 // Application Constants
 // =============================================================================
 
-import type { NavItem, Feature, Testimonial, Project, FooterNav, SocialLink, ContactInfo, Update, UpdateFilterOption, ScholarshipApplicationData } from '@/types';
+import type { NavItem, Feature, Testimonial, Project, FooterNav, SocialLink, ContactInfo, Update, UpdateFilterOption, ScholarshipApplicationData, Office, StudyArea, PrepStrategy } from '@/types';
 
 // Site Information
 export const SITE_NAME = 'AGENTS';
@@ -507,6 +507,92 @@ export const SAMPLE_UPDATE_DETAIL: Update = {
 };
 
 // =============================================================================
+// Scholarship Sources Constants
+// =============================================================================
+
+export const SCHOLARSHIP_OFFICES: Office[] = [
+  {
+    id: 'dost-sei',
+    name: 'DOST - Science Education Institute',
+    image: '/offices/dost-sei.png',
+    location: 'General Santos Ave, Bicutan, Taguig',
+    email: 'dost02scholarship@gmail.com',
+    link: 'https://www.facebook.com/DOST.SEI',
+  },
+  {
+    id: 'dost-r2',
+    name: 'DOST Region 2 - Scholarship Unit',
+    image: '/offices/dost-r2.png',
+    location: 'Regional Government Center, Carig Sur, Tuguegarao',
+    email: 'dost02scholarship@gmail.com',
+    link: 'https://www.facebook.com/dost2scholarship',
+  },
+  {
+    id: 'osdw',
+    name: 'Office of the Student Development and Welfare',
+    image: '/offices/osdw.png',
+    location: 'Student Center, COEA Building, CSU Carig',
+    email: 'agentscsucarig2k24@gmail.com',
+    link: 'https://www.facebook.com/CSUCarigAGENTS',
+  },
+  {
+    id: 'agents',
+    name: 'AGENTS',
+    image: '/offices/agents.png',
+    location: 'Student Center, COEA Building, CSU Carig',
+    email: 'agentscsucarig2k24@gmail.com',
+    link: 'https://www.facebook.com/CSUCarigAGENTS',
+  },
+];
+
+export const SCHOLARSHIP_STUDY_AREAS: StudyArea[] = [
+  {
+    id: 1,
+    title: 'Science & Technology',
+    description: 'Biology, Chemistry, Physics, and Earth Sciences fundamentals.',
+  },
+  {
+    id: 2,
+    title: 'Mathematics',
+    description: 'Algebra, Geometry, Trigonometry, and Calculus applications.',
+  },
+  {
+    id: 3,
+    title: 'Language & Reading',
+    description: 'Vocabulary, grammar proficiency, and reading comprehension.',
+  },
+  {
+    id: 4,
+    title: 'Abstract Reasoning',
+    description: 'Pattern recognition, logical flow, and spatial orientation.',
+  },
+];
+
+export const SCHOLARSHIP_PREP_STRATEGIES: PrepStrategy[] = [
+  {
+    id: 'time',
+    icon: 'clock',
+    title: 'Time Management Mastery',
+    description:
+      'Practice with timed mock exams to improve speed and accuracy. Learn which questions to prioritize and which to skip and return to later.',
+  },
+  {
+    id: 'concept',
+    icon: 'map',
+    title: 'Concept Mapping',
+    description:
+      'Instead of memorization, focus on understanding core scientific and mathematical concepts through visual mapping and real-world application.',
+  },
+  {
+    id: 'simulated',
+    icon: 'users',
+    title: 'Simulated Review Sessions',
+    description:
+      'Form or join study groups that recreate the actual testing environment to reduce anxiety and build test-taking endurance.',
+  },
+];
+
+// =============================================================================
 // Scholarship Page Constants
 // =============================================================================
 
@@ -609,25 +695,25 @@ export const SCHOLARSHIP_APPLICATION_DATA: ScholarshipApplicationData = {
       id: 'cp-1',
       name: 'Kris Andrew P. Evangulla',
       role: 'Project Technical Assistant I',
-      imageUrl: '/images/contacts/evangulla.jpg',
+      imageUrl: '/contacts/evangulla.png',
     },
     {
       id: 'cp-2',
       name: 'Madelyn P. Bulaqui',
       role: 'Project Staff – Scholarship',
-      imageUrl: '/images/contacts/bulaqui.jpg',
+      imageUrl: '/contacts/bulaqui.png',
     },
     {
       id: 'cp-3',
       name: 'Mary Ann P. Maglasin',
       role: 'ARD – FASS, DOST Region 2',
-      imageUrl: '/images/contacts/maglasin.jpg',
+      imageUrl: '/contacts/maglasin.png',
     },
     {
       id: 'cp-4',
       name: 'Cecilia S. Calagui',
       role: 'SRS II/CM for S&T Scholarships DOST Region 2',
-      imageUrl: '/images/contacts/calagui.jpg',
+      imageUrl: '/contacts/calagui.png',
     },
   ],
   cta: {
@@ -636,6 +722,6 @@ export const SCHOLARSHIP_APPLICATION_DATA: ScholarshipApplicationData = {
     buttonText: 'Apply Now',
     buttonLink: 'https://www.sei.dost.gov.ph/',
   },
-  eligibilityImageUrl: '/images/dost-building.jpg',
-  documentsImageUrl: '/images/dost-building.jpg',
+  eligibilityImageUrl: '/application/dost-building.png',
+  documentsImageUrl: '/application/dost-building.png',
 };
