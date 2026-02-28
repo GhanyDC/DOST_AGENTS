@@ -81,10 +81,12 @@ function StepIcon({ icon }: { icon: string }) {
     ),
   };
 
+  const isLarge = icon === 'play';
+
   return (
     <div className="flex items-center justify-center w-14 h-14 rounded-full bg-[#3d3d00] border border-[#FFE500]/30">
       <svg
-        className="w-6 h-6 text-[#FFE500]"
+        className={`${isLarge ? 'w-9 h-9' : 'w-6 h-6'} text-[#FFE500]`}
         fill="none"
         stroke="currentColor"
         viewBox="0 0 24 24"
@@ -259,10 +261,10 @@ export function ScholarshipApplicationContent({
             Eligibility Requirements
           </motion.h2>
 
-          <div className="grid lg:grid-cols-2 gap-8 items-start">
+          <div className="grid lg:grid-cols-2 gap-8 items-stretch">
             {/* Image */}
             <motion.div
-              className="relative aspect-4/3 rounded-xl overflow-hidden"
+              className="relative min-h-[300px] rounded-xl overflow-hidden"
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, margin: '-80px' }}
@@ -321,7 +323,7 @@ export function ScholarshipApplicationContent({
             Required Documents
           </motion.h2>
 
-          <div className="grid lg:grid-cols-2 gap-8 items-start">
+          <div className="grid lg:grid-cols-2 gap-8 items-stretch">
             {/* Documents list */}
             <motion.div
               className="space-y-3"
@@ -349,7 +351,7 @@ export function ScholarshipApplicationContent({
 
             {/* Image */}
             <motion.div
-              className="relative aspect-4/3 rounded-xl overflow-hidden"
+              className="relative min-h-[300px] rounded-xl overflow-hidden"
               initial={{ opacity: 0, x: 30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, margin: '-80px' }}
@@ -450,19 +452,33 @@ export function ScholarshipApplicationContent({
                   >
                     {d.label}
                   </p>
-                  <div className="flex items-center justify-between">
-                    <span
-                      className="text-sm sm:text-base font-bold text-black"
-                      style={{ fontFamily: 'var(--font-poppins)', fontWeight: 700 }}
+                  {i === 0 ? (
+                    <Link
+                      href="https://tp26.science-scholarships.ph/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center justify-between group"
                     >
-                      {d.date}
-                    </span>
-                    {i === 0 && (
-                      <svg className="w-4 h-4 text-black/50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <span
+                        className="text-sm sm:text-base font-bold text-black group-hover:underline"
+                        style={{ fontFamily: 'var(--font-poppins)', fontWeight: 700 }}
+                      >
+                        {d.date}
+                      </span>
+                      <svg className="w-4 h-4 text-black/50 group-hover:text-black transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                       </svg>
-                    )}
-                  </div>
+                    </Link>
+                  ) : (
+                    <div className="flex items-center justify-between">
+                      <span
+                        className="text-sm sm:text-base font-bold text-black"
+                        style={{ fontFamily: 'var(--font-poppins)', fontWeight: 700 }}
+                      >
+                        {d.date}
+                      </span>
+                    </div>
+                  )}
                 </div>
               ))}
 
@@ -554,7 +570,7 @@ export function ScholarshipApplicationContent({
       {/* ================================================================= */}
       {/* Who to Approach — Contact Persons */}
       {/* ================================================================= */}
-      <section className="py-10 sm:py-14">
+      <section className="pt-10 sm:pt-14 pb-24 sm:pb-32 md:pb-40">
         <Container>
           <motion.div
             className="text-center mb-12 sm:mb-16"
