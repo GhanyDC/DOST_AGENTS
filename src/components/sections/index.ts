@@ -5,3 +5,4 @@
 
 export * from './home';
 export * from './updates';
+export * from './scholarship';

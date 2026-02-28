@@ -13,6 +13,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Container } from '@/components/ui/Container';
 import { Button } from '@/components/ui/Button';
 import { NAV_ITEMS } from '@/lib/constants';
+import type { NavItem } from '@/types';
 
 const navItemVariants = {
   hidden: { opacity: 0, y: -8 },
@@ -47,12 +48,38 @@ const mobileMenuVariants = {
   },
 };
 
+const dropdownVariants = {
+  hidden: { opacity: 0, y: -4, scale: 0.98 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: {
+      duration: 0.2,
+      ease: [0.22, 1, 0.36, 1] as const,
+    },
+  },
+  exit: {
+    opacity: 0,
+    y: -4,
+    scale: 0.98,
+    transition: {
+      duration: 0.15,
+      ease: [0.22, 1, 0.36, 1] as const,
+    },
+  },
+};
+
 export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
   const [hasEntered, setHasEntered] = useState(false);
+  const [openDropdown, setOpenDropdown] = useState<string | null>(null);
+  const [mobileDropdown, setMobileDropdown] = useState<string | null>(null);
   const navRef = useRef<HTMLElement | null>(null);
+  const dropdownRef = useRef<HTMLDivElement | null>(null);
+  const dropdownTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const pathname = usePathname();
   const lastScrollY = useRef(0);
   const ticking = useRef(false);
@@ -138,7 +165,47 @@ export function Navbar() {
   // Close mobile menu on route change
   useEffect(() => {
     setMobileOpen(false);
+    setOpenDropdown(null);
+    setMobileDropdown(null);
   }, [pathname]);
+
+  // Close desktop dropdown on outside click
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setOpenDropdown(null);
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  // Cleanup timeout on unmount
+  useEffect(() => {
+    return () => {
+      if (dropdownTimeoutRef.current) clearTimeout(dropdownTimeoutRef.current);
+    };
+  }, []);
+
+  /** Check if any dropdown child is active */
+  const isDropdownActive = (item: NavItem) =>
+    item.dropdown?.some((d) => pathname?.startsWith(d.href)) ?? false;
+
+  /** Handle mouse enter with delay cancel */
+  const handleDropdownEnter = (label: string) => {
+    if (dropdownTimeoutRef.current) {
+      clearTimeout(dropdownTimeoutRef.current);
+      dropdownTimeoutRef.current = null;
+    }
+    setOpenDropdown(label);
+  };
+
+  /** Handle mouse leave with 150ms grace period */
+  const handleDropdownLeave = () => {
+    dropdownTimeoutRef.current = setTimeout(() => {
+      setOpenDropdown(null);
+    }, 150);
+  };
 
   return (
     <nav
@@ -187,7 +254,92 @@ export function Navbar() {
           {/* Desktop Navigation — centered */}
           <div className="hidden lg:flex items-center gap-0.5">
             {NAV_ITEMS.map((item, index) => {
-              const isActive = pathname === item.href || (item.href === '/' && pathname === '/home');
+              const hasDropdown = !!item.dropdown;
+              const isActive = hasDropdown
+                ? isDropdownActive(item)
+                : pathname === item.href || (item.href === '/' && pathname === '/home');
+
+              if (hasDropdown) {
+                return (
+                  <motion.div
+                    key={item.label}
+                    custom={index}
+                    variants={navItemVariants}
+                    initial="hidden"
+                    animate="visible"
+                    className="relative"
+                    ref={openDropdown === item.label ? dropdownRef : undefined}
+                    onMouseEnter={() => handleDropdownEnter(item.label)}
+                    onMouseLeave={handleDropdownLeave}
+                  >
+                    <button
+                      className={[
+                        'relative px-4 xl:px-5 py-2 text-sm font-medium rounded-lg transition-all duration-200 inline-flex items-center gap-1',
+                        isActive
+                          ? 'text-[#FFE500]'
+                          : 'text-white/60 hover:text-white hover:bg-white/4',
+                      ].join(' ')}
+                      style={{ fontFamily: 'var(--font-poppins)' }}
+                      onClick={() => setOpenDropdown(openDropdown === item.label ? null : item.label)}
+                      aria-expanded={openDropdown === item.label}
+                      aria-haspopup="true"
+                    >
+                      {item.label}
+                      <svg
+                        className={[
+                          'w-3.5 h-3.5 transition-transform duration-200',
+                          openDropdown === item.label ? 'rotate-180' : '',
+                        ].join(' ')}
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                      </svg>
+                      {isActive && (
+                        <motion.div
+                          className="absolute bottom-0.5 left-1/2 -translate-x-1/2 h-0.5 w-5 bg-[#FFE500] rounded-full"
+                          layoutId="nav-indicator"
+                          transition={{ type: 'spring', stiffness: 350, damping: 30 }}
+                        />
+                      )}
+                    </button>
+
+                    <AnimatePresence>
+                      {openDropdown === item.label && (
+                        <motion.div
+                          className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-48 py-2 bg-[#0a1628]/95 backdrop-blur-xl border border-white/10 rounded-xl shadow-[0_8px_32px_rgba(0,0,0,0.4)] overflow-hidden z-50"
+                          variants={dropdownVariants}
+                          initial="hidden"
+                          animate="visible"
+                          exit="exit"
+                        >
+                          {item.dropdown!.map((subItem) => {
+                            const subActive = pathname === subItem.href;
+                            return (
+                              <Link
+                                key={subItem.href}
+                                href={subItem.href}
+                                className={[
+                                  'block px-4 py-2.5 text-sm font-medium transition-all duration-150',
+                                  subActive
+                                    ? 'text-white bg-white/8 font-semibold'
+                                    : 'text-white/60 hover:text-white hover:bg-white/6',
+                                ].join(' ')}
+                                style={{ fontFamily: 'var(--font-poppins)' }}
+                                onClick={() => setOpenDropdown(null)}
+                              >
+                                {subItem.label}
+                              </Link>
+                            );
+                          })}
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </motion.div>
+                );
+              }
+
               return (
                 <motion.div
                   key={item.label}
@@ -292,7 +444,80 @@ export function Navbar() {
               <Container>
                 <div className="py-4 space-y-1">
                   {NAV_ITEMS.map((item, index) => {
-                    const isActive = pathname === item.href || (item.href === '/' && pathname === '/home');
+                    const hasDropdown = !!item.dropdown;
+                    const isActive = hasDropdown
+                      ? isDropdownActive(item)
+                      : pathname === item.href || (item.href === '/' && pathname === '/home');
+
+                    if (hasDropdown) {
+                      return (
+                        <motion.div
+                          key={item.label}
+                          initial={{ opacity: 0, x: -16 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ delay: index * 0.05 }}
+                        >
+                          <button
+                            className={[
+                              'w-full flex items-center justify-between px-4 py-3 text-base font-medium rounded-lg transition-colors',
+                              isActive
+                                ? 'text-[#FFE500] bg-white/4'
+                                : 'text-white/70 hover:text-white hover:bg-white/4',
+                            ].join(' ')}
+                            onClick={() =>
+                              setMobileDropdown(mobileDropdown === item.label ? null : item.label)
+                            }
+                            aria-expanded={mobileDropdown === item.label}
+                          >
+                            {item.label}
+                            <svg
+                              className={[
+                                'w-4 h-4 transition-transform duration-200',
+                                mobileDropdown === item.label ? 'rotate-180' : '',
+                              ].join(' ')}
+                              fill="none"
+                              stroke="currentColor"
+                              viewBox="0 0 24 24"
+                            >
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                            </svg>
+                          </button>
+                          <AnimatePresence>
+                            {mobileDropdown === item.label && (
+                              <motion.div
+                                className="overflow-hidden"
+                                initial={{ height: 0, opacity: 0 }}
+                                animate={{ height: 'auto', opacity: 1 }}
+                                exit={{ height: 0, opacity: 0 }}
+                                transition={{ duration: 0.2 }}
+                              >
+                                <div className="pl-6 py-1 space-y-0.5">
+                                  {item.dropdown!.map((subItem) => {
+                                    const subActive = pathname === subItem.href;
+                                    return (
+                                      <Link
+                                        key={subItem.href}
+                                        href={subItem.href}
+                                        className={[
+                                          'block px-4 py-2.5 text-sm font-medium rounded-lg transition-colors',
+                                          subActive
+                                            ? 'text-white bg-white/6'
+                                            : 'text-white/50 hover:text-white hover:bg-white/4',
+                                        ].join(' ')}
+                                        onClick={() => setMobileOpen(false)}
+                                      >
+                                        {subItem.label}
+                                      </Link>
+                                    );
+                                  })}
+                                </div>
+                              </motion.div>
+                            )}
+                          </AnimatePresence>
+                        </motion.div>
+                      );
+                    }
+
                     return (
                       <motion.div
                         key={item.label}

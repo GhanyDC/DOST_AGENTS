@@ -137,7 +137,7 @@ export function HeroSection() {
               animate={{ textShadow: ['0 0 20px rgba(255,229,0,0.3)', '0 0 40px rgba(255,229,0,0.15)', '0 0 20px rgba(255,229,0,0.3)'] }}
               transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
             >
-              {HERO_CONTENT.titleHighlight}
+              {HERO_CONTENT.titleHighlight }
             </motion.span>{' '}
             <span className="text-white">
               {HERO_CONTENT.titleRest}
