@@ -1,6 +1,8 @@
 # DOST Agents
 
-A modern Next.js application with Supabase backend, built with React 19, TypeScript, and Tailwind CSS.
+## 📱 Overview
+
+**DOST Agents** is a website for the **DOST Academic Guild of Excellence and New-age Thinking Scholars**. It serves as a hub for collaboration, project tracking, and communication among members, helping the organization streamline activities, share updates, and support its academic and community initiatives.
 
 ## Tech Stack
 
